@@ -1,0 +1,101 @@
+\documentclass[12pt]{report}
+
+\usepackage{graphicx} % Required for the inclusion of images
+
+\usepackage{subfig}
+\usepackage[pdftex]{hyperref}
+
+% Maths --------------------------------
+\usepackage[centertags]{amsmath}
+\usepackage{amssymb,amsthm,amsfonts,bm} %bold maths
+\newcommand{\textoverline}[1]{$\overline{\mbox{#1}}$} % to use overbar outside math mode
+\newcommand{\textunderline}[1]{$\underline{\mbox{#1}}$} % to use overbar outside math mode
+\usepackage{mathtools} % Abs and more...
+% --------------------------------------
+\usepackage[american]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{ae,aecompl} %Font improvements
+\usepackage{tabularx,ragged2e,booktabs,caption}
+% --------------------------------------
+\setlength{\parindent}{1em} % Removes all indentation from paragraphs
+\setlength{\parskip}{0.5em}
+% \linespread{1.2}
+
+% \pagenumbering{arabic} % no page number
+% \pagestyle{empty}
+
+\usepackage[dvipsnames]{xcolor}
+\newcommand{\mktitle}[1]{{\Large {\color{NavyBlue} #1}}}
+\newcommand{\mksection}[1]{{\large {\color{NavyBlue} #1}}}
+
+\title{\textbf{Building Scenarios}}
+\author{Guillermo Echegoyen Blanco}
+
+\makeatletter
+  \let\thetitle\@title
+  \let\theauthor\@author
+  \let\thedate\@date
+\makeatother
+
+% ToDo := Maybe insert date?
+\newcommand{\insertheader}{
+  {
+    \centering
+    \mktitle{
+      \textunderline{\thetitle} \par
+      \theauthor \par
+      \thedate
+    }
+    \par
+  }
+}
+
+\begin{document}
+
+\insertheader
+
+\mksection{Objetivos}
+
+  El objetivo principal de los escenarios de simulaci\'on que vamos a construir es evaluar la necesidad del sistema de creencias que maneja la plataforma Aerostack y probar que las ampliaciones que se proponen soportan correctamente misiones complejas.
+
+  Para ello se proponen varios escenarios de dificultad incremental, entre otras situaciones, queremos testar que pasa cuando:
+  \begin{itemize}
+    \item Hay disconformidad entre el mundo y lo que el agente cree del mismo.
+    \item Hay disconformidad entre dos agentes, creen cosas distintas sobre lo mismo.
+    \item ...
+  \end{itemize}
+
+\mksection{Escenarios}
+
+\mksection{\normalsize{1. Construcci\'on de torres}}
+
+  Este es el escenario m\'as simple, sencillamente cada agente construye una torre por su cuenta.
+
+  De esta manera medimos que las creencias que el agente tiene son consistentes con el mundo. Puntos de inter\'es:
+
+  \begin{itemize}
+    \item Hacer el experimento con varios agentes permitir\'ia ver c\'omo comunicar dichos agentes para que tengan una visi\'on com\'un, compartida de la situaci\'on de cada uno.
+    \item Quitarles ladrillos a los agentes despu\'es de que los coloquen puede ser muy interesante para ver c\'omo se adaptan a las incoherencias entre sus conocimientos y el mundo real (ver caso 1).
+  \end{itemize}
+
+\clearpage
+\mksection{\normalsize{2. Construcci\'on con orden}}
+
+  En este escenario se construye algo que tiene un orden en la construcci\'on. Esto podr\'ia ser una ventana, en la que hay que colocar un marco/viga en la parte de arriba que soporte la parte superior, una torre en la que las piezas van en un orden concreto, varios tipos de ladrillo con un resistencia a que se le pongan otros encima (p.e.: un ladrillo que solo soporta n ladrillos encima como ese), en general cualquier tipo de construcci\'on que implique cierto orden. Los puntos de inter\'es de este escenario son los mismos que en el anterior y adem\'as:
+
+  \begin{itemize}
+    \item Imponer cierto orden en las piezas a colocar requiere de cierta coordinaci\'on entre el/los agentes y la forma en la que construyen (ver casos 1, 2). Cuando se requiere de coordinaci\'on en los pasos de construcci\'on el quitar ladrillos sin que el agente lo vea implica, adem\'as de que tiene que actualizar sus creencias, que tendr\'a que replanificar.
+    \item Los agentes tendr\'an que resolver el bloqueo mutuo entre tareas y replanificar juntos cuando sea necesario.
+  \end{itemize}
+
+\mksection{Casos} 
+
+  \textunderline{Caso 1:} En $t = 1$ un agente coloca un ladrillo para la construcci\'on, en $t = n, n > 1$ el operario quita uno de los ladrillos, mientras el agente no lo ve. En $t = n + 1$ el agente tendr\'a una incoherencia entre lo que cree y lo que hay en el mundo real y tendr\'a que actualizar sus creencias de forma acorde, habr\'a que decidir si hay replanificaci\'on.
+
+  \textunderline{Caso 2:} Hasta $n_{1}$ el agente coloca ladrillos de tipo $l_{1}$, en $n_{2}$ tiene que empezar a colocarlos de tipo $l_{2}$ y no puede hacerlo si no est\'an colocados todos los del tipo anterior. Entre $n_{1}$ y $n_{2}$ el operario quita un ladrillo de tipo $l_{1}$ sin que el agente lo vea. As\'i cuando en $n_{2}$ este llega con un ladrillo de tipo $l_{2}$ se encuentra en una situaci\'on de incoherencia entre sus creencias y el mundo real, con lo que tendr\'a que actualizar sus creencias y replanificar el movimiento, esto implicar\'a dejar ese ladrillo de tipo $l_{2}$ e ir a por otro de tipo $l_{1}$, colocarlo y volver a por el que hab\'ia dejado para continuar con la construcci\'on.
+
+  \textunderline{Caso 3:} Como el caso anterior pero la construcci\'on se hace cooperativamente entre dos agentes, donde cada uno maneja un tipo de ladrillo distinto. Esto a\~nade cierta complejidad ya que en la incoherencia tienen que llegar a un consenso mutua y replanificar ambos. Esto nos puede ayudar a comprobar la robustez del algoritmo de incoherencia y replanificaci\'on.
+
+\end{document}
+
