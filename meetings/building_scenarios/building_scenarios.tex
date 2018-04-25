@@ -76,8 +76,61 @@
 
   \begin{itemize}
     \item Hacer el experimento con varios agentes permitir\'ia ver c\'omo comunicar dichos agentes para que tengan una visi\'on com\'un, compartida de la situaci\'on de cada uno.
-    \item Quitarles ladrillos a los agentes despu\'es de que los coloquen puede ser muy interesante para ver c\'omo se adaptan a las incoherencias entre sus conocimientos y el mundo real (ver caso 1).
+    \item Quitarles ladrillos a los agentes despu\'es de que los coloquen puede ser muy interesante para ver c\'omo se adaptan a las incoherencias entre sus conocimientos y el mundo real (ver ejemplos 1).
   \end{itemize}
+
+\clearpage
+\mksection{\normalsize{Especificaci\'on}}
+
+  \textunderline{Caso 1:}
+    \begin{itemize}
+      \item Un solo agente.
+      \item Una sola torre.
+      \item Sin interacci\'on de operario.
+      \item Poner a un solo agente a construir para comprobar que con el sistema de creencias coherente es capaz de construir correctamente.
+    \end{itemize}
+
+  \textunderline{Caso 2:}
+    \begin{itemize}
+      \item Dos agentes.
+      \item Una torre por agente.
+      \item Sin interacci\'on de operario.
+      \item Poner a dos agentes a construir para comprobar que con el sistema de creencias coherente y compartido son capaces de construir correctamente, cada uno su torre.
+    \end{itemize}
+
+  \textunderline{Caso 3:}
+    \begin{itemize}
+      \item Dos agentes.
+      \item Una sola torre.
+      \item Sin interacci\'on de operario.
+      \item Poner a dos agentes a construir para comprobar que con el sistema de creencias coherente y compartido son capaces de construir correctamente una sola torre, tienen que ir actualiz\'andose el uno al otro.
+    \end{itemize}
+
+  \textunderline{Caso 4:}
+    \begin{itemize}
+      \item Un solo agente.
+      \item Una sola torre.
+      \item Con interacci\'on de operario. Quitar ladrillos sin que el agente lo vea.
+      \item Poner a un solo agente a construir y mientras lo est\'a haciendo, sin que lo vea, el operario le quita uno o varios ladrillos. Esto nos ayudar\'a a ver c\'omo funciona la actualizaci\'on de creencias y a fijar una tasa de actualizaci\'on de creencias (eg: cada cu\'anto tiempo hay que comprobar que lo que ten\'iamos como creencia es efectivamente as\'i).
+    \end{itemize}
+
+  \textunderline{Caso 5:}
+    \begin{itemize}
+      \item Dos agentes.
+      \item Una torre por agente.
+      \item Con interacci\'on de operario. Quitar ladrillos sin que lo vea uno de los agentes, pero que lo vea el otro. De esta manera podemos testar la tasa de refresco o actualizaci\'on de los agentes y el m\'etodo por el que se ponen de acuerdo, ya que discrepar\'an en sus creencias *.
+      \item Poner a dos agentes a construir para comprobar que con el sistema de creencias coherente y compartido son capaces de construir correctamente, cada uno su torre.
+    \end{itemize}
+
+    * C\'omo actualizamos? Cuando los dos agentes est\'an de acuerdo (eg: uno lo ve y avisa, el otro no est\'a de acuerdo, hasta que no lo vea no actualiza)?
+
+  \textunderline{Caso 6:}
+    \begin{itemize}
+      \item Dos agentes.
+      \item Una torre por agente.
+      \item Con interacci\'on de operario. Quitar ladrillos sin que lo vea ninguno de los agentes. De esta manera podemos testar la tasa de refresco o actualizaci\'on de los agentes y el m\'etodo por el que se ponen de acuerdo, ya que discrepar\'an en sus creencias. Este caso igual sobra o sobra en anterior.
+      \item Poner a dos agentes a construir para comprobar que con el sistema de creencias coherente y compartido son capaces de construir correctamente, cada uno su torre.
+    \end{itemize}
 
 \clearpage
 \mksection{\normalsize{2. Construcci\'on con orden}}
@@ -85,11 +138,69 @@
   En este escenario se construye algo que tiene un orden en la construcci\'on. Esto podr\'ia ser una ventana, en la que hay que colocar un marco/viga en la parte de arriba que soporte la parte superior, una torre en la que las piezas van en un orden concreto, varios tipos de ladrillo con un resistencia a que se le pongan otros encima (p.e.: un ladrillo que solo soporta n ladrillos encima como ese), en general cualquier tipo de construcci\'on que implique cierto orden. Los puntos de inter\'es de este escenario son los mismos que en el anterior y adem\'as:
 
   \begin{itemize}
-    \item Imponer cierto orden en las piezas a colocar requiere de cierta coordinaci\'on entre el/los agentes y la forma en la que construyen (ver casos 1, 2). Cuando se requiere de coordinaci\'on en los pasos de construcci\'on el quitar ladrillos sin que el agente lo vea implica, adem\'as de que tiene que actualizar sus creencias, que tendr\'a que replanificar.
+    \item Imponer cierto orden en las piezas a colocar requiere de cierta coordinaci\'on entre el/los agentes y la forma en la que construyen (ver ejemplos 1, 2). Cuando se requiere de coordinaci\'on en los pasos de construcci\'on el quitar ladrillos sin que el agente lo vea implica, adem\'as de que tiene que actualizar sus creencias, que tendr\'a que replanificar.
     \item Los agentes tendr\'an que resolver el bloqueo mutuo entre tareas y replanificar juntos cuando sea necesario.
   \end{itemize}
 
-\mksection{Casos} 
+\mksection{\normalsize{Especificaci\'on}}
+
+  \textunderline{Caso 1:}
+    \begin{itemize}
+      \item Un solo agente.
+      \item Una sola torre a construir con cierto orden.
+      \item El pool de ladrillos est\'a ordenado con el orden que tiene que seguir el agente.
+      \item Sin interacci\'on de operario.
+      \item Poner a un solo agente a construir para comprobar que con el sistema de creencias coherente es capaz de construir correctamente.
+    \end{itemize}
+
+  \textunderline{Caso 2:}
+    \begin{itemize}
+      \item Un solo agente.
+      \item Una sola torre a construir con cierto orden.
+      \item El pool de ladrillos est\'a \textbf{desordenado}.
+      \item Sin interacci\'on de operario.
+      \item Poner a un solo agente a construir, esto nos permitir\'a consolidar la pol\'itica que tiene que seguir el agente para colocar los bloques ordenadamente.
+    \end{itemize}
+
+  \textunderline{Caso 3:}
+    \begin{itemize}
+      \item Un solo agente.
+      \item Una sola torre a construir con cierto orden.
+      \item El pool de ladrillos est\'a \textbf{desordenado}.
+      \item Con interacci\'on de operario.
+      \item El operario, al quitar el bloque crear\'a una incoherencia en las creencias del agente, colocando el bloque en el pool en cierto orden puede complicarle el problema y hacer que tenga que replanificar.
+    \end{itemize}
+
+  \textunderline{Caso 4:}
+    \begin{itemize}
+      \item Dos agentes.
+      \item Una sola torre a construir con cierto orden.
+      \item El pool de ladrillos est\'a \textbf{desordenado}.
+      \item Sin interacci\'on de operario.
+      \item Ambos agentes pueden colocar cualquier ladrillo. Esto es construcci\'on colaborativa en la que tienen que planificar juntos el orden en el que se van colocando los ladrillos.
+    \end{itemize}
+
+  \textunderline{Caso 5:}
+    \begin{itemize}
+      \item Dos agentes.
+      \item Una sola torre a construir con cierto orden.
+      \item El pool de ladrillos est\'a \textbf{desordenado}.
+      \item Sin interacci\'on de operario.
+      \item Cada agente solo puede colocar un tipo de ladrillo (o parte dentro del orden de la construcci\'on). Esto permite que un agente quede bloqueado por la tarea que est\'a haciendo el otro.
+    \end{itemize}
+
+  \textunderline{Caso 5:}
+    \begin{itemize}
+      \item Dos agentes.
+      \item Una sola torre a construir con cierto orden.
+      \item El pool de ladrillos est\'a \textbf{desordenado}.
+      \item Con interacci\'on de operario.
+      \item Como en el caso anterior, pero con interacci\'on del operario. Puede, por ejemplo mover ladrillos cuando fuera a darse el cambio entre los dos agentes, de tal forma que el segundo estuviera empezando a hacer su labor y el primero termin\'andola, en este caso tendr\'an que replanificar.
+    \end{itemize}
+
+  Estos casos son extensibles m\'as de dos agentes.
+
+\mksection{Ejemplos} 
 
   \textunderline{Caso 1:} En $t = 1$ un agente coloca un ladrillo para la construcci\'on, en $t = n, n > 1$ el operario quita uno de los ladrillos, mientras el agente no lo ve. En $t = n + 1$ el agente tendr\'a una incoherencia entre lo que cree y lo que hay en el mundo real y tendr\'a que actualizar sus creencias de forma acorde, habr\'a que decidir si hay replanificaci\'on.
 
