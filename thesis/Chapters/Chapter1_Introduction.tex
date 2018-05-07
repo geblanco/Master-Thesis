@@ -1,0 +1,44 @@
+\chapter{Introduction}
+
+  \textbf{[ToDo := Refs \& Links]}
+
+  In the following work an integration of a navigation system onto the Aerostack platform is presented.
+
+  \section{Context}
+
+    Aerostack is a framework for aerial robots, aimed at giving flight autonomy to some extent. It features a modular approach for the construction of behaviors that can be used to develop complex flights and automatic handling for certain situations such battery level or hardware conditions. It is the frame for the following work, which adds more autonomy through the integration of a octomap-based navigation system and a global planner. This provides a novel localization technique for the framework.
+
+  \section{Motivation}
+
+    So far, there exists only one simple geometry planner and an Aruco-based localization technique. In indoor environments, this system compels the need for environment preparation, the Arucos must be placed beforehand in well known localizations that must be hardcoded in the robot map. In this sense, there exists a need for a more robust, preparation-free localization system and accompanying planner. This work provides such an improvement with the introduction of a octomap-based navigation system and a global planner.
+
+  \section{General Objective}
+
+    This work aims at adding a novel navigation system to the Aerostack framework.
+
+
+  \section{Specific Objectives}
+
+    This section enumerates a comprehensive list of objectives.
+
+    \begin{enumerate}
+      \item Enrich the current navigation and localization systems.
+      \item Test and validate the new navigation and localization systems through simulated environments.
+    \end{enumerate}
+
+    To achieve the first objective, the following additions to the framework are proposed:
+
+    \begin{itemize}
+      \item Add a robust planner based on a new navigation technique.
+      \item Add a robust navigation technique through the use of octomaps.
+      \item Add a robust localization technique based on octomaps.
+      \item Add octomaps construction support through lidar.
+    \end{itemize}
+
+  \section{Overview}
+
+    \textbf{[ToDo := Review when everything is finished]}
+
+    This dissertation is organized as follows: ...
+
+

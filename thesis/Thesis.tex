@@ -132,7 +132,7 @@
   \listofsymbols{ll}  % Include a list of Abbreviations (a table of two columns)
   {
     % \textbf{Acronym} & \textbf{W}hat (it) \textbf{S}tands \textbf{F}or \\
-    \textbf{LAH} & \textbf{L}ist \textbf{A}bbreviations \textbf{H}ere \\
+    % \textbf{LAH} & \textbf{L}ist \textbf{A}bbreviations \textbf{H}ere \\
   }
   \clearpage  % Start a new page
 
@@ -140,7 +140,7 @@
   \listofconstants{lrcl}  % Include a list of Physical Constants (a four column table)
   {
     % Constant Name & Symbol & = & Constant Value (with units) \\
-    Speed of Light & $c$ & $=$ & $2.997\ 924\ 58\times10^{8}\ \mbox{ms}^{-\mbox{s}}$ (exact)\\
+    % Speed of Light & $c$ & $=$ & $2.997\ 924\ 58\times10^{8}\ \mbox{ms}^{-\mbox{s}}$ (exact)\\
   }
   \clearpage  %Start a new page
 
@@ -148,10 +148,9 @@
   \listofnomenclature{lll}  % Include a list of Symbols (a three column table)
   {
     % symbol & name & unit \\
-    $a$ & distance & m \\
-    $P$ & power & W (Js$^{-1}$) \\
-    & & \\ % Gap to separate the Roman symbols from the Greek
-    $\omega$ & angular frequency & rads$^{-1}$ \\
+    % $a$ & distance & m \\
+    % & & \\ % Gap to separate the Roman symbols from the Greek
+    % $\omega$ & angular frequency & rads$^{-1}$ \\
   }
 %% ----------------------------------------------------------------
 % End of the pre-able, contents and lists of things
@@ -168,9 +167,12 @@
   \mainmatter   % Begin normal, numeric (1,2,3...) page numbering
   \pagestyle{fancy}  % Return the page headers back to the "fancy" style
 
-  \input{Chapters/Chapter1} % Introduction
+  \renewcommand{\chaptermark}[1]{\markboth{#1}{}} % Make the chapter mark without the "Chapter X" stuff
+  \lhead{\emph{\leftmark}}  % Set the left side page header accordingly
 
-  %\input{Chapters/Chapter2} % Background Theory 
+  \input{Chapters/Chapter1_Introduction.tex} % Introduction
+
+  \input{Chapters/Chapter2_Problem_Description.tex} % Background Theory 
 
   %\input{Chapters/Chapter3} % Experimental Setup
 
