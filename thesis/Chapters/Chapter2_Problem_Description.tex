@@ -12,7 +12,7 @@
 
     A lidar is going to be used as the main source for localization. The module in charge of this part is already present in the Aerostack framework, but it is not being used. Based on lidar input an octomap is built. This octomap is then used by the navigator, along with the planner instructions to build a motion plan to execute.
 
-    The lidar + octomap functionality is provided by a module called hector\_slam, developed at the Darmstadt University \cite{hector_slam}. 
+    The lidar + octomap functionality is provided by a module called hector\_slam, developed at the Darmstadt University \cite{hector_slam}. Taking the lidar cloud of points it is able to reconstruct an octomap and then localize inside it (SLAM). The output of this module can be used to create a plan avoiding obstacles to reach a target point.
 
     [ ToDo := Review, NavStack \& Global Planner ]
 

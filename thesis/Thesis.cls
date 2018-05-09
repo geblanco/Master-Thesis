@@ -149,30 +149,26 @@
 \examiner    {}
 \degree      {}
 \authors     {}
-\university  {\texorpdfstring{\href{University Web Site URL Here (include http://)}
-                {University Name}}
-                {University Name}}
-\UNIVERSITY  {\texorpdfstring{\href{University Web Site URL Here (include http://)}
-                {UNIVERSITY NAME (IN BLOCK CAPITALS)}}
-                {UNIVERSITY NAME (IN BLOCK CAPITALS)}}
-\department  {\texorpdfstring{\href{Department or School Web Site URL Here (include http://)}
-                {Department or School Name}}
-                {Department or School Name}}
-\DEPARTMENT  {\texorpdfstring{\href{Department or School Web Site URL Here (include http://)}
-                {DEPARTMENT OR SCHOOL NAME (IN BLOCK CAPITALS)}}
-                {DEPARTMENT OR SCHOOL NAME (IN BLOCK CAPITALS)}}
-\group       {\texorpdfstring{\href{Research Group Web Site URL Here (include http://)}
-                {Research Group Name}}
-                {Research Group Name}}
-\GROUP       {\texorpdfstring{\href{Research Group Web Site URL Here (include http://)}
-                {RESEARCH GROUP NAME (IN BLOCK CAPITALS)}}
-                {RESEARCH GROUP NAME (IN BLOCK CAPITALS)}}
-\faculty     {\texorpdfstring{\href{Faculty Web Site URL Here (include http://)}
-                {Faculty Name}}
-                {Faculty Name}}
-\FACULTY     {\texorpdfstring{\href{Faculty Web Site URL Here (include http://)}
-                {FACULTY NAME (IN BLOCK CAPITALS)}}
-                {FACULTY NAME (IN BLOCK CAPITALS)}}
+\university  {{Universidad Polit\'ecnica de Madrid}}
+\UNIVERSITY  {{UNIVERSIDAD POLIT\'ECNICA DE MADRID}}
+\department  {\texorpdfstring{\href{http://www.dia.fi.upm.es/}
+                {Departamento de Inteligencia Artificial}}
+                {Departamento de Inteligencia Artificial}}
+\DEPARTMENT  {\texorpdfstring{\href{http://www.dia.fi.upm.es/}
+                {DEPARTAMENTO DE INTELIGENCIA ARTIFICIAL}}
+                {DEPARTAMENTO DE INTELIGENCIA ARTIFICIAL}}
+\group       {\texorpdfstring{\href{http://visionaerialrobotics.com/}
+                {Vision and Aerial Robotics}}
+                {Vision and Aerial Robotics}}
+\GROUP       {\texorpdfstring{\href{http://visionaerialrobotics.com/}
+                {VISION AND AERIAL ROBOTICS}}
+                {vISION AND AERIAL ROBOTICS}}
+\faculty     {\texorpdfstring{\href{https://www.fi.upm.es/}
+                {Escuela T\'ecnica Superior de Ingenieros Inform\'aticos}}
+                {Escuela T\'ecnica Superior de Ingenieros Inform\'aticos}}
+\FACULTY     {\texorpdfstring{\href{https://www.fi.upm.es/}
+                {ESCUELA T\'ECNICA SUPERIOR DE INGENIEROS INFORM\'ATICOS}}
+                {ESCUELA T\'ECNICA SUPERIOR DE INGENIEROS INFORM\'ATICOS}}
 \addresses   {}
 \subject     {}
 \keywords    {}
@@ -200,8 +196,8 @@
       \smallskip
       {\LARGE \authornames \par}
       \vfill
-      {\large A thesis submitted in partial fulfillment for the \par}
-      {\large degree of Doctor of Philosophy \par}
+      {\large A master thesis submitted in partial fulfillment for the \par}
+      {\large masters degree of Artificial Intelligence \par}
       \bigskip
       \bigskip
       {\large in the \par}
@@ -244,7 +240,7 @@
     {\normalsize \facname \par}
     {\normalsize \deptname \par}
     \bigskip
-    {\normalsize Doctor of Philosophy\par}
+    {\normalsize Master Degree in Artificial Intelligence\par}
     \bigskip
     {\normalsize\bf \@title \par}
     \medskip
