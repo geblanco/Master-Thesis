@@ -1,6 +1,6 @@
 \chapter{Problem Description}
 
-  In the present chapter the problem is presented, along with an introduction to the previous work. It is structured as follows: Section \ref{ch_2:sect:1} presents the context of the problem and the requirements a replacement should have. Section \ref{ch_2:sect:2} describes deeply the improvements presented and the decisions taken to end in \ref{ch_2:sect:3} with the description of the previous system.
+  In the present chapter the problem is presented, along with an introduction to the previous work. It is structured as follows: Section \ref{ch_2:sect:1} presents the context of the problem and the requirements a replacement should have. Section \ref{ch_2:sect:2} describes deeply the improvements presented and the decisions taken to end in Section \ref{ch_2:sect:3} with the description of the previous system.
 
   \section{Requirements} \label{ch_2:sect:1}
 
@@ -12,13 +12,15 @@
 
     A lidar is going to be used as the main source for localization. The module in charge of this part is already present in the Aerostack framework, but it is not being used. Based on lidar input an octomap is built. This octomap is then used by the navigator, along with the planner instructions to build a motion plan to execute.
 
-    The lidar + octomap functionality is provided by a module called hector\_slam, developed at the Darmstadt University \cite{hector_slam}. Taking the lidar cloud of points it is able to reconstruct an octomap and then localize inside it (SLAM). The output of this module can be used to create a plan avoiding obstacles to reach a target point.
+    The lidar + octomap functionality is provided by a module called hector\_slam, developed at the Darmstadt University \cite{hector_slam}. Taking the lidar's cloud of points it is able to reconstruct an octomap and then localize inside it (SLAM). The output of this module can be used to create a plan avoiding obstacles to reach a target point.
 
     [ ToDo := Review, NavStack \& Global Planner ]
 
   \section{Previous Work} \label{ch_2:sect:3}
 
-    By now, there is a process responsible for doing recognition of Aruco markers, it is connected to the robot camera and fetches data every $n$ milliseconds, where $n$ is a user defined constant. When an aruco is recognized, the pose of the robot can be estimated. Knowing the exact position of the marker enables the process to estimate the absolute position of the robot, leading to a high precision coordinates localization. [ToDo := Continue]
+    By now, there is a process responsible for doing recognition of Aruco markers, it is connected to the robot camera and fetches data every $n$ milliseconds, where $n$ is a user defined constant. When an aruco is recognized, the pose of the robot can be estimated. Knowing the exact position of the marker enables the process to estimate the absolute position of the robot, leading to a high precision coordinates localization. While this approach has many advantages, it fails when the environment is not prepared beforehand.
+
+    To create a plan, a target position and the used Aruco markers are specified, then the motion planner creates a 2D plan to follow, using the Arucos to localize in the process.
 
     \begin{comment}
       \begin{itemize}
