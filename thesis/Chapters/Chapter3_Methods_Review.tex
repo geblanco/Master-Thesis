@@ -2,7 +2,25 @@
 
   The following chapter reviews the techniques used 
 
+  \section{Raw Summary}
+    \subsection{Sensor Technologies}
+
+    Technologies based on range sensing are primarily divided into two groups, the ones that use \textit{Triangulation} techniques and the ones using \textit{Time of Flight}.
+
+    In this section a survey of the current technical methods is presented. First, the technologies using triangulation are presented (subsection \ref{ch_3:sect:summ:subsect:triang}), as well as the problems that arise from this technique. Subsection \ref{ch_3:sect:summ:subsect:tof} proceeds with time of flight based techniques to finish with a comparison in subsubsection \ref{ch_3:sect:summ:subsect:cmp}.
+
+    \subsubsection{Triangulation} \label{ch_3:sect:summ:subsect:triang}
+
+     Technologies based on triangulation usually involves various sensors which emmit a ray and measure it's reflection. To estimate the depth between the measuring device and a certain point of the world the following procedure can be used: Using the angle formed between two consecutive sensors to a certain point of the world and knowing the base distance $b$ between those sensors gives a triangle, for the shake of simplicity let us assume that one of the rays form a right angle with the base of the sensors. Then, the angle $\theta$ of the other ray is related to the depth $Z$ perpendicular to the base of the sensors by
+
+    \begin{equation}
+      \tan \theta = \frac{Z}{b}
+    \end{equation}
+
+    \subsubsection{Time of Flight} \label{ch_3:sect:summ:subsect:tof}
+
+    \subsubsection{Comparison} \label{ch_3:sect:summ:subsect:cmp}
 
   \begin{comment}
-   Chapters  5, 7, 31, 45 y 47 
+   Chapter 31, part C, sect 31.2 Sensor Technologies
   \end{comment}
