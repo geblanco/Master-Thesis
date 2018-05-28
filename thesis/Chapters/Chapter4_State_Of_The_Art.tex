@@ -1,0 +1,25 @@
+\chapter{State of the Art}
+
+  This chapter will review the classic methods used for localization and mapping, which is the core for any navigation technique, it starts describing the problems that arise both in localization and mapping. Continue with some of the most prolific solutions found to these problems to finish exposing the techniques and algorithms used by the Aerostack framework.
+
+  Localization is referred to all the techniques used to find the position in coordinates of an agent or object inside the world, relative to a reference frame. As far as it's absolute coordinates are known, anything can be used as reference frame, it is used as the coordinates system's centre. In an outdoors environment, the Earth could be the reference frame and the robot's coordinates can be acquired with a GPS, giving an absolute point inside the three dimensional space. It is desirable for these coordinates to be in a way that a computer can handle efficiently, tipically as two or three floating point numbers (although integer numbers are used sometimes too), depending on the number of dimensions used to represent the space. To save computational effort, the y axis could be unused in a wheeled robot.
+
+  Moving a robot avoiding possible obstacles through the space is tricky in itself, obstacles must be detected and handled correctly, moving objects can appear in the way, and so on. This alone does not provide any intelligence nor it helps planning, to aid in planning and moving smartly in the space, a map can be constructed while the localization is happening. The term mapping covers all the algorithms used to construct a map combining the data acquired from the many input sources a robot can have. Mapping opens the door for smart planning, along with many more advantages. A classic example is finding cycles in planned paths.
+
+  \clearpage
+
+  \section{Localization}
+
+    Localization techniques are divided into two groups: Outdoor and indoor techniques. The distinction comes from the fact that GPS signal cannot go through walls. This fact has led to a whole new set of technologies and techniques that are able to localize in environments without an absolute reference to the world.
+
+  \begin{comment}
+    Organization:
+      - Localization and mapping: Talk about Localization techniques:
+        - Outdoor: GPS
+        - Indoor: Bluetooth/WiFi Beacons, OptiTrack camera, Image-Based algorithms
+  \end{comment}
+
+  \begin{comment}
+    \begin{itemize}
+    \end{itemize}
+  \end{comment}
