@@ -14,7 +14,7 @@
 
     This section is organized as follows: First outdoor localization will be analyzed, with a brief review of it's core components, then various indoor localization techniques will be exposed, focusing on lidar based techniques.
 
-    \subsection{Outdoor localization}
+    \subsection{Outdoor localization} \label{ch_sota:sect:localization:outdoor}
 
       By now, the most robust, reliable solution for outdoor localization is based on combining different sources of data. The mobile platform has drawn great attention over the past few years, pushing some of the largest companies in a shared effort to improve localization services while minimizing the impact over the battery's performance.
 
@@ -23,16 +23,24 @@
       To aid both problems two new localization techniques were implemented:
       \begin{enumerate}
         \item GSM Localization. As every GSM antenna has a well known location stored in a database, one can localize trilaterating the near GSM antennas. Obviosly, this method is subject to GSM signal coverage.
-        \item WiFi Localization. This powerful method can serve both as an indoor and outdoor localization technique (see \ref{ch_4:sect:localization:indoor}). When a smarphone detects a wifi hotspot, it sends it's BSSID along with the GPS coordinates if available to a centralized server. As this database grows the localization precision improves and every user can take advantage from it. This is scpecially useful in urban areas where stallite signal is poor or intermitent and improves as more and more users log information.
+        \item WiFi Localization. This powerful method can serve both as an indoor and outdoor localization technique (see sect. \ref{ch_sota:sect:localization:indoor}). When a smarphone detects a WiFi hotspot, it sends it's BSSID along with the GPS coordinates if available to a centralized server. As this database grows the localization precision improves and every user can take advantage from it. This is scpecially useful in urban areas where stallite signal is poor or intermitent and improves as more and more users log information.
       \end{enumerate}
 
       The best localization services can be provided with the conjunction of these three main techniques, which can be easily merged with an \textit{Extended Kalman Filter}.
 
+      Although these techniques are widely used they are limited to mobile platforms, which are restricted both in sensorization and in processing capabilities. For robotic applications more sophisticated sensors are used, this includes depth cameras and lidars for the most part. Again, all the sensors output is merged to get the best estimates.
 
-      Although these techniques are widely used they are limited to mobile platforms, which are limited both in sensorization and in processing capabilities. For robotic applications more sophisticated sensors can be used, this includes 
+      In robotics, it is usual that the localization we are interested in is relative instead of absolute. This is done to aid in locating near objects in the space relative to the robot but also to construct a map, the process of localization and mapping simultaneosly is called SLAM (see sect. \ref{ch_sota:sect:localization:slam}).
 
-    \subsection{Indoor localization}
+    \subsection{Indoor localization} \label{ch_sota:sect:localization:indoor}
 
+      To localize in indoor environments many strategies can be followed, the general trend is to place different markers (active or passive) beforehand in well known locations. This markers are then recognized by the licalizing device to know it's location. This \textit{recognizable markers} can be anything, a Bluetooth beacon, a WiFi hotspot, etc.
+
+      Bluetooth beacons are specially designed for this purpose, providing the beacon reader with more information. In the case of WiFi hotspots localization is usually done by analyzing the signal strength and incoming angle.
+
+      [ToDo := Talk about OptiTrack and arucos]
+
+    \subsection{SLAM} \label{ch_sota:sect:localization:slam}
 
   \begin{comment}
     Organization:
