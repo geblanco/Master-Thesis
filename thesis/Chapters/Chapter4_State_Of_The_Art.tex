@@ -30,17 +30,25 @@
 
       Although these techniques are widely used they are limited to mobile platforms, which are restricted both in sensorization and in processing capabilities. For robotic applications more sophisticated sensors are used, this includes depth cameras and lidars for the most part. Again, all the sensors output is merged to get the best estimates.
 
-      In robotics, it is usual that the localization we are interested in is relative instead of absolute. This is done to aid in locating near objects in the space relative to the robot but also to construct a map, the process of localization and mapping simultaneosly is called SLAM (see sect. \ref{ch_sota:sect:localization:slam}).
+      In robotics, it is usual that the localization we are interested in is relative instead of absolute. This is done to aid in locating near objects in the space relative to the robot but also to construct a map, the process of localization and mapping simultaneously is called \textit{SLAM - Simultaneous Localization And Mapping} (see sect. \ref{ch_sota:sect:localization:slam}).
 
     \subsection{Indoor localization} \label{ch_sota:sect:localization:indoor}
 
-      To localize in indoor environments many strategies can be followed, the general trend is to place different markers (active or passive) beforehand in well known locations. This markers are then recognized by the licalizing device to know it's location. This \textit{recognizable markers} can be anything, a Bluetooth beacon, a WiFi hotspot, etc.
+      To localize in indoor environments many strategies can be followed, the general trend is to place different markers (active or passive) beforehand in well known locations. This markers are then recognized by the localizing device to know it's location. This \textit{recognizable markers} can be anything, a Bluetooth beacon, a WiFi hotspot, etc.
 
-      Bluetooth beacons are specially designed for this purpose, providing the beacon reader with more information. In the case of WiFi hotspots localization is usually done by analyzing the signal strength and incoming angle.
+      Bluetooth beacons are specially crafted for this purpose as they can provide much more information. It has been extensively used in congresses and hotels to provide hosts with more information beyond localization, as services and timetables based on location. 
 
-      [ToDo := Talk about OptiTrack and arucos]
+      In the case of WiFi hotspots localization is usually done by analyzing the signal strength and incoming angle. This method only works when the hotspots' location is known beforehand and is very prone to errors because the device must remain static in a certain angle.
+
+      From the computer vision perspective, visual markers can be placed too and processed by the device localizing and again, this requires preparation beforehand. One example of this setup are the well known \href{https://www.uco.es/investiga/grupos/ava/node/26}{Aruco}
+
+      In many robotic applications like swarm robotics there is a necessity to track each member of the swarm in a closed, contained environment for this purpose an \href{http://www.optitrack.com/}{OptiTrack} system can be used, it is a highly precise camera set that can track various markers (marked swarm members) and serve through the network. This setup is specially useful to monitor the swarm, enabling each member to access it's location.
 
     \subsection{SLAM} \label{ch_sota:sect:localization:slam}
+
+    SLAM is the process of mapping and, at the same time localizing inside that map \textbf{ToDo := Seed paper}. This is specially useful in environments that are not prepared like the ones exposed previously, enabling the robot to work on an unknown place without getting lost nor entering cyclic paths. SLAM techniques are crucial in any robot with some degree of autonomy, it makes the navigation possible. 
+
+    The method was first proposed for lidar sensors and quickly followed by different camera systems.
 
   \begin{comment}
     Organization:
