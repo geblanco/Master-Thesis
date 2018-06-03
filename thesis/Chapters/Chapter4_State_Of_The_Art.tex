@@ -46,18 +46,29 @@
 
     \subsection{SLAM} \label{ch_sota:sect:localization:slam}
 
-    SLAM is the process of mapping and, at the same time localizing inside that map \textbf{ToDo := Seed paper}. This is specially useful in environments that are not prepared like the ones exposed previously, enabling the robot to work on an unknown place without getting lost nor entering cyclic paths. SLAM techniques are crucial in any robot with some degree of autonomy, it makes the navigation possible. 
+    SLAM is the process of mapping and, at the same time localizing inside that map. This is specially useful in environments that are not prepared like the ones exposed previously, enabling the robot to work on an unknown place without getting lost nor entering cyclic paths. SLAM techniques are crucial in any robot with some degree of autonomy, it makes the navigation possible. 
 
-    There are three main variants here
+    There are three main variants here, the ones based on Extended Kalman Filters, the probabilistic ones and the ones based on Graph Optimization.
 
-    The method was first proposed for lidar sensors and quickly followed by different camera systems.
+    \subsubsection{Extended Kalman Filters SLAM}
 
-  \begin{comment}
-    Organization:
-      - Localization and mapping: Talk about Localization techniques:
-        - Outdoor: GPS
-        - Indoor: Bluetooth/WiFi Beacons, OptiTrack camera, Image-Based algorithms
-  \end{comment}
+      Extended Kalman Filters (EKF) SLAM is the earliest technique developed for SLAM. EKF is a general technique to find the best estimate for the measuring variable based on the mean and covariance. In this case the inputs are the odometry used to estimate the robot position, features of the environment anchor the odometry measures and the robot motor system sensors (wheel decoders, etc) to estimate the change on the position. Then the objective is to find the best estimate for the current robot's position.
+
+      At the start of the process, the system's ($0$, $0$) coordinate is established where the robot is, this is the most confident measure about the robot position. As the robot navigates the environment, succesive measures are taken and paired with the known landmarks, when a previously seen landmark is witnessed again, the position estimate is corrected with the covariance matrix, and the error correction is propagated along the previous estimates. In this way a long as the robot is navigating an sensing the landmarks, the position estimate improves.
+
+      Although this technique works well on small maps, it renders unusable for large maps, this happens because the covariance matrix used to correlate the position estimates grows cuadratically with the measures, making the memory footprint wildly large and the overall processing time very high. Some researchers have proposed an improvement over the EKF SLAM algorithm through submap decomposition \cite{Guivant2001, Leonard2000}.
+
+    \subsubsection{Particle Filters}
+
+      Particle Filters are a probabilistic approach to position estimation, usually called Fast SLAM \cite{Montemerlo2002}. It uses various \textit{particles} that represent the posterior probability of the true distribution of maps and possible paths. To do so it stands over a method called Rao-Blackwellization, that aids in dimensioning the number of particles needed to represent the map. Also, as conditional indepence is assumed between the observed landmarks, every landmark can be represented as $N$ small Gaussians, which is linear, instead of exponential on the number of landmarks.
+
+      Although this method is easy to implement, is fast enough for real time applications with not very high demanding software and yields good results on small to medium maps, it suffers from the fact that lots of particles are needed to represent big maps, specially with multiple nested loops. Therefore, many improvements have been proposed, \cite{Grisetti2007} for example uses ocucupancy grids instead of Gaussians.
+
+    \subsubsection{Graph Optimization SLAM}
+
+      % ToDo := Graphical model for slam...
+
+    % ToDo := Write about hector_slam and lidar, write about visual slam and orb_slam
 
   \begin{comment}
     \begin{itemize}
