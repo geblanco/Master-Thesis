@@ -66,6 +66,7 @@
 
     \subsubsection{Graph Optimization SLAM}
 
+      The Graph Optimization SLAM techniques try to optimize a graphical model representing the landmark and robots locations. In this representation, each location is viewed a node in the graph, and the edge (called soft constraint) between two consecutive nodes is the odometry captured. The key intuition behind these methods is that at the end, the graph is sparse, because, each node will have just a few connections to other nodes. Also, at worst, the number of entries in the graph is linear in the time elapsed and ib the number of nodes.
       % ToDo := Graphical model for slam...
 
     % ToDo := Write about hector_slam and lidar, write about visual slam and orb_slam
