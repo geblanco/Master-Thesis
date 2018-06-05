@@ -66,10 +66,23 @@
 
     \subsubsection{Graph Optimization SLAM}
 
-      The Graph Optimization SLAM techniques try to optimize a graphical model representing the landmark and robots locations. In this representation, each location is viewed a node in the graph, and the edge (called soft constraint) between two consecutive nodes is the odometry captured. The key intuition behind these methods is that at the end, the graph is sparse, because, each node will have just a few connections to other nodes. Also, at worst, the number of entries in the graph is linear in the time elapsed and ib the number of nodes.
-      % ToDo := Graphical model for slam...
+      The Graph Optimization SLAM techniques try to optimize a graphical model representing the landmark and robots locations. In this representation, each location is viewed a node in the graph, and the edge (called soft constraint) between two consecutive nodes is the captured odometry. The key intuition behind these methods is that at the end, the graph is sparse, because, each node will have just a few connections to other nodes. Also, at worst, the number of entries in the graph is linear in the time elapsed and in the number of nodes.
 
-    % ToDo := Write about hector_slam and lidar, write about visual slam and orb_slam
+      This is the most widely used approach because sparse linear optimization is in a very advanced stage, allowing for scalable, yet efficient implementations of the algorithm.
+
+    \subsubsection{Lidar SLAM}
+
+      Lidar is a well established laser range sensor that can be used for depth estimation. By doing fast sweeps in 360 degrees it can compose a depth map which can be used for SLAM.
+
+      Hector SLAM \cite{KohlbrecherMeyerStrykKlingaufFlexibleSlamSystem2011} is a technique developed in the Darmstadt University. It uses a lidar sensor to do a fast SLAM by matching rays along sweeps.
+
+      Along this work, the \textit{hector\_slam} ROS module will be integrated into the Aerostack framework, providing a robust SLAM technique ready to use for the drones equiped with lidar.
+
+    \subsubsection{Visual SLAM}
+
+      Using computer vision for SLAM have been a challange since it's conception, it raises the difficulty, specially for monocular cameras. Although many features can be extracted from images, it is not clear how to process nor store the data taking into account the full 6 degrees of freedom in a camera. All the parameters of the camera must be known beforehand, depth cameras include a lot of noise and monocular cameras do not have scale.
+
+      In \cite{murTRO2015}, ORB-SLAM is proposed. Intuitively, it creates ORB features from a visual input and stores it in a sparse matrix, then a matching process is launched to localize every feature, improving the localization along the way. It can work on Monocular (no scale), Stereo and Depth Cameras, giving extraordinary results.
 
   \begin{comment}
     \begin{itemize}
