@@ -1,0 +1,28 @@
+== Chapter 4 | project:TFM ==
+* [X] Write intro  #9a1f3020
+* [O] Write chapter 4  #041e8cbd
+    * [X] Test  #363aaae5
+    * [X] [CH 4] Technical Goals  #08fd66eb
+        * [X] [CH 4] Intro  #142fa771
+        * [X] [CH 4] Behavior lidar  #f5d5cae5
+        * [X] [CH 4] Behavior navigation  #4e9824dc
+    * [X] [CH 4] Specification  #91cf8854
+        * [X] Aerostack architecture impositions  #501a248a
+        * [X] [CH 4] Behavior lidar  #44b82741
+        * [X] [CH 4] Behavior navigation  #ceb95a2c
+        * [X] [CH 4][Spec] Technical specs of implemented behaviors  #10b8424d
+    * [X] [CH 4] Integration  #d3b531fc
+        * [X] [CH 4][Integ] What a module should do to be integrated  #c42b0bba
+    * [X] [CH 4] Behavior lidar  #4b51b4d2
+        * [X] [CH 4][BLid] Goals  #fd8ad921
+        * [X] [CH 4][BLid] Integration  #5e411ff4
+        * [X] [CH 4][BLid] Specification  #bf8f48be
+        * [X] [CH 4][BLid] Intro  #2cadcd64
+    * [ ] [CH 4] Behavior navigation  #2315eafe
+        * [ ] [CH 4][BNav] Think about it's modules  #53bccacb
+        * [ ] [CH 4][BNav] Goals  #6b7109b2
+        * [ ] [CH 4][BNav] Integration  #e92ec136
+        * [ ] [CH 4][BNav] Specification  #c8c89ea7
+        * [ ] [CH 4][BNav] Intro  #de7e9e13
+    * [ ] [CH 4] Close up  #372ddfe4
+

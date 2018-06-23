@@ -1,0 +1,470 @@
+[
+  {
+    "name": "/drone11/amcl",
+    "publications": [
+      "/drone11/amcl_pose",
+      "/drone11/particlecloud"
+    ],
+    "subscriptions": [
+      "/drone11/initialpose",
+      "/drone11/scan"
+    ]
+  },
+  {
+    "name": "/drone11/base_sensor_broadcaster",
+    "publications": [],
+    "subscriptions": []
+  },
+  {
+    "name": "/drone11/behavior_coordinator_process",
+    "publications": [
+      "/drone11/list_of_active_behaviors",
+      "/drone11/process_alive_signal",
+      "/drone11/process_error"
+    ],
+    "subscriptions": [
+      "/drone11/behavior_event"
+    ]
+  },
+  {
+    "name": "/drone11/behavior_keep_hovering",
+    "publications": [
+      "/drone11/process_alive_signal",
+      "/drone11/process_error"
+    ],
+    "subscriptions": []
+  },
+  {
+    "name": "/drone11/behavior_land",
+    "publications": [
+      "/drone11/process_alive_signal",
+      "/drone11/process_error"
+    ],
+    "subscriptions": []
+  },
+  {
+    "name": "/drone11/behavior_self_localize_by_odometry",
+    "publications": [
+      "/drone11/process_alive_signal",
+      "/drone11/process_error"
+    ],
+    "subscriptions": []
+  },
+  {
+    "name": "/drone11/behavior_specialist_process",
+    "publications": [
+      "/drone11/process_alive_signal",
+      "/drone11/process_error"
+    ],
+    "subscriptions": []
+  },
+  {
+    "name": "/drone11/behavior_take_off",
+    "publications": [
+      "/drone11/process_alive_signal",
+      "/drone11/process_error"
+    ],
+    "subscriptions": []
+  },
+  {
+    "name": "/drone11/belief_manager_process",
+    "publications": [
+      "/drone11/all_beliefs",
+      "/drone11/process_alive_signal",
+      "/drone11/process_error"
+    ],
+    "subscriptions": []
+  },
+  {
+    "name": "/drone11/belief_updater_process",
+    "publications": [
+      "/drone11/process_alive_signal",
+      "/drone11/process_error"
+    ],
+    "subscriptions": [
+      "/drone11/EstimatedPose_droneGMR_wrt_GFF",
+      "/drone11/arucoObservation",
+      "/drone11/battery",
+      "/drone11/qr_interpretation"
+    ]
+  },
+  {
+    "name": "/drone11/droneCommand",
+    "publications": [
+      "/drone11/process_alive_signal"
+    ],
+    "subscriptions": [
+      "/drone11/EstimatedPose_droneGMR_wrt_GFF",
+      "/drone11/battery",
+      "/drone11/command/low_level",
+      "/drone11/droneControllerYawRefCommand",
+      "/drone11/odometry/filtered",
+      "/drone11/rotation_angles"
+    ]
+  },
+  {
+    "name": "/drone11/droneInterface",
+    "publications": [
+      "/drone11/command/dAltitude",
+      "/drone11/command/dYaw",
+      "/drone11/command/high_level",
+      "/drone11/command/pitch_roll",
+      "/drone11/droneControllerYawRefCommand",
+      "/drone11/dronePositionRefs",
+      "/drone11/droneSpeedsRefs",
+      "/drone11/droneTrajectoryAbsRefCommand",
+      "/drone11/droneTrajectoryRefCommand",
+      "/drone11/process_alive_signal"
+    ],
+    "subscriptions": [
+      "/drone11/ArucoSlam_EstimatedPose",
+      "/drone11/ArucoSlam_EstimatedSpeeds",
+      "/drone11/EstimatedPose_droneGMR_wrt_GFF",
+      "/drone11/EstimatedSpeed_droneGMR_wrt_GFF",
+      "/drone11/SOEstimatedPose",
+      "/drone11/SOEstimatedSpeeds",
+      "/drone11/altitude",
+      "/drone11/battery",
+      "/drone11/camera/front/image_raw",
+      "/drone11/command/dAltitude",
+      "/drone11/command/dYaw",
+      "/drone11/command/high_level",
+      "/drone11/command/pitch_roll",
+      "/drone11/controller_image_features",
+      "/drone11/controller_image_features_feedback",
+      "/drone11/droneTrajectoryController/controlMode",
+      "/drone11/get_bounding_box",
+      "/drone11/ground_speed",
+      "/drone11/imu",
+      "/drone11/is_object_on_frame",
+      "/drone11/magnetometer",
+      "/drone11/process_alive_signal",
+      "/drone11/rotation_angles",
+      "/drone11/status",
+      "/drone11/tracking_object",
+      "/drone11/trajectoryControllerPositionReferencesRebroadcast",
+      "/drone11/trajectoryControllerSpeedReferencesRebroadcast",
+      "/drone11/trajectoryControllerTrajectoryReferencesRebroadcast"
+    ]
+  },
+  {
+    "name": "/drone11/droneLocalPose",
+    "publications": [
+      "/drone11/altitude",
+      "/drone11/gazebo_estimated_pose",
+      "/drone11/gazebo_estimated_speed",
+      "/drone11/ground_speed",
+      "/drone11/process_alive_signal"
+    ],
+    "subscriptions": []
+  },
+  {
+    "name": "/drone11/droneMidLevelAutopilot",
+    "publications": [
+      "/drone11/command/low_level",
+      "/drone11/process_alive_signal",
+      "/drone11/status"
+    ],
+    "subscriptions": [
+      "/drone11/EstimatedSpeed_droneGMR_wrt_GFF",
+      "/drone11/altitude",
+      "/drone11/command/dAltitude",
+      "/drone11/command/dYaw",
+      "/drone11/command/high_level",
+      "/drone11/command/pitch_roll",
+      "/drone11/ground_speed",
+      "/drone11/rotation_angles"
+    ]
+  },
+  {
+    "name": "/drone11/droneNavigationStackROSModuleNode",
+    "publications": [
+      "/drone11/droneControllerYawRefCommand",
+      "/drone11/dronePositionRefs",
+      "/drone11/droneSpeedsRefs",
+      "/drone11/goal_reached",
+      "/drone11/move_base_simple/goal",
+      "/drone11/obstacle_found",
+      "/drone11/odom",
+      "/drone11/process_alive_signal"
+    ],
+    "subscriptions": [
+      "/drone11/globalGoal",
+      "/drone11/move_base/NavfnROS/plan",
+      "/drone11/move_base_simple/goal",
+      "/drone11/odometry/filtered",
+      "/drone11/rotation_angles",
+      "/drone11/scan"
+    ]
+  },
+  {
+    "name": "/drone11/droneRobotLocalizationROSModuleNode",
+    "publications": [
+      "/drone11/EstimatedPose_droneGMR_wrt_GFF",
+      "/drone11/EstimatedSpeed_droneGMR_wrt_GFF",
+      "/drone11/PnP_pose/data",
+      "/drone11/VO_Semantic_SLAM/Pose/data",
+      "/drone11/altitude/data",
+      "/drone11/altitude_gt/data",
+      "/drone11/bebop_imu/data",
+      "/drone11/bebop_vel_alti/data",
+      "/drone11/controller/odom/data",
+      "/drone11/gps/fix_data",
+      "/drone11/hector_slam/data",
+      "/drone11/imu/data",
+      "/drone11/laser_scan_pose/data",
+      "/drone11/laser_scan_window_pose/data",
+      "/drone11/optical_flow/data",
+      "/drone11/process_alive_signal",
+      "/drone11/rotation_angles/data",
+      "/drone11/set_pose",
+      "/drone11/slamdunk_pose/data"
+    ],
+    "subscriptions": [
+      "/drone11/altitude",
+      "/drone11/command/dAltitude",
+      "/drone11/command/dYaw",
+      "/drone11/command/pitch_roll",
+      "/drone11/ground_speed",
+      "/drone11/imu",
+      "/drone11/lb_estimated_pose/door_pose",
+      "/drone11/lb_estimated_pose/window_pose",
+      "/drone11/mavros/global_position/raw/fix",
+      "/drone11/odometry/filtered",
+      "/drone11/poseupdate",
+      "/drone11/rotation_angles",
+      "/drone11/states/ardrone3/PilotingState/AltitudeChanged",
+      "/drone11/states/ardrone3/PilotingState/AttitudeChanged",
+      "/drone11/states/ardrone3/PilotingState/SpeedChanged",
+      "/drone11/vb_estimated_pose/rpnp_pose"
+    ]
+  },
+  {
+    "name": "/drone11/droneRotationAngles",
+    "publications": [
+      "/drone11/imu",
+      "/drone11/process_alive_signal",
+      "/drone11/rotation_angles",
+      "/drone11/rotation_angles_radians"
+    ],
+    "subscriptions": []
+  },
+  {
+    "name": "/drone11/droneTrajectoryController",
+    "publications": [
+      "/drone11/command/dAltitude",
+      "/drone11/command/dYaw",
+      "/drone11/command/pitch_roll",
+      "/drone11/droneTrajectoryController/controlMode",
+      "/drone11/eventString",
+      "/drone11/process_alive_signal",
+      "/drone11/trajectoryControllerPositionReferencesRebroadcast",
+      "/drone11/trajectoryControllerSpeedReferencesRebroadcast",
+      "/drone11/trajectoryControllerTrajectoryReferencesRebroadcast"
+    ],
+    "subscriptions": [
+      "/drone11/EstimatedPose_droneGMR_wrt_GFF",
+      "/drone11/EstimatedPose_iRobotGMR_wrt_droneGMR",
+      "/drone11/EstimatedSpeed_droneGMR_wrt_GFF",
+      "/drone11/command_PBVS/Altitude",
+      "/drone11/droneControllerYawRefCommand",
+      "/drone11/dronePositionRefs",
+      "/drone11/droneSpeedsRefs",
+      "/drone11/droneTrajectoryAbsRefCommand",
+      "/drone11/droneTrajectoryRefCommand"
+    ]
+  },
+  {
+    "name": "/drone11/ekf_localization",
+    "publications": [
+      "/drone11/odometry/filtered"
+    ],
+    "subscriptions": [
+      "/drone11/altitude/data",
+      "/drone11/hector_slam/data",
+      "/drone11/imu/data",
+      "/drone11/laser_scan_pose/data",
+      "/drone11/optical_flow/data",
+      "/drone11/set_pose"
+    ]
+  },
+  {
+    "name": "/drone11/hector_geotiff_node",
+    "publications": [],
+    "subscriptions": [
+      "/drone11/syscommand"
+    ]
+  },
+  {
+    "name": "/drone11/hector_mapping",
+    "publications": [
+      "/drone11/hector_debug_info",
+      "/drone11/map",
+      "/drone11/map_metadata",
+      "/drone11/poseupdate",
+      "/drone11/slam_cloud",
+      "/drone11/slam_out_pose"
+    ],
+    "subscriptions": [
+      "/drone11/initialpose",
+      "/drone11/scan",
+      "/drone11/syscommand"
+    ]
+  },
+  {
+    "name": "/drone11/hector_trajectory_server",
+    "publications": [
+      "/drone11/trajectory"
+    ],
+    "subscriptions": [
+      "/drone11/syscommand"
+    ]
+  },
+  {
+    "name": "/drone11/imu_attitude_to_tf_node",
+    "publications": [],
+    "subscriptions": [
+      "/drone11/imu_topic"
+    ]
+  },
+  {
+    "name": "/drone11/link1_broadcaster",
+    "publications": [],
+    "subscriptions": []
+  },
+  {
+    "name": "/drone11/link2_broadcaster",
+    "publications": [],
+    "subscriptions": []
+  },
+  {
+    "name": "/drone11/link3_broadcaster",
+    "publications": [],
+    "subscriptions": []
+  },
+  {
+    "name": "/drone11/map_nav_broadcaster",
+    "publications": [],
+    "subscriptions": []
+  },
+  {
+    "name": "/drone11/move_base",
+    "publications": [
+      "/drone11/cmd_vel",
+      "/drone11/move_base/EBandPlannerROS/eband_visualization",
+      "/drone11/move_base/EBandPlannerROS/eband_visualization_array",
+      "/drone11/move_base/EBandPlannerROS/global_plan",
+      "/drone11/move_base/EBandPlannerROS/local_plan",
+      "/drone11/move_base/EBandPlannerROS/parameter_descriptions",
+      "/drone11/move_base/EBandPlannerROS/parameter_updates",
+      "/drone11/move_base/NavfnROS/plan",
+      "/drone11/move_base/current_goal",
+      "/drone11/move_base/feedback",
+      "/drone11/move_base/global_costmap/costmap",
+      "/drone11/move_base/global_costmap/costmap_updates",
+      "/drone11/move_base/global_costmap/footprint",
+      "/drone11/move_base/global_costmap/inflation_layer/parameter_descriptions",
+      "/drone11/move_base/global_costmap/inflation_layer/parameter_updates",
+      "/drone11/move_base/global_costmap/obstacle_layer/parameter_descriptions",
+      "/drone11/move_base/global_costmap/obstacle_layer/parameter_updates",
+      "/drone11/move_base/global_costmap/parameter_descriptions",
+      "/drone11/move_base/global_costmap/parameter_updates",
+      "/drone11/move_base/global_costmap/static_layer/parameter_descriptions",
+      "/drone11/move_base/global_costmap/static_layer/parameter_updates",
+      "/drone11/move_base/goal",
+      "/drone11/move_base/local_costmap/costmap",
+      "/drone11/move_base/local_costmap/costmap_updates",
+      "/drone11/move_base/local_costmap/footprint",
+      "/drone11/move_base/local_costmap/inflation_layer/parameter_descriptions",
+      "/drone11/move_base/local_costmap/inflation_layer/parameter_updates",
+      "/drone11/move_base/local_costmap/obstacle_layer/parameter_descriptions",
+      "/drone11/move_base/local_costmap/obstacle_layer/parameter_updates",
+      "/drone11/move_base/local_costmap/parameter_descriptions",
+      "/drone11/move_base/local_costmap/parameter_updates",
+      "/drone11/move_base/local_costmap/static_layer/parameter_descriptions",
+      "/drone11/move_base/local_costmap/static_layer/parameter_updates",
+      "/drone11/move_base/parameter_descriptions",
+      "/drone11/move_base/parameter_updates",
+      "/drone11/move_base/result",
+      "/drone11/move_base/status"
+    ],
+    "subscriptions": [
+      "/drone11/map",
+      "/drone11/move_base/cancel",
+      "/drone11/move_base/global_costmap/footprint",
+      "/drone11/move_base/goal",
+      "/drone11/move_base/local_costmap/footprint",
+      "/drone11/move_base_simple/goal",
+      "/drone11/odom",
+      "/drone11/scan"
+    ]
+  },
+  {
+    "name": "/drone11/process_monitor_process_main",
+    "publications": [
+      "/drone11/process_error_unified_notification",
+      "/drone11/processes_performance",
+      "/drone11/wifiIsOk"
+    ],
+    "subscriptions": [
+      "/drone11/process_alive_signal",
+      "/drone11/self_detected_process_error"
+    ]
+  },
+  {
+    "name": "/drone11/resource_manager_process",
+    "publications": [
+      "/drone11/list_of_active_capabilities",
+      "/drone11/list_of_active_processes",
+      "/drone11/process_alive_signal",
+      "/drone11/process_error"
+    ],
+    "subscriptions": []
+  },
+  {
+    "name": "/drone11/rviz",
+    "publications": [
+      "/drone11/clicked_point",
+      "/drone11/initialpose",
+      "/drone11/move_base_simple/goal"
+    ],
+    "subscriptions": [
+      "/drone11/exploration_polygon_marker",
+      "/drone11/exploration_polygon_marker_array",
+      "/drone11/map",
+      "/drone11/map_updates",
+      "/drone11/move_base/NavfnROS/plan",
+      "/drone11/move_base/current_goal",
+      "/drone11/move_base/local_costmap/costmap",
+      "/drone11/move_base/local_costmap/costmap_updates",
+      "/drone11/move_base/local_costmap/footprint",
+      "/drone11/slam_out_pose",
+      "/drone11/trajectory"
+    ]
+  },
+  {
+    "name": "/drone11/self_localization_selector_process",
+    "publications": [
+      "/drone11/process_alive_signal",
+      "/drone11/process_error"
+    ],
+    "subscriptions": []
+  },
+  {
+    "name": "/gazebo",
+    "publications": [
+      "/drone11/scan"
+    ],
+    "subscriptions": []
+  },
+  {
+    "name": "/hummingbird1/roll_pitch_yawrate_thrust_controller_node",
+    "publications": [],
+    "subscriptions": []
+  },
+  {
+    "name": "/rosout",
+    "publications": [],
+    "subscriptions": []
+  }
+]

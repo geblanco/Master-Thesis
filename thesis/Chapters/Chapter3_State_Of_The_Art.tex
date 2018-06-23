@@ -14,7 +14,7 @@
 
     This section is organized as follows: First outdoor localization will be analyzed, with a brief review of it's core components, then various indoor localization techniques will be exposed, focusing on lidar based techniques.
 
-    \subsection{Outdoor localization} \label{ch_sota:sect:localization:outdoor}
+    \subsection{Outdoor localization} \label{ch_3:sect:localization:outdoor}
 
       By now, the most robust, reliable solution for outdoor localization is based on combining different sources of data. The mobile platform has drawn great attention over the past few years, pushing some of the largest companies in a shared effort to improve localization services while minimizing the impact over the battery's performance.
 
@@ -23,16 +23,16 @@
       To aid both problems two new localization techniques were implemented:
       \begin{enumerate}
         \item GSM Localization. As every GSM antenna has a well known location stored in a database, one can localize trilaterating the near GSM antennas. Obviosly, this method is subject to GSM signal coverage.
-        \item WiFi Localization. This powerful method can serve both as an indoor and outdoor localization technique (see sect. \ref{ch_sota:sect:localization:indoor}). When a smarphone detects a WiFi hotspot, it sends it's BSSID along with the GPS coordinates if available to a centralized server. As this database grows the localization precision improves and every user can take advantage from it. This is scpecially useful in urban areas where stallite signal is poor or intermitent and improves as more and more users log information.
+        \item WiFi Localization. This powerful method can serve both as an indoor and outdoor localization technique (see sect. \ref{ch_3:sect:localization:indoor}). When a smarphone detects a WiFi hotspot, it sends it's BSSID along with the GPS coordinates if available to a centralized server. As this database grows the localization precision improves and every user can take advantage from it. This is scpecially useful in urban areas where stallite signal is poor or intermitent and improves as more and more users log information.
       \end{enumerate}
 
       The best localization services can be provided with the conjunction of these three main techniques, which can be easily merged with an \textit{Extended Kalman Filter}.
 
       Although these techniques are widely used they are limited to mobile platforms, which are restricted both in sensorization and in processing capabilities. For robotic applications more sophisticated sensors are used, this includes depth cameras and lidars for the most part. Again, all the sensors output is merged to get the best estimates.
 
-      In robotics, it is usual that the localization we are interested in is relative instead of absolute. This is done to aid in locating near objects in the space relative to the robot but also to construct a map, the process of localization and mapping simultaneously is called \textit{SLAM - Simultaneous Localization And Mapping} (see sect. \ref{ch_sota:sect:localization:slam}).
+      In robotics, it is usual that the localization we are interested in is relative instead of absolute. This is done to aid in locating near objects in the space relative to the robot but also to construct a map, the process of localization and mapping simultaneously is called \textit{SLAM - Simultaneous Localization And Mapping} (see sect. \ref{ch_3:sect:localization:slam}).
 
-    \subsection{Indoor localization} \label{ch_sota:sect:localization:indoor}
+    \subsection{Indoor localization} \label{ch_3:sect:localization:indoor}
 
       To localize in indoor environments many strategies can be followed, the general trend is to place different markers (active or passive) beforehand in well known locations. This markers are then recognized by the localizing device to know it's location. This \textit{recognizable markers} can be anything, a Bluetooth beacon, a WiFi hotspot, etc.
 
@@ -44,13 +44,13 @@
 
       In many robotic applications like swarm robotics there is a necessity to track each member of the swarm in a closed, contained environment for this purpose an \href{http://www.optitrack.com/}{OptiTrack} system can be used, it is a highly precise camera set that can track various markers (marked swarm members) and serve through the network. This setup is specially useful to monitor the swarm, enabling each member to access it's location.
 
-    \subsection{SLAM} \label{ch_sota:sect:localization:slam}
+    \subsection{SLAM} \label{ch_3:sect:localization:slam}
 
     SLAM is the process of mapping and, at the same time localizing inside that map. This is specially useful in environments that are not prepared like the ones exposed previously, enabling the robot to work on an unknown place without getting lost nor entering cyclic paths. SLAM techniques are crucial in any robot with some degree of autonomy, it makes the navigation possible. 
 
     There are three main variants here, the ones based on Extended Kalman Filters, the probabilistic ones and the ones based on Graph Optimization.
 
-    \subsubsection{Extended Kalman Filters SLAM}
+    \subsubsection{Extended Kalman Filters SLAM} \label{ch_3:sect:localization:ekf}
 
       Extended Kalman Filters (EKF) SLAM is the earliest technique developed for SLAM. EKF is a general technique to find the best estimate for the measuring variable based on the mean and covariance. In this case the inputs are the odometry used to estimate the robot position, features of the environment anchor the odometry measures and the robot motor system sensors (wheel decoders, etc) to estimate the change on the position. Then the objective is to find the best estimate for the current robot's position.
 
@@ -74,7 +74,7 @@
 
       Lidar is a well established laser range sensor that can be used for depth estimation. By doing fast sweeps in 360 degrees it can compose a depth map which can be used for SLAM.
 
-      Hector SLAM \cite{KohlbrecherMeyerStrykKlingaufFlexibleSlamSystem2011} is a technique developed in the Darmstadt University. It uses a lidar sensor to do a fast SLAM by matching rays along sweeps.
+      Hector SLAM \cite{hector_slam} is a technique developed in the Darmstadt University. It uses a lidar sensor to do a fast SLAM by matching rays along sweeps.
 
       Along this work, the \textit{hector\_slam} ROS module will be integrated into the Aerostack framework, providing a robust SLAM technique ready to use for the drones equiped with lidar.
 

@@ -1,0 +1,181 @@
+--------------------------------------------------------------------------------
+Node [/drone11/move_base]
+Publications: 
+ * /drone11/cmd_vel [geometry_msgs/Twist]
+ * /drone11/move_base/EBandPlannerROS/eband_visualization [visualization_msgs/Marker]
+ * /drone11/move_base/EBandPlannerROS/eband_visualization_array [visualization_msgs/MarkerArray]
+ * /drone11/move_base/EBandPlannerROS/global_plan [nav_msgs/Path]
+ * /drone11/move_base/EBandPlannerROS/local_plan [nav_msgs/Path]
+ * /drone11/move_base/EBandPlannerROS/parameter_descriptions [dynamic_reconfigure/ConfigDescription]
+ * /drone11/move_base/EBandPlannerROS/parameter_updates [dynamic_reconfigure/Config]
+ * /drone11/move_base/NavfnROS/plan [nav_msgs/Path]
+ * /drone11/move_base/current_goal [geometry_msgs/PoseStamped]
+ * /drone11/move_base/feedback [move_base_msgs/MoveBaseActionFeedback]
+ * /drone11/move_base/global_costmap/costmap [nav_msgs/OccupancyGrid]
+ * /drone11/move_base/global_costmap/costmap_updates [map_msgs/OccupancyGridUpdate]
+ * /drone11/move_base/global_costmap/footprint [geometry_msgs/PolygonStamped]
+ * /drone11/move_base/global_costmap/inflation_layer/parameter_descriptions [dynamic_reconfigure/ConfigDescription]
+ * /drone11/move_base/global_costmap/inflation_layer/parameter_updates [dynamic_reconfigure/Config]
+ * /drone11/move_base/global_costmap/obstacle_layer/parameter_descriptions [dynamic_reconfigure/ConfigDescription]
+ * /drone11/move_base/global_costmap/obstacle_layer/parameter_updates [dynamic_reconfigure/Config]
+ * /drone11/move_base/global_costmap/parameter_descriptions [dynamic_reconfigure/ConfigDescription]
+ * /drone11/move_base/global_costmap/parameter_updates [dynamic_reconfigure/Config]
+ * /drone11/move_base/global_costmap/static_layer/parameter_descriptions [dynamic_reconfigure/ConfigDescription]
+ * /drone11/move_base/global_costmap/static_layer/parameter_updates [dynamic_reconfigure/Config]
+ * /drone11/move_base/goal [move_base_msgs/MoveBaseActionGoal]
+ * /drone11/move_base/local_costmap/costmap [nav_msgs/OccupancyGrid]
+ * /drone11/move_base/local_costmap/costmap_updates [map_msgs/OccupancyGridUpdate]
+ * /drone11/move_base/local_costmap/footprint [geometry_msgs/PolygonStamped]
+ * /drone11/move_base/local_costmap/inflation_layer/parameter_descriptions [dynamic_reconfigure/ConfigDescription]
+ * /drone11/move_base/local_costmap/inflation_layer/parameter_updates [dynamic_reconfigure/Config]
+ * /drone11/move_base/local_costmap/obstacle_layer/parameter_descriptions [dynamic_reconfigure/ConfigDescription]
+ * /drone11/move_base/local_costmap/obstacle_layer/parameter_updates [dynamic_reconfigure/Config]
+ * /drone11/move_base/local_costmap/parameter_descriptions [dynamic_reconfigure/ConfigDescription]
+ * /drone11/move_base/local_costmap/parameter_updates [dynamic_reconfigure/Config]
+ * /drone11/move_base/local_costmap/static_layer/parameter_descriptions [dynamic_reconfigure/ConfigDescription]
+ * /drone11/move_base/local_costmap/static_layer/parameter_updates [dynamic_reconfigure/Config]
+ * /drone11/move_base/parameter_descriptions [dynamic_reconfigure/ConfigDescription]
+ * /drone11/move_base/parameter_updates [dynamic_reconfigure/Config]
+ * /drone11/move_base/result [move_base_msgs/MoveBaseActionResult]
+ * /drone11/move_base/status [actionlib_msgs/GoalStatusArray]
+ * /rosout [rosgraph_msgs/Log]
+
+Subscriptions: 
+ * /clock [rosgraph_msgs/Clock]
+ * /drone11/map [nav_msgs/OccupancyGrid]
+ * /drone11/move_base/cancel [unknown type]
+ * /drone11/move_base/global_costmap/footprint [geometry_msgs/PolygonStamped]
+ * /drone11/move_base/goal [move_base_msgs/MoveBaseActionGoal]
+ * /drone11/move_base/local_costmap/footprint [geometry_msgs/PolygonStamped]
+ * /drone11/move_base_simple/goal [geometry_msgs/PoseStamped]
+ * /drone11/odom [nav_msgs/Odometry]
+ * /drone11/scan [sensor_msgs/LaserScan]
+ * /tf [tf2_msgs/TFMessage]
+ * /tf_static [unknown type]
+
+Services: 
+ * /drone11/move_base/EBandPlannerROS/set_parameters
+ * /drone11/move_base/NavfnROS/make_plan
+ * /drone11/move_base/clear_costmaps
+ * /drone11/move_base/get_loggers
+ * /drone11/move_base/global_costmap/inflation_layer/set_parameters
+ * /drone11/move_base/global_costmap/obstacle_layer/set_parameters
+ * /drone11/move_base/global_costmap/set_parameters
+ * /drone11/move_base/global_costmap/static_layer/set_parameters
+ * /drone11/move_base/local_costmap/inflation_layer/set_parameters
+ * /drone11/move_base/local_costmap/obstacle_layer/set_parameters
+ * /drone11/move_base/local_costmap/set_parameters
+ * /drone11/move_base/local_costmap/static_layer/set_parameters
+ * /drone11/move_base/make_plan
+ * /drone11/move_base/set_logger_level
+ * /drone11/move_base/set_parameters
+
+
+contacting node http://a60245fc7516:45493/ ...
+Pid: 1598
+Connections:
+ * topic: /rosout
+    * to: /rosout
+    * direction: outbound
+    * transport: TCPROS
+ * topic: /drone11/move_base/current_goal
+    * to: /drone11/rviz
+    * direction: outbound
+    * transport: TCPROS
+ * topic: /drone11/move_base/goal
+    * to: /drone11/move_base
+    * direction: outbound
+    * transport: INTRAPROCESS
+ * topic: /drone11/move_base/NavfnROS/plan
+    * to: /drone11/rviz
+    * direction: outbound
+    * transport: TCPROS
+ * topic: /drone11/move_base/NavfnROS/plan
+    * to: /drone11/droneNavigationStackROSModuleNode
+    * direction: outbound
+    * transport: TCPROS
+ * topic: /drone11/move_base/local_costmap/footprint
+    * to: /drone11/rviz
+    * direction: outbound
+    * transport: TCPROS
+ * topic: /drone11/move_base/local_costmap/costmap
+    * to: /drone11/rviz
+    * direction: outbound
+    * transport: TCPROS
+ * topic: /drone11/move_base/local_costmap/costmap_updates
+    * to: /drone11/rviz
+    * direction: outbound
+    * transport: TCPROS
+ * topic: /clock
+    * to: /gazebo (http://a60245fc7516:37653/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /tf
+    * to: /gazebo (http://a60245fc7516:37653/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /tf
+    * to: /drone11/link2_broadcaster (http://a60245fc7516:33791/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /tf
+    * to: /drone11/link1_broadcaster (http://a60245fc7516:35349/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /tf
+    * to: /drone11/base_sensor_broadcaster (http://a60245fc7516:33611/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /tf
+    * to: /drone11/link3_broadcaster (http://a60245fc7516:41277/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /tf
+    * to: /drone11/map_nav_broadcaster (http://a60245fc7516:35013/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /tf
+    * to: /drone11/droneRobotLocalizationROSModuleNode (http://a60245fc7516:34481/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /tf
+    * to: /drone11/imu_attitude_to_tf_node (http://a60245fc7516:37459/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /tf
+    * to: /drone11/hector_mapping (http://a60245fc7516:41801/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /tf
+    * to: /drone11/amcl (http://a60245fc7516:39029/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /tf
+    * to: /drone11/ekf_localization (http://a60245fc7516:36161/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /drone11/move_base_simple/goal
+    * to: /drone11/rviz (http://a60245fc7516:42301/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /drone11/move_base_simple/goal
+    * to: /drone11/droneNavigationStackROSModuleNode (http://a60245fc7516:43077/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /drone11/map
+    * to: /drone11/hector_mapping (http://a60245fc7516:41801/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /drone11/scan
+    * to: /gazebo (http://a60245fc7516:37653/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /drone11/odom
+    * to: /drone11/droneNavigationStackROSModuleNode (http://a60245fc7516:43077/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /drone11/move_base/goal
+    * to: /drone11/move_base (http://a60245fc7516:45493/)
+    * direction: inbound
+    * transport: INTRAPROCESS
+

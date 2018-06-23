@@ -1,0 +1,134 @@
+--------------------------------------------------------------------------------
+Node [/drone11/hector_mapping]
+Publications: 
+ * /drone11/hector_debug_info [hector_mapping/HectorDebugInfo]
+ * /drone11/map [nav_msgs/OccupancyGrid]
+ * /drone11/map_metadata [nav_msgs/MapMetaData]
+ * /drone11/poseupdate [geometry_msgs/PoseWithCovarianceStamped]
+ * /drone11/slam_cloud [sensor_msgs/PointCloud]
+ * /drone11/slam_out_pose [geometry_msgs/PoseStamped]
+ * /rosout [rosgraph_msgs/Log]
+ * /tf [tf2_msgs/TFMessage]
+
+Subscriptions: 
+ * /clock [rosgraph_msgs/Clock]
+ * /drone11/initialpose [geometry_msgs/PoseWithCovarianceStamped]
+ * /drone11/scan [sensor_msgs/LaserScan]
+ * /drone11/syscommand [unknown type]
+ * /tf [tf2_msgs/TFMessage]
+ * /tf_static [unknown type]
+
+Services: 
+ * /drone11/dynamic_map
+ * /drone11/hector_mapping/get_loggers
+ * /drone11/hector_mapping/set_logger_level
+
+
+contacting node http://a60245fc7516:41801/ ...
+Pid: 1470
+Connections:
+ * topic: /rosout
+    * to: /rosout
+    * direction: outbound
+    * transport: TCPROS
+ * topic: /drone11/map
+    * to: /drone11/rviz
+    * direction: outbound
+    * transport: TCPROS
+ * topic: /drone11/map
+    * to: /drone11/move_base
+    * direction: outbound
+    * transport: TCPROS
+ * topic: /drone11/poseupdate
+    * to: /drone11/droneRobotLocalizationROSModuleNode
+    * direction: outbound
+    * transport: TCPROS
+ * topic: /drone11/slam_out_pose
+    * to: /drone11/rviz
+    * direction: outbound
+    * transport: TCPROS
+ * topic: /tf
+    * to: /drone11/hector_mapping
+    * direction: outbound
+    * transport: INTRAPROCESS
+ * topic: /tf
+    * to: /drone11/hector_trajectory_server
+    * direction: outbound
+    * transport: TCPROS
+ * topic: /tf
+    * to: /drone11/ekf_localization
+    * direction: outbound
+    * transport: TCPROS
+ * topic: /tf
+    * to: /drone11/move_base
+    * direction: outbound
+    * transport: TCPROS
+ * topic: /tf
+    * to: /drone11/droneRobotLocalizationROSModuleNode
+    * direction: outbound
+    * transport: TCPROS
+ * topic: /tf
+    * to: /drone11/rviz
+    * direction: outbound
+    * transport: TCPROS
+ * topic: /tf
+    * to: /drone11/amcl
+    * direction: outbound
+    * transport: TCPROS
+ * topic: /clock
+    * to: /gazebo (http://a60245fc7516:37653/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /tf
+    * to: /gazebo (http://a60245fc7516:37653/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /tf
+    * to: /drone11/link1_broadcaster (http://a60245fc7516:35349/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /tf
+    * to: /drone11/link3_broadcaster (http://a60245fc7516:41277/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /tf
+    * to: /drone11/link2_broadcaster (http://a60245fc7516:33791/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /tf
+    * to: /drone11/droneRobotLocalizationROSModuleNode (http://a60245fc7516:34481/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /tf
+    * to: /drone11/map_nav_broadcaster (http://a60245fc7516:35013/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /tf
+    * to: /drone11/base_sensor_broadcaster (http://a60245fc7516:33611/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /tf
+    * to: /drone11/imu_attitude_to_tf_node (http://a60245fc7516:37459/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /tf
+    * to: /drone11/hector_mapping (http://a60245fc7516:41801/)
+    * direction: inbound
+    * transport: INTRAPROCESS
+ * topic: /tf
+    * to: /drone11/amcl (http://a60245fc7516:39029/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /tf
+    * to: /drone11/ekf_localization (http://a60245fc7516:36161/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /drone11/scan
+    * to: /gazebo (http://a60245fc7516:37653/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /drone11/initialpose
+    * to: /drone11/rviz (http://a60245fc7516:42301/)
+    * direction: inbound
+    * transport: TCPROS
+

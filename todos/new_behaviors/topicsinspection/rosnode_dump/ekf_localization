@@ -1,0 +1,145 @@
+--------------------------------------------------------------------------------
+Node [/drone11/ekf_localization]
+Publications: 
+ * /diagnostics [diagnostic_msgs/DiagnosticArray]
+ * /drone11/odometry/filtered [nav_msgs/Odometry]
+ * /rosout [rosgraph_msgs/Log]
+ * /tf [tf2_msgs/TFMessage]
+
+Subscriptions: 
+ * /clock [rosgraph_msgs/Clock]
+ * /drone11/altitude/data [nav_msgs/Odometry]
+ * /drone11/hector_slam/data [nav_msgs/Odometry]
+ * /drone11/imu/data [sensor_msgs/Imu]
+ * /drone11/laser_scan_pose/data [nav_msgs/Odometry]
+ * /drone11/optical_flow/data [nav_msgs/Odometry]
+ * /drone11/set_pose [geometry_msgs/PoseWithCovarianceStamped]
+ * /tf [tf2_msgs/TFMessage]
+ * /tf_static [unknown type]
+
+Services: 
+ * /drone11/ekf_localization/get_loggers
+ * /drone11/ekf_localization/set_logger_level
+ * /drone11/set_pose
+
+
+contacting node http://a60245fc7516:36161/ ...
+Pid: 1265
+Connections:
+ * topic: /rosout
+    * to: /rosout
+    * direction: outbound
+    * transport: TCPROS
+ * topic: /drone11/odometry/filtered
+    * to: /drone11/droneRobotLocalizationROSModuleNode
+    * direction: outbound
+    * transport: TCPROS
+ * topic: /drone11/odometry/filtered
+    * to: /drone11/droneCommand
+    * direction: outbound
+    * transport: TCPROS
+ * topic: /drone11/odometry/filtered
+    * to: /drone11/droneNavigationStackROSModuleNode
+    * direction: outbound
+    * transport: TCPROS
+ * topic: /tf
+    * to: /drone11/ekf_localization
+    * direction: outbound
+    * transport: INTRAPROCESS
+ * topic: /tf
+    * to: /drone11/hector_trajectory_server
+    * direction: outbound
+    * transport: TCPROS
+ * topic: /tf
+    * to: /drone11/droneRobotLocalizationROSModuleNode
+    * direction: outbound
+    * transport: TCPROS
+ * topic: /tf
+    * to: /drone11/hector_mapping
+    * direction: outbound
+    * transport: TCPROS
+ * topic: /tf
+    * to: /drone11/rviz
+    * direction: outbound
+    * transport: TCPROS
+ * topic: /tf
+    * to: /drone11/move_base
+    * direction: outbound
+    * transport: TCPROS
+ * topic: /tf
+    * to: /drone11/amcl
+    * direction: outbound
+    * transport: TCPROS
+ * topic: /clock
+    * to: /gazebo (http://a60245fc7516:37653/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /tf
+    * to: /gazebo (http://a60245fc7516:37653/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /tf
+    * to: /drone11/link1_broadcaster (http://a60245fc7516:35349/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /tf
+    * to: /drone11/droneRobotLocalizationROSModuleNode (http://a60245fc7516:34481/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /tf
+    * to: /drone11/link2_broadcaster (http://a60245fc7516:33791/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /tf
+    * to: /drone11/link3_broadcaster (http://a60245fc7516:41277/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /tf
+    * to: /drone11/imu_attitude_to_tf_node (http://a60245fc7516:37459/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /tf
+    * to: /drone11/map_nav_broadcaster (http://a60245fc7516:35013/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /tf
+    * to: /drone11/base_sensor_broadcaster (http://a60245fc7516:33611/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /tf
+    * to: /drone11/ekf_localization (http://a60245fc7516:36161/)
+    * direction: inbound
+    * transport: INTRAPROCESS
+ * topic: /tf
+    * to: /drone11/amcl (http://a60245fc7516:39029/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /tf
+    * to: /drone11/hector_mapping (http://a60245fc7516:41801/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /drone11/set_pose
+    * to: /drone11/droneRobotLocalizationROSModuleNode (http://a60245fc7516:34481/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /drone11/optical_flow/data
+    * to: /drone11/droneRobotLocalizationROSModuleNode (http://a60245fc7516:34481/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /drone11/altitude/data
+    * to: /drone11/droneRobotLocalizationROSModuleNode (http://a60245fc7516:34481/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /drone11/hector_slam/data
+    * to: /drone11/droneRobotLocalizationROSModuleNode (http://a60245fc7516:34481/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /drone11/laser_scan_pose/data
+    * to: /drone11/droneRobotLocalizationROSModuleNode (http://a60245fc7516:34481/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /drone11/imu/data
+    * to: /drone11/droneRobotLocalizationROSModuleNode (http://a60245fc7516:34481/)
+    * direction: inbound
+    * transport: TCPROS
+

@@ -1,0 +1,98 @@
+--------------------------------------------------------------------------------
+Node [/drone11/droneNavigationStackROSModuleNode]
+Publications: 
+ * /drone11/droneControllerYawRefCommand [droneMsgsROS/droneYawRefCommand]
+ * /drone11/dronePositionRefs [droneMsgsROS/dronePositionRefCommandStamped]
+ * /drone11/droneSpeedsRefs [droneMsgsROS/droneSpeeds]
+ * /drone11/goal_reached [std_msgs/Bool]
+ * /drone11/move_base_simple/goal [geometry_msgs/PoseStamped]
+ * /drone11/obstacle_found [std_msgs/Bool]
+ * /drone11/odom [nav_msgs/Odometry]
+ * /drone11/process_alive_signal [droneMsgsROS/AliveSignal]
+ * /rosout [rosgraph_msgs/Log]
+
+Subscriptions: 
+ * /clock [rosgraph_msgs/Clock]
+ * /drone11/globalGoal [unknown type]
+ * /drone11/move_base/NavfnROS/plan [nav_msgs/Path]
+ * /drone11/move_base_simple/goal [geometry_msgs/PoseStamped]
+ * /drone11/odometry/filtered [nav_msgs/Odometry]
+ * /drone11/rotation_angles [geometry_msgs/Vector3Stamped]
+ * /drone11/scan [sensor_msgs/LaserScan]
+
+Services: 
+ * /drone11/droneNavigationStackROSModuleNode/get_loggers
+ * /drone11/droneNavigationStackROSModuleNode/reset
+ * /drone11/droneNavigationStackROSModuleNode/set_logger_level
+ * /drone11/droneNavigationStackROSModuleNode/start
+ * /drone11/droneNavigationStackROSModuleNode/stop
+
+
+contacting node http://a60245fc7516:43077/ ...
+Pid: 4278
+Connections:
+ * topic: /rosout
+    * to: /rosout
+    * direction: outbound
+    * transport: TCPROS
+ * topic: /drone11/process_alive_signal
+    * to: /drone11/process_monitor_process_main
+    * direction: outbound
+    * transport: TCPROS
+ * topic: /drone11/droneControllerYawRefCommand
+    * to: /drone11/droneCommand
+    * direction: outbound
+    * transport: TCPROS
+ * topic: /drone11/droneControllerYawRefCommand
+    * to: /drone11/droneTrajectoryController
+    * direction: outbound
+    * transport: TCPROS
+ * topic: /drone11/droneSpeedsRefs
+    * to: /drone11/droneTrajectoryController
+    * direction: outbound
+    * transport: TCPROS
+ * topic: /drone11/odom
+    * to: /drone11/move_base
+    * direction: outbound
+    * transport: TCPROS
+ * topic: /drone11/dronePositionRefs
+    * to: /drone11/droneTrajectoryController
+    * direction: outbound
+    * transport: TCPROS
+ * topic: /drone11/move_base_simple/goal
+    * to: /drone11/droneNavigationStackROSModuleNode
+    * direction: outbound
+    * transport: INTRAPROCESS
+ * topic: /drone11/move_base_simple/goal
+    * to: /drone11/move_base
+    * direction: outbound
+    * transport: TCPROS
+ * topic: /clock
+    * to: /gazebo (http://a60245fc7516:37653/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /drone11/odometry/filtered
+    * to: /drone11/ekf_localization (http://a60245fc7516:36161/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /drone11/rotation_angles
+    * to: /drone11/droneRotationAngles (http://a60245fc7516:46085/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /drone11/move_base/NavfnROS/plan
+    * to: /drone11/move_base (http://a60245fc7516:45493/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /drone11/scan
+    * to: /gazebo (http://a60245fc7516:37653/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /drone11/move_base_simple/goal
+    * to: /drone11/droneNavigationStackROSModuleNode (http://a60245fc7516:43077/)
+    * direction: inbound
+    * transport: INTRAPROCESS
+ * topic: /drone11/move_base_simple/goal
+    * to: /drone11/rviz (http://a60245fc7516:42301/)
+    * direction: inbound
+    * transport: TCPROS
+
