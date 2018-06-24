@@ -77,7 +77,49 @@ In this chapter, the technical goals of the project are introduced. Each develop
 
 \section{Behavior Navigation Interface}
 
-  
+This behavior should provide an API to do navigation tasks. It should be able to generate obstacle-free trajectories  to any given point (when there exists one) and be able to move the robot along those trajectories.
+
+\pagebreak
+
+The identified tasks for this behavior are as follows:
+
+\begin{enumerate}
+  \item Given a point (or goal), execute the necessary motions to get the robot to that goal.
+  \item Given a path, execute the necessary motions to follow it until the path is finished.
+  \item Given a point (or goal), generate an obstacle-free path from the current robot's position to that goal.
+\end{enumerate}
+
+This tasks can be directly mapped with processes. However, we will implement them as separate behaviors to provide more modularity and reusability. 
+
+As of the current version of Aerostack, there exists a behavior that executes the motion of going to a given point in the 2D map representation used by Aerostack. However, this behavior is not general enough to use a different map representation, so we will implement a new one capable of executing the motion in the new map format: occupancy grids (which is the format used in \textit{hector mapping}).
+
+The task of following a path can also be broken down to generate a series of points along that path and following each point. Following points blindly can be dangerous in environments whith moving obstacles, therefore a new behavior for this functionallity will be provided. This new behavior will receive a path, chop it in various points and start following them, testing before each motion if the path is obstacle-free. To do so, it will make use of the trajectory generator.
+
+With all this information, the \textit{behavior navigation interface} can be defined as the process in charge of coordinating all these new behaviors, it will receive a point and work in tandem with the other three behaviors to manage to go to that point without colliding with any obstacle.
+
+The proposed names for each behavior are: \textit{behavior go to point in occupancy grid}, \textit{behavior follow path in occupancy grid}, \textit{behavior generate path in occupancy grid}. Figure \textbf{ToDo := Generate figure} ilustrates the architecture followed for all these behaviors and the more general \textit{behavior navigation interface}
+
+% ToDo := Add nav behavior figure.
+
+In order to integrate this new behaviors with the current version of the Aerostack, the following topics will be created:
+
+\textbf{TODO := Table with all the generated topics and it's description}
+
+The following subsubsections explain each behavior in more detail.
+
+\subsection{Behavior Go to Point in Occupancy Grid}
+
+In order to move the robot from one point to another, this behavior will communicate the controller, providing it with the desired point. The controller will translate this point in the necessary motions and move the robot. Furthermore a \textit{cancel motion} service will be provided to cancel the motion in course, giving grainer control to the navigation interface.
+
+\subsection{Behavior Follow Path in Occupancy Grid}
+
+This behavior will work in tandem with the go to point process, it will receive a path as a list of points and ask the \textit{behavior go to point in occupancy grid} for each each point. Additionally, it will include the \textit{cancel motion} service too.
+
+\subsection{Behavior Generate Path in Occupancy Grid}
+
+In this case we will employ a special planner provided as a ros package called \textit{move base}, which is specially crafted for lidar interfaces. It accepts an occupancy grid map and the raytraces from the lidar and implements the planning algorithm. \textbf{TODO := Talk more over the move algorithm, explain the behavior monitoring.}
+
+% ToDo := Finish redacting this behavior
 
 \begin{comment}
   \begin{itemize}

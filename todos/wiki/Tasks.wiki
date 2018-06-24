@@ -18,9 +18,10 @@
         * [X] [CH 4][BLid] Integration  #5e411ff4
         * [X] [CH 4][BLid] Specification  #bf8f48be
         * [X] [CH 4][BLid] Intro  #2cadcd64
-    * [ ] [CH 4] Behavior navigation  #2315eafe
-        * [ ] [CH 4][BNav] Think about it's modules  #53bccacb
-        * [ ] [CH 4][BNav] Goals  #6b7109b2
+    * [.] [CH 4] Behavior navigation  #2315eafe
+        * [X] [CH 4][BNav] Think about it's modules  #53bccacb
+        * [X] [CH 4][BNav] Goals  #6b7109b2
+        * [ ] [CH 4][BNav] Super cool figure  #b9a28f43
         * [ ] [CH 4][BNav] Integration  #e92ec136
         * [ ] [CH 4][BNav] Specification  #c8c89ea7
         * [ ] [CH 4][BNav] Intro  #de7e9e13
