@@ -18,12 +18,20 @@
         * [X] [CH 4][BLid] Integration  #5e411ff4
         * [X] [CH 4][BLid] Specification  #bf8f48be
         * [X] [CH 4][BLid] Intro  #2cadcd64
-    * [.] [CH 4] Behavior navigation  #2315eafe
+    * [X] [CH 4] Close up  #372ddfe4
+    * [O] [CH 4] Behavior navigation  #2315eafe
         * [X] [CH 4][BNav] Think about it's modules  #53bccacb
         * [X] [CH 4][BNav] Goals  #6b7109b2
-        * [ ] [CH 4][BNav] Super cool figure  #b9a28f43
-        * [ ] [CH 4][BNav] Integration  #e92ec136
-        * [ ] [CH 4][BNav] Specification  #c8c89ea7
-        * [ ] [CH 4][BNav] Intro  #de7e9e13
-    * [ ] [CH 4] Close up  #372ddfe4
+        * [X] [CH 4][BNav] Talk about move_base module  #91d58d1e
+        * [X] [CH 4][BNav] Intro  #de7e9e13
+        * [X] [CH 4][BNav] Integration  #e92ec136
+            * [X] [CH 4][BNav] Talk with Martin about the specs  #b6e63ca2
+        * [X] [CH 4][BNav] Navigation Super cool figure  #b9a28f43
+        * [X] [CH 4][BNav] Go To Point figure  #df84734b
+        * [X] [CH 4][BNav] Generate Path figure  #d801a2c0
+        * [X] [CH 4][BNav] Follow Path figure  #44209ace
+        * [.] [CH 4][BNav] Specification  #c8c89ea7
+            * [X] [CH 4][BNav] Talk with Martin about the specs  #e0ba43a4
+            * [ ] [CH 4][BNav] Talk about goal to point obstacle timeout  #cf7381ba
+            * [ ] [CH 4][BNav] Talk with alejo about nav interface obstacles  #650a9ea6
 

@@ -1,6 +1,6 @@
 \chapter{Implemented Modules}
 
-In this chapter, the technical goals of the project are introduced. Each developed module will be explained as well as it's requirements and it's specification details. For each module, it will be explored:
+In this chapter, the technical goals of the project are introduced. Each developed module will be explained as well as it's requirements and specification details. For each module, the following points will be addressed:
 
 \begin{itemize}
   \item The technical goals
@@ -11,10 +11,9 @@ In this chapter, the technical goals of the project are introduced. Each develop
 
 \section{Technical Goals}
 
-  % ToDo := introduce the goals: problem and solution each module solves
   In order for the Aerostack framework to localize with a different technique rather than visual markers a lidar sensor will be used. In this case, the \textit{Hokuyo Eye} range sensor will be used, which is the \textit{defacto} range sensor in this context. Also, the low level implentation provides a nice ros API that can be used to fetch data. To wrap all this functionallity we propose the implementation of a new high level behavior that coordinates all the framework with the lidar interface, providing a high level, standarized API for lidar-based localization.
 
-  As of the current version of Aerostack, navigation is done with a 2D probabilistic roadmap planner, the input for the planner is a predefined map, done by hand in the Graphical User Interface that Aerostack provides. This is a static map and goes against the nature of the any dynamically acquired mapping signal. To tackle this problem a new navigation behavior is proposed. This behavior will abstract the planner used for each localization mode, providing a high level standarized API that can be used independently of the localization technique, replacing the old one.
+  As of the current version of Aerostack, navigation is done with a 2D probabilistic roadmap planner, the input for the planner is a predefined map, done by hand in the Graphical User Interface that Aerostack provides. This is a static map and goes against the nature of the any dynamically acquired mapping signal. To tackle this problem several new navigation behaviors are proposed. These behaviors will abstract the planner used for each localization mode, providing a high level standarized API that can be used independently of the localization technique, replacing the old one.
 
 \section{Specification}
 
@@ -28,13 +27,10 @@ In this chapter, the technical goals of the project are introduced. Each develop
 
   In a similar fashion to the visual marker localization behavior, the lidar localization behavior proposed will require three more processes: the slam process, an ekf that combines various signals and a localization technique selector, this is explained in detail in the corresponding behavior section (sect. \ref{ch_4:sect:behav_slam}).
 
-  The case of the navigation behavior is more complicated as it will need more modules to work correctly and will make use of other behaviors [\textbf{ToDo := Tell a little what modules does the navigator requires}]
-
-  % ToDo =: Tell about the navigator.
+  The navigation interface is slightly more complicated, it will be composed of various behaviors that provide different functionallity, abstracting away the logic needed to navigate at different levels. We propose three new behaviors and the inclusion of a new planner, efficiently designed to work with lidar signal. More details will be provided in the corresponding section \ref{ch_4:sect:nav_interface}
 
 \section{Integration} \label{ch_4:sect:integration}
 
-  % ToDo := How does the module integrates with the current state of Aerostack
   To integrate each behavior, we will follow a bottom up procedure. This way, we will ensure that the processes the behavior depends on are working correctly inside the Aerostack and the error doesn't get masked with the behavior integration.
 
   When integrating a new behavior some steps should be followed:
@@ -46,7 +42,7 @@ In this chapter, the technical goals of the project are introduced. Each develop
 
   The lidar-based localization behavior will provide a new localization mode, so it is reasonable to mark the rest localization behaviors as incompatible, also, a new localization method selector process will be added, this will ensure that when various localization techniques are to be used in the same mission, they can be easily toggled on and off. This will be detailed in the corresponding behavior section \ref{ch_4:sect:behav_slam}.
 
-  In the case of the navigation behavior, the rest of the navigation behaviors will be marked as incompatible, but as this behavior is intended to replace the old one, no selector will be provided. Instead, this behavior will choose the data sources and plan with that data, providing an abstraction over the method used for localization and mapping.
+  \textbf{ToDo := Talk about navigation behaviors here?}
 
 \section{Behavior Self Localize and Map by Lidar} \label{ch_4:sect:behav_slam}
 
@@ -75,51 +71,83 @@ In this chapter, the technical goals of the project are introduced. Each develop
 
   In the configuration file of this behavior the localization by visual markers behavior will appear as incompatible. As for the capabilities, all of \textit{hector mapping}, \textit{drone robot localization} and \textit{self localization selector} will figurate as capabilities, indicating that those processes should be started before this behavior.
 
-\section{Behavior Navigation Interface}
+\section{Navigation Interface} \label{ch_4:sect:nav_interface}
 
-This behavior should provide an API to do navigation tasks. It should be able to generate obstacle-free trajectories  to any given point (when there exists one) and be able to move the robot along those trajectories.
+  We will consider the navigation interface as the minimum set of behaviors necessary to provide a robust, flexible API to do navigation tasks related to lidar-based localization and mapping techniques. It should be able to generate obstacle-free trajectories  to any given point (when there exists one) and be able to move the robot along those trajectories.
 
-\pagebreak
+  The identified tasks for this API are as follows:
 
-The identified tasks for this behavior are as follows:
+  \begin{enumerate}
+    \item Given a point (or goal), execute the necessary motions to get the robot to that goal.
+    \item Given a path, execute the necessary motions to follow it until the path is finished.
+    \item Given a point (or goal), generate an obstacle-free path from the current robot's position to that goal.
+  \end{enumerate}
 
-\begin{enumerate}
-  \item Given a point (or goal), execute the necessary motions to get the robot to that goal.
-  \item Given a path, execute the necessary motions to follow it until the path is finished.
-  \item Given a point (or goal), generate an obstacle-free path from the current robot's position to that goal.
-\end{enumerate}
+  This tasks can be directly mapped with processes. However, we will implement them as separate behaviors to provide more modularity and reusability. Also, as each process will provide abstraction at a certain level of granularity, it makes sense to implement it as separate, independent behaviors (although some code will be duplicated)
 
-This tasks can be directly mapped with processes. However, we will implement them as separate behaviors to provide more modularity and reusability. 
+  As of the current version of Aerostack, there exists a behavior that executes the motion of going to a given point in the 2D map representation used by Aerostack. However, this behavior is not general enough to be used with a different map representation, so we will implement a new one capable of executing the motion in the new map format: occupancy grids (which is the format used in \textit{hector mapping}). Also, in a dynamic environment, obstacles can arise in the path, this behavior will ensure that no collisions happen when executing the motion. More details to follow in section \ref{ch_4:subsect:behav_gtp}.
 
-As of the current version of Aerostack, there exists a behavior that executes the motion of going to a given point in the 2D map representation used by Aerostack. However, this behavior is not general enough to use a different map representation, so we will implement a new one capable of executing the motion in the new map format: occupancy grids (which is the format used in \textit{hector mapping}).
+  The task of following a path or trajectory consists in instructing the previously available trajectory controller to follow a set of points (that conform the trajectory), given in a specific reference frame (world coordinates in this case). Contrary to the previously defined behavior, this one executes the motion blindly, providing a lower level of control to the user.
 
-The task of following a path can also be broken down to generate a series of points along that path and following each point. Following points blindly can be dangerous in environments whith moving obstacles, therefore a new behavior for this functionallity will be provided. This new behavior will receive a path, chop it in various points and start following them, testing before each motion if the path is obstacle-free. To do so, it will make use of the trajectory generator.
+  For the last functionality, generating obstacle-free paths, another behavior will be implemented. It will consist mainly in a wrapper around the new planner, providing the lowest level of control in our navigation interface. For the planning we will employ a special planner provided as a ros package called \textit{move base}, which is specially crafted for lidar interfaces. It accepts an occupancy grid map and the raytraces from the lidar and implements the planning algorithm. Under the hood, it uses the elastic band algorithm for path optimization.
 
-With all this information, the \textit{behavior navigation interface} can be defined as the process in charge of coordinating all these new behaviors, it will receive a point and work in tandem with the other three behaviors to manage to go to that point without colliding with any obstacle.
+  The proposed names for each behavior are: \textit{behavior go to point in occupancy grid}, \textit{behavior follow path in occupancy grid}, \textit{behavior generate path in occupancy grid}. Figures \cref{ch_4:fig:behav_gtp,ch_4:fig:behav_fp,ch_4:fig:behav_gp} ilustrate the architecture followed by each of these behaviors. The following subsubsections explain each behavior in detail.
 
-The proposed names for each behavior are: \textit{behavior go to point in occupancy grid}, \textit{behavior follow path in occupancy grid}, \textit{behavior generate path in occupancy grid}. Figure \textbf{ToDo := Generate figure} ilustrates the architecture followed for all these behaviors and the more general \textit{behavior navigation interface}
+\subsection{Behavior Go to Point in Occupancy Grid} \label{ch_4:subsect:behav_gtp}
 
-% ToDo := Add nav behavior figure.
+  This behavior provides the highest abstraction level of all the navigation interface, provided a target point, it will generate an obstacle-free trajectory to follow and send it to the trajectory controller, which executes the necessary motions to follow that trajectory. During the motion, this behavior will also ensure that no dynamic object gets in the way, recalculating the trajectory if necessary. In order to plan the trajectories, the new move base planner will be used, and as it will be a goal based behavior, the taget goal will be given as an argument to the start service. Figure \ref{ch_4:fig:behav_gtp} illustrates the general architecture of this behavior.
 
-In order to integrate this new behaviors with the current version of the Aerostack, the following topics will be created:
+  \begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{./Figures/BehaviorGTPArquitecture.png}
+    \caption{Behavior Go to Point architecture. Move base is the planner}
+    \label{ch_4:fig:behav_gtp}
+  \end{figure}
 
-\textbf{TODO := Table with all the generated topics and it's description}
+  A condition for this behavior to operate correctly is that no other behavior is instructing the trajectory controller. To ensure this condition is met, the list of motion behaviors is stated as incompatible. The capabilities should list that it is a set-point-based flight behavior, instructing the behavior coordinator to setup the trajectory controller accordingly, the new planner (move base) should be explicitly declared as well so it is started automatically.
 
-The following subsubsections explain each behavior in more detail.
+  \textbf{ToDo := Timeout if path not found?}
 
-\subsection{Behavior Go to Point in Occupancy Grid}
+  The proposed topics will be:
 
-In order to move the robot from one point to another, this behavior will communicate the controller, providing it with the desired point. The controller will translate this point in the necessary motions and move the robot. Furthermore a \textit{cancel motion} service will be provided to cancel the motion in course, giving grainer control to the navigation interface.
+  \textbf{ToDo := Set this up as a table}
+
+  \begin{itemize}
+    \item scan: Scan data from the lidar, direct input to the planner.
+    \item map: Occupancy grid map from the self localize and map by lidar behavior, direct input to the planner.
+    \item move base goal: Topic to instruct the planner to calculate an obstacle-free trajectory.
+    \item move base path: Topic with the planned trajectory from the planner. Grabbed in the behavior to follow it.
+  \end{itemize}
+
 
 \subsection{Behavior Follow Path in Occupancy Grid}
 
-This behavior will work in tandem with the go to point process, it will receive a path as a list of points and ask the \textit{behavior go to point in occupancy grid} for each each point. Additionally, it will include the \textit{cancel motion} service too.
+  This behavior will communicate with the trajectory controller, instructing it to move following a given path received in the start service. For this behavior to work correctly, the motion behaviors should be disabled too. In this case, no other low level process is needed. The following figure illustrates the general concept (\ref{ch_4:fig:behav_fp}). Following a path can be a useful feature when developing fine grain controlled missions, like the ones enabled with Python.
+
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=0.75\textwidth]{./Figures/BehaviorFPArquitecture.png}
+    \caption{Behavior follow path in occupancy grid architecture}
+    \label{ch_4:fig:behav_fp}
+  \end{figure}
+
+  Again, the correct settings should be ensured in the configuration file, marking motion behaviors to avoid trajectories interferences.
 
 \subsection{Behavior Generate Path in Occupancy Grid}
 
-In this case we will employ a special planner provided as a ros package called \textit{move base}, which is specially crafted for lidar interfaces. It accepts an occupancy grid map and the raytraces from the lidar and implements the planning algorithm. \textbf{TODO := Talk more over the move algorithm, explain the behavior monitoring.}
+  In this case we will only implement a wrapper around the move base planner. This is the lowest abstraction level provided by the navigation interface API. Being able to generate paths can be useful for fine grain controlled missions and debugging. The only communication way for this behavior will be dropping the planned the path on the belief memmory, this way the amount of traffic and topics is reduced, saving computing resources and avoiding polluting more topics. It's architecture is depicted in figure \ref{ch_4:fig:behav_gp}.
 
-% ToDo := Finish redacting this behavior
+  \pagebreak
+
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=0.85\textwidth]{./Figures/BehaviorGPArquitecture.png}
+    \caption{Behavior generate path in occupancy grid architecture}
+    \label{ch_4:fig:behav_gp}
+  \end{figure}
+
+
+This chapter has reviewed the most important aspects and specification of the implemented modules. In the next one, the validation and testing for these behaviors will be introduced.
 
 \begin{comment}
   \begin{itemize}
