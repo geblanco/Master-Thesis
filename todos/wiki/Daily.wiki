@@ -1,0 +1,11 @@
+== Programming | project:coding ==
+* [X] Move base controller robot process  #c662cf4a
+    * [X] Ensure move_base_simple/goal maps to move_base/goal  #2c60b601
+    * [X] Lower down timeout, easily observable that move base collapses  #a2a4b016
+* [ ] Fullfil behaviors  #b1781b35
+    * [ ] Generate Path in occupancy grid  #09ded01f
+        * [ ] Check behavior termination  #230bc4d7
+    * [ ] Follow path in occupancy grid  #75f38f11
+        * [ ] Check estimated, initial point and relative (instead of absolute) coordinates  #2bca7c52
+        * [ ] Check behavior termination  #15a05f2d
+    * [ ] Go to point in occupancy grid  #39a491de
