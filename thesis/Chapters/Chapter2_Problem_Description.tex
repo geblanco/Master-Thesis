@@ -4,7 +4,11 @@ In the present chapter the problem is presented, along with an introduction to t
 
   \section{The Aerostack Framework} \label{ch_2:sect:aerostack}
 
-    Aerostack is an agnostic framework to build and design control architectures for aerial robotic systems. It provides some low level components as well as coordination processes and some planners. Figure \ref{ch_2:fig:aerostack_arqu} shows the general architecture of the framework.
+    Aerostack is a software framework that helps developers design and build the control architecture of aerial robotic systems, integrating multiple heterogeneous computational solutions (e.g., computer vision algorithms, motion controllers, self localization and mapping methods, planning algorithms, etc.).
+
+    Aerostack is useful for building autonomous aerial systems in complex and dynamic environments and it is also a useful research tool for aerial robotics to test new algorithms and architectures.
+
+    Aerostack was created to be available for communities of researchers and developers and it is currently an active open-source project. It provides some low level components as well as coordination processes and some planners. Figure \ref{ch_2:fig:aerostack_arqu} shows the general architecture of the framework. It is fully described in \cite{7502591} and \cite{Sanchez-Lopez2017} and publicly avaiable \href{https://github.com/Vision4UAV/Aerostack/wiki}{here}
 
     \begin{figure}[ht]
       \centering
@@ -15,7 +19,7 @@ In the present chapter the problem is presented, along with an introduction to t
 
   \section{Requirements} \label{ch_2:sect:requirements}
 
-    As of the second version of Aerostack, the only localization technique available is based on the recognition of a special type of marker called Aruco, first used for augmented reality applications. It is a fast and reliable technique to estimate the pose of the camera capturing the image. Altough this system works fine for many applications, it imposes the need of preparing the environment, placing this markers in a very precise way and annotating it's exact position before the experiments. While this might not be a problem in an augmented reality like scenario, when it comes to live localization in unknown environment it becomes useless. Hence, a new system for localization is required.
+    As of the second version of Aerostack, the only localization techniques available are: visual localization based on the recognition of a special type of marker called Aruco, first used for augmented reality applications and odometry based localization. It is a fast and reliable technique to estimate the pose of the camera capturing the image. Altough this system works fine for many applications, it imposes the need of preparing the environment, placing this markers in a very precise way and annotating it's exact position before the experiments. While this might not be a problem in an augmented reality like scenario, when it comes to live localization in unknown environment it becomes useless. Hence, a new system for localization is required.
 
     Along with the aforementioned localization technique comes the navigator which coordinates with a 2D geometric planner to accomplish the mission at hand. As the localization technique is to be changed, leading to a new way to perceive the environment, a new navigator and planner will be necessary. 
 
