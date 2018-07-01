@@ -1,5 +1,6 @@
-== Chapter 4 | project:TFM ==
+== Chapters ToDos | project:TFM ==
 * [X] Write intro  #9a1f3020
+* [X] Add SOTA Figures & formulas  #16a6f15b
 * [O] Write chapter 4  #041e8cbd
     * [X] Test  #363aaae5
     * [X] [CH 4] Technical Goals  #08fd66eb
@@ -19,7 +20,7 @@
         * [X] [CH 4][BLid] Specification  #bf8f48be
         * [X] [CH 4][BLid] Intro  #2cadcd64
     * [X] [CH 4] Close up  #372ddfe4
-    * [O] [CH 4] Behavior navigation  #2315eafe
+    * [X] [CH 4] Behavior navigation  #2315eafe
         * [X] [CH 4][BNav] Think about it's modules  #53bccacb
         * [X] [CH 4][BNav] Goals  #6b7109b2
         * [X] [CH 4][BNav] Talk about move_base module  #91d58d1e
@@ -30,8 +31,11 @@
         * [X] [CH 4][BNav] Go To Point figure  #df84734b
         * [X] [CH 4][BNav] Generate Path figure  #d801a2c0
         * [X] [CH 4][BNav] Follow Path figure  #44209ace
-        * [.] [CH 4][BNav] Specification  #c8c89ea7
+        * [X] [CH 4][BNav] Talk with alejo about nav interface obstacles  #650a9ea6
+        * [X] [CH 4][BNav] Specification  #c8c89ea7
             * [X] [CH 4][BNav] Talk with Martin about the specs  #e0ba43a4
-            * [ ] [CH 4][BNav] Talk about goal to point obstacle timeout  #cf7381ba
-            * [ ] [CH 4][BNav] Talk with alejo about nav interface obstacles  #650a9ea6
+            * [X] [CH 4][BNav] Talk about goal to point obstacle timeout  #cf7381ba
+    * [ ] [CH 4][All] Add implementation diff  #9fc0da7c
+    * [ ] [CH 4][All] Talk about the onStart algorithm  #8677106d
+    * [ ] [CH 4][All] Talk about the activation conditions  #6e08ecc3
 
