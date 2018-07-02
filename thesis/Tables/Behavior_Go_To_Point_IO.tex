@@ -1,0 +1,8 @@
+  \begin{itemize}
+    \item \textbf{scan}: Scan data from the lidar, direct input to the planner.
+    \item \textbf{map}: Occupancy grid map from the self localize and map by lidar behavior, direct input to the planner.
+    \item \textbf{pose, speed}: Estimates of the current robot's position and speed.
+    \item \textbf{move base goal}: Topic to instruct the planner to calculate an obstacle-free trajectory. Used by the path planner module.
+    \item \textbf{move base path}: Topic with the planned trajectory from the move base module. Grabbed from the path planner module.
+    \item \textbf{candidate path}: Output topic with the candidate trajectory, output from the path planner, grabbed from the behavior to instruct the trajectory controller.
+  \end{itemize}

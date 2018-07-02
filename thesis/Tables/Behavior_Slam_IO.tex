@@ -2,7 +2,9 @@
   \item scan: This is the output of the lidar node, it is directly fed into the \textit{hector mapping} node
   \item imu: This topic contains the measures from the \textit{inertial measurement unit}
   \item odometry: This is a general topic with the measures from odometry
+  \item map lidar: Map output from \textit{hector mapping}, used as internal representation for the behavior.
+  \item pose lidar: Pose output from \textit{hector mapping}, used as internal representation for the behavior and input to EKF fusion module.
   \item map: This is the map as processed by the \textit{hector mapping} node
-  \item estimated\_speed\_lidar: This is the estimated speed from the whole behavior process, fed to the selector
-  \item estimated\_pose\_lidar: This is the estimated pose from the whole behavior process, fed to the selector
+  \item pose ekf fusion: This is the estimated speed from the whole behavioor process, fed to the selector.
+  \item speed ekf fusion: Estimated pose from the whole behavioor process, fed to the selector.
 \end{itemize}

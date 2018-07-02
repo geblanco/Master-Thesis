@@ -64,12 +64,15 @@ In this chapter, the technical goals of the project are introduced. Each develop
   Bellow there is a list of the inputs and outputs of this behavior:
 
   % ToDo := Check this out with Martin
-  [\textbf{ToDo := Set this up as a table??}]
   \input{./Tables/Behavior_Slam_IO.tex}
 
   This behavior monitors the correct working of the algorithm (\textit{hector mapping}) by listening on the \textit{map} topic, when it outputs strange or simply wrong data, an error is emitted.
 
-  In the configuration file of this behavior the localization by visual markers behavior will appear as incompatible. As for the capabilities, all of \textit{hector mapping}, \textit{drone robot localization} and \textit{self localization selector} will figurate as capabilities, indicating that those processes should be started before this behavior.
+  In the configuration file of this behavior the localization by visual markers behavior will appear as incompatible. As for the capabilities, all of \textit{hector mapping}, \textit{drone robot localization} and \textit{self localization selector} will figurate as capabilities, indicating that those processes should be started before this behavior. Furthermore, when it's activation conditions are tested (\textit{checkOwnActivationConditions} native method each behavior should implement), it will check that the robot actually counts with a lidar interface.
+
+  The monitor algorithm will consist in checking the consistency of the output map as well as it's frequency, when a drift is detected a warning will be printed, indicating that the \textit{hector\_slam} is having problems. In the worst case, when the node does not output a map at all, an error will be emitted and the behavior will terminate.
+
+\clearpage
 
 \section{Navigation Interface} \label{ch_4:sect:nav_interface}
 
@@ -87,17 +90,17 @@ In this chapter, the technical goals of the project are introduced. Each develop
 
   As of the current version of Aerostack, there exists a behavior that executes the motion of going to a given point in the 2D map representation used by Aerostack. However, this behavior is not general enough to be used with a different map representation, so we will implement a new one capable of executing the motion in the new map format: occupancy grids (which is the format used in \textit{hector mapping}). Also, in a dynamic environment, obstacles can arise in the path, this behavior will ensure that no collisions happen when executing the motion. More details to follow in section \ref{ch_4:subsect:behav_gtp}.
 
-  The task of following a path or trajectory consists in instructing the previously available trajectory controller to follow a set of points (that conform the trajectory), given in a specific reference frame (world coordinates in this case). Contrary to the previously defined behavior, this one executes the motion blindly, providing a lower level of control to the user.
+  The task of following a path or trajectory consists in instructing the previously available trajectory controller to follow a set of points (that conform the trajectory), given in a specific reference frame (world coordinates in this case). Contrary to the previously defined behavior, this one executes the motion blindly, providing a lower level of control to the user. Please refer to \ref{ch_4:subsect:behav_fpog} for more details.
 
   For the last functionality, generating obstacle-free paths, another behavior will be implemented. It will consist mainly in a wrapper around the new planner, providing the lowest level of control in our navigation interface. For the planning we will employ a special planner provided as a ros package called \textit{move base}, which is specially crafted for lidar interfaces. It accepts an occupancy grid map and the raytraces from the lidar and implements the planning algorithm. Under the hood, it uses the elastic band algorithm for path optimization.
 
-  The proposed names for each behavior are: \textit{behavior go to point in occupancy grid}, \textit{behavior follow path in occupancy grid}, \textit{behavior generate path in occupancy grid}. Figures \cref{ch_4:fig:behav_gtp,ch_4:fig:behav_fp,ch_4:fig:behav_gp} ilustrate the architecture followed by each of these behaviors. The following subsubsections explain each behavior in detail.
+  The proposed names for each behavior are: \textit{behavior go to point in occupancy grid}, \textit{behavior follow path in occupancy grid} and \textit{behavior generate path in occupancy grid}. \cref{ch_4:fig:behav_gtp,ch_4:fig:behav_fp,ch_4:fig:behav_gp} ilustrate the architecture followed by each of these behaviors. The following subsubsections explain each behavior in detail.
 
 \subsection{Behavior Go to Point in Occupancy Grid} \label{ch_4:subsect:behav_gtp}
 
-  This behavior provides the highest abstraction level of all the navigation interface, provided a target point, it will generate an obstacle-free trajectory to follow and send it to the trajectory controller, which executes the necessary motions to follow that trajectory. During the motion, this behavior will also ensure that no dynamic object gets in the way, recalculating the trajectory if necessary. In order to plan the trajectories, the new move base planner will be used, and as it will be a goal based behavior, the taget goal will be given as an argument to the start service. Figure \ref{ch_4:fig:behav_gtp} illustrates the general architecture of this behavior.
+  This behavior provides the highest abstraction level of all the navigation interface, provided a target point, it will generate an obstacle-free trajectory to follow and send it to the trajectory controller, which executes the necessary motions to follow that trajectory. During the motion, this behavior will also ensure that no dynamic object gets in the way, recalculating the trajectory if necessary. In order to plan the trajectories, the new planner, \textit{move base} will be used, and as it will be a goal based behavior, the taget goal will be given as an argument to the start service. Figure \ref{ch_4:fig:behav_gtp} illustrates the general architecture of this behavior.
 
-  \begin{figure}
+  \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{./Figures/BehaviorGTPArquitecture.png}
     \caption{Behavior Go to Point architecture. Move base is the planner}
@@ -106,23 +109,20 @@ In this chapter, the technical goals of the project are introduced. Each develop
 
   A condition for this behavior to operate correctly is that no other behavior is instructing the trajectory controller. To ensure this condition is met, the list of motion behaviors is stated as incompatible. The capabilities should list that it is a set-point-based flight behavior, instructing the behavior coordinator to setup the trajectory controller accordingly, the new planner (move base) should be explicitly declared as well so it is started automatically.
 
-  \textbf{ToDo := Timeout if path not found?}
-
   The proposed topics will be:
 
-  \textbf{ToDo := Set this up as a table}
-
-  \begin{itemize}
-    \item scan: Scan data from the lidar, direct input to the planner.
-    \item map: Occupancy grid map from the self localize and map by lidar behavior, direct input to the planner.
-    \item move base goal: Topic to instruct the planner to calculate an obstacle-free trajectory.
-    \item move base path: Topic with the planned trajectory from the planner. Grabbed in the behavior to follow it.
-  \end{itemize}
+  \input{./Tables/Behavior_Go_To_Point_IO.tex}
 
 
-\subsection{Behavior Follow Path in Occupancy Grid}
+  The process \textit{path planning in occupancy grid} is in charge of monitoring the \textit{move base} planner, it's the intermediary between any behavior requesting a trajectory plan and the planner itself. This decision was taken for two reasons, the main one is that \textit{move base} contains a bug, when the computation power is lowering, sometimes the planner fails to generate a path. To monitor this strange behavior and correctly handle it we implemented this intermediate module. The second reason is that in the feature, the underlying planner could be changed, unifying a path planning API will smooth the transition, making it transparent to the API consumers.
 
-  This behavior will communicate with the trajectory controller, instructing it to move following a given path received in the start service. For this behavior to work correctly, the motion behaviors should be disabled too. In this case, no other low level process is needed. The following figure illustrates the general concept (\ref{ch_4:fig:behav_fp}). Following a path can be a useful feature when developing fine grain controlled missions, like the ones enabled with Python.
+  When the behavior is started it receives an absolute or relative coordinate to go, it waits for the current position estimate and starts planning. If the robot's orientation has to be changed it first instructs the trajectory controller to do so, until the target orientation is achieved. Once the robot is correctly oriented, the path planner is asked for a candidate path to follow and instructing the trajectory controller to follow it. Also, while the trajectory is being executed, the behavior still listens to new paths, this way, when the planner outputs an empty trajectory we know that an obstacle is obstructing the path, stop the controller and replan again. 
+
+  As for the activation conditions, this behavior requires that the battery is not in a \textit{LOW} state and the aircraft is in state \textit{FLYING}. To check this conditions, it will make use of the \textit{belief manager} that stores important state information from all the Aerostack in the so called \textit{beliefs}. For example, when the dron starts flying it will toggle its state from \textit{LANDED} to \textit{FLYING} and the belief manager will gather this information for easy retrieval, this goes for the battery state too.
+
+\subsection{Behavior Follow Path in Occupancy Grid} \label{ch_4:subsect:behav_fpog}
+
+  This behavior will communicate with the trajectory controller, instructing it to move following a given path received by a special topic. For this behavior to work correctly, the motion behaviors should be disabled too. In this case, no other low level process is needed. The following figure illustrates the general concept (\ref{ch_4:fig:behav_fp}). Following a path can be a useful feature when developing fine grain controlled missions, like the ones enabled with Python.
 
   \begin{figure}[h]
     \centering
@@ -131,13 +131,19 @@ In this chapter, the technical goals of the project are introduced. Each develop
     \label{ch_4:fig:behav_fp}
   \end{figure}
 
+  The important topics are explained below:
+
+  \input{./Tables/Behavior_Follow_Path_IO.tex}
+
   Again, the correct settings should be ensured in the configuration file, marking motion behaviors to avoid trajectories interferences.
 
-\subsection{Behavior Generate Path in Occupancy Grid}
+  This behavior has similar constraints to the previous one, if the aircraft battery is low or is landed, it cannot be executed. In this case, the monitor is much simpler, given a trajectory it instructs the trajectory controller to follow it. Not avoiding obstacles was a design decision taken to promote developers independence and granularity control. Also, the path is given in a topic and not in a service to avoid the overhead of parsing arguments from the behavior coordinator and to allow for some time for planning between the activation of the behavior and the path following order. If no path is received a timeout will ensure the process is stopped after a certain amount of predefined time.
 
-  In this case we will only implement a wrapper around the move base planner. This is the lowest abstraction level provided by the navigation interface API. Being able to generate paths can be useful for fine grain controlled missions and debugging. The only communication way for this behavior will be dropping the planned the path on the belief memmory, this way the amount of traffic and topics is reduced, saving computing resources and avoiding polluting more topics. It's architecture is depicted in figure \ref{ch_4:fig:behav_gp}.
+\clearpage
 
-  \pagebreak
+\subsection{Behavior Generate Path in Occupancy Grid} \label{ch_4:subsect:behav_gpog}
+
+  In this case we will only implement a wrapper around the path planner module. This is the lowest abstraction level behavior provided by the navigation interface API. Being able to generate paths can be useful for fine grain controlled missions and debugging. The only communication way for this behavior will be dropping the planned path on the belief memmory, this way the amount of traffic and topics is reduced, saving computing resources and avoiding polluting more topics. It's architecture is depicted in figure \ref{ch_4:fig:behav_gp}.
 
   \begin{figure}[h]
     \centering
@@ -146,6 +152,11 @@ In this chapter, the technical goals of the project are introduced. Each develop
     \label{ch_4:fig:behav_gp}
   \end{figure}
 
+  Contrary to the rest of the presented behaviors, as this one does perform any motion, it does not have any restriction, nor it conflicts with any behavior requiring the trajectory controller. This behavior will store any given path in the belief memmory with a different unique identifier, ensuring that the computed paths are not smashed, this is a desirable feature for many reasons, the most obvious is being able to avoid the overhead of planning again, reusing precalculated paths. This allows for a developer to execute a trajectory by parts.
+
+\subsection{Path Planner in Occupancy Grid} \label{ch_4:subsect:path_planner}
+
+  This module was developed as part of the Navigation Interface to provide a unified API access to the move base planner, reducing the overhead of changing the planner in the future and monitoring the correct funcioning of the move base module.
 
 This chapter has reviewed the most important aspects and specification of the implemented modules. In the next one, the validation and testing for these behaviors will be introduced.
 
