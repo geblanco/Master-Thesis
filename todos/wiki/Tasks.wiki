@@ -39,31 +39,38 @@
     * [X] [CH 4][All] Add implementation diff  #9fc0da7c
     * [X] [CH 4][All] Talk about the onStart algorithm  #8677106d
     * [X] [CH 4][All] Talk about the activation conditions  #6e08ecc3
-* [ ] Write chapter 5 - Validation  #d83aa343
-    * [ ] [CH 5][Val] Present the validation tests  #b8d42d2b
-        * [ ] [CH 5][Val] What to measure  #691462e3
-        * [ ] [CH 5][Val] How to measure  #4948d5ef
-        * [ ] [CH 5][Val] What the measure mean  #5f27a7c4
-    * [ ] [CH 5][Val] Simulation  #90fa7adb
-        * [ ] [CH 5][Val] Present the simulator  #40c762d0
-        * [ ] [CH 5][Val] Present rotors  #3103e9b1
-        * [ ] [CH 5][Val] How they work together  #fb8074c6
-        * [ ] [CH 5][Val] Integration with Aerostack  #f2b1f954
-    * [ ] [CH 5][Val] Real flight  #2303e6e2
-        * [ ] [CH 5][Val] Used aircraft  #f82923af
-        * [ ] [CH 5][Val] Sensorization  #8e6e035c
-        * [ ] [CH 5][Val] Computing resources  #ce34ca86
-        * [ ] [CH 5][Val] Limitations  #4c527b88
-    * [ ] [CH 5][Val] Boiler mission  #335fbaa2
-        * [ ] [CH 5][Val] Why is it useful (facade inspection)  #4eae9246
-        * [ ] [CH 5][Val] Industrial application  #4f6ea5ab
-        * [ ] [CH 5][Val] Simulation  #f6aa7656
-            * [ ] [CH 5][Val] Gazebo world  #e875f6fb
-        * [ ] [CH 5][Val] Real flight  #fc876402
-            * [ ] [CH 5][Val] School sports centre  #fb71f957
+* [o] Write chapter 5 - Validation  #d83aa343
+    * [X] [CH 5][Val] Present the validation tests  #b8d42d2b
+        * [X] [CH 5][Val] What to measure  #691462e3
+        * [X] [CH 5][Val] How to measure  #4948d5ef
+        * [X] [CH 5][Val] What the measure mean  #5f27a7c4
+        * [ ] [CH 5][Val] Add time measures (depends on validation)  #3782e78e
+    * [X] [CH 5][Val] Simulation  #90fa7adb
+        * [X] [CH 5][Val] Present the simulator  #40c762d0
+        * [X] [CH 5][Val] Present rotors  #3103e9b1
+        * [X] [CH 5][Val] How they work together  #fb8074c6
+        * [X] [CH 5][Val] Integration with Aerostack  #f2b1f954
+        * [X] [CH 5][Val] Used aircraft  #3eb4df08
+    * [X] [CH 5][Val] Boiler mission  #335fbaa2
+        * [X] [CH 5][Val] Why is it useful (facade inspection)  #4eae9246
+        * [X] [CH 5][Val] Industrial application  #4f6ea5ab
+        * [X] [CH 5][Val] Simulation  #f6aa7656
+        * [X] [CH 5][Val] Real flight  #fc876402
+    * [X] [CH 5][Val] Real flight  #2303e6e2
+        * [X] [CH 5][Val] Used aircraft  #f82923af
+        * [X] [CH 5][Val] Sensorization  #8e6e035c
+    * [ ] [CH 5][Val] Validate the introduction  #57fb1b77
     * [ ] [CH 5][Val] Validation  #5668cb67
         * [ ] [CH 5][Val] Simulation  #f82ea498
+            * [ ] [CH 5][Val] Gazebo world  #e875f6fb
+            * [ ] [CH 5][Val] Computing resources  #ce34ca86
+            * [ ] [CH 5][Val] Limitations  #4c527b88
         * [ ] [CH 5][Val] Real flight  #cf5590a5
+            * [ ] [CH 5][Val] School sports centre  #fb71f957
+            * [ ] [CH 5][Val] Computing resources  #20a76d32
+            * [ ] [CH 5][Val] Limitation  #aa45cf0a
+    * [ ] Results  #414f67c2
         * [ ] [CH 5][Val] Performance comparison  #99cc64a9
         * [ ] [CH 5][Val] Conclusions  #f38baa50
     * [ ] [CH 5] Chapter conclusions & close up  #a837173e
+* [ ] [Appendix] Add the mission code to the appendix.  #bc53ba2f
