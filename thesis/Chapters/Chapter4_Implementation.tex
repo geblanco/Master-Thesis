@@ -122,11 +122,11 @@ In this chapter, the technical goals of the project are introduced. Each develop
 
 \subsection{Behavior Follow Path in Occupancy Grid} \label{ch_4:subsect:behav_fpog}
 
-  This behavior will communicate with the trajectory controller, instructing it to move following a given path received by a special topic. For this behavior to work correctly, the motion behaviors should be disabled too. In this case, no other low level process is needed. The following figure illustrates the general concept (\ref{ch_4:fig:behav_fp}). Following a path can be a useful feature when developing fine grain controlled missions, like the ones enabled with Python.
+  This behavior will communicate with the trajectory controller, instructing it to move following a given path received as an input argument. For this behavior to work correctly, the motion behaviors should be disabled too. In this case, no other low level process is needed. The following figure illustrates the general concept (\ref{ch_4:fig:behav_fp}). Following a path can be a useful feature when developing fine grain controlled missions, like the ones enabled with Python.
 
   \begin{figure}[h]
     \centering
-    \includegraphics[width=0.75\textwidth]{./Figures/BehaviorFPArquitecture.png}
+    \includegraphics[width=\textwidth]{./Figures/BehaviorFPArquitecture.png}
     \caption{Behavior follow path in occupancy grid architecture}
     \label{ch_4:fig:behav_fp}
   \end{figure}
@@ -137,7 +137,7 @@ In this chapter, the technical goals of the project are introduced. Each develop
 
   Again, the correct settings should be ensured in the configuration file, marking motion behaviors to avoid trajectories interferences.
 
-  This behavior has similar constraints to the previous one, if the aircraft battery is low or is landed, it cannot be executed. In this case, the monitor is much simpler, given a trajectory it instructs the trajectory controller to follow it. Not avoiding obstacles was a design decision taken to promote developers independence and granularity control. Also, the path is given in a topic and not in a service to avoid the overhead of parsing arguments from the behavior coordinator and to allow for some time for planning between the activation of the behavior and the path following order. If no path is received a timeout will ensure the process is stopped after a certain amount of predefined time.
+  This behavior has similar constraints to the previous one, if the aircraft battery is low or is landed, it cannot be executed. In this case, the monitor is much simpler, given a trajectory it instructs the trajectory controller to follow it. Not avoiding obstacles was a design decision taken to promote developers independence and granularity control. When the behavior starts, the provided path will be parsed into a known data structure, if no path is given or it is malformed an error will be thrown and the behavior will finish.
 
 \clearpage
 
@@ -146,8 +146,7 @@ In this chapter, the technical goals of the project are introduced. Each develop
   In this case we will only implement a wrapper around the path planner module. This is the lowest abstraction level behavior provided by the navigation interface API. Being able to generate paths can be useful for fine grain controlled missions and debugging. The only communication way for this behavior will be dropping the planned path on the belief memmory, this way the amount of traffic and topics is reduced, saving computing resources and avoiding polluting more topics. It's architecture is depicted in figure \ref{ch_4:fig:behav_gp}.
 
   \begin{figure}[h]
-    \centering
-    \includegraphics[width=0.85\textwidth]{./Figures/BehaviorGPArquitecture.png}
+    \centering \includegraphics[width=\textwidth]{./Figures/BehaviorGPArquitecture.png}
     \caption{Behavior generate path in occupancy grid architecture}
     \label{ch_4:fig:behav_gp}
   \end{figure}

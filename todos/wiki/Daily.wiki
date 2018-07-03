@@ -3,12 +3,13 @@
     * [X] Ensure move_base_simple/goal maps to move_base/goal  #2c60b601
     * [X] Lower down timeout, easily observable that move base collapses  #a2a4b016
 * [X] TFM Launch file  #0da783a6
-* [X] Fullfil behaviors  #b1781b35
+* [O] Fullfil behaviors  #b1781b35
     * [X] Generate Path in occupancy grid  #09ded01f
         * [X] Check behavior termination  #230bc4d7
     * [X] Follow path in occupancy grid  #75f38f11
         * [X] Check estimated, initial point and relative (instead of absolute) coordinates  #2bca7c52
         * [X] Check behavior termination  #15a05f2d
+        * [ ] [CODE][BFollow] Change parameter to start event instead of topic  #72699320
     * [X] SLAM by lidar check situation  #324b8ee9
     * [X] Go to point in occupancy grid  #39a491de
         * [X] Yaw check  #8e6c0b3e
