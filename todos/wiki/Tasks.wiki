@@ -59,18 +59,19 @@
     * [X] [CH 5][Val] Real flight  #2303e6e2
         * [X] [CH 5][Val] Used aircraft  #f82923af
         * [X] [CH 5][Val] Sensorization  #8e6e035c
+    * [X] [CH 5][Val] Validation  #5668cb67
+        * [X] [CH 5][Val] Simulation  #f82ea498
+            * [X] [CH 5][Val] Gazebo world  #e875f6fb
+            * [X] [CH 5][Val] Computing resources  #ce34ca86
+            * [X] [CH 5][Val] Limitations  #4c527b88
+        * [X] [CH 5][Val] Real flight  #cf5590a5
+            * [X] [CH 5][Val] School sports centre  #fb71f957
+            * [X] [CH 5][Val] Computing resources  #20a76d32
+            * [X] [CH 5][Val] Limitation  #aa45cf0a
     * [ ] [CH 5][Val] Validate the introduction  #57fb1b77
-    * [ ] [CH 5][Val] Validation  #5668cb67
-        * [ ] [CH 5][Val] Simulation  #f82ea498
-            * [ ] [CH 5][Val] Gazebo world  #e875f6fb
-            * [ ] [CH 5][Val] Computing resources  #ce34ca86
-            * [ ] [CH 5][Val] Limitations  #4c527b88
-        * [ ] [CH 5][Val] Real flight  #cf5590a5
-            * [ ] [CH 5][Val] School sports centre  #fb71f957
-            * [ ] [CH 5][Val] Computing resources  #20a76d32
-            * [ ] [CH 5][Val] Limitation  #aa45cf0a
     * [ ] Results  #414f67c2
         * [ ] [CH 5][Val] Performance comparison  #99cc64a9
         * [ ] [CH 5][Val] Conclusions  #f38baa50
     * [ ] [CH 5] Chapter conclusions & close up  #a837173e
 * [ ] [Appendix] Add the mission code to the appendix.  #bc53ba2f
+    * [ ] [Appendix] Tidy up mission  #f9f4f0e0

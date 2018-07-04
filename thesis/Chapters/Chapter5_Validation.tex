@@ -2,7 +2,7 @@
 
   This chapter will go through all the validation and tests implemented to measure the perfomance and the correct functioning of the new behaviors. 
 
-  To validate each implemented behavior we propose using them both in simulation and in real flight missions. The validation tests are presented in detail in section \ref{ch_5:sect:val_tests}, explaining what the tests measure and how they do it as well as the intuition behind each test. Afterwards, in section \ref{ch_5:sect:simulation} we will epose the simulator used and it's particularities as well as how it is integrated with the current version of Aerostack. It will be followed by the specification of the aircraft used for the real flight mission in section \ref{ch_5:sect:real_flight} to finish with some conclusions in section \ref{ch_5:sect:conclusions}.
+  To validate each implemented behavior we propose using them both in simulation and in real flight missions. The validation tests are presented in detail in section \ref{ch_5:sect:val_tests}, explaining what the tests measure and how they do it as well as the intuition behind each test. Afterwards, in section \ref{ch_5:subsect:exp_simulation} we will epose the simulator used and it's particularities as well as how it is integrated with the current version of Aerostack. It will be followed by the specification of the aircraft used for the real flight mission in section \ref{ch_5:sect:real_flight} to finish with some conclusions in section \ref{ch_5:sect:conclusions}.
 
 \section{Validation Tests} \label{ch_5:sect:val_tests}
 
@@ -10,7 +10,7 @@
 
   \begin{enumerate}
     \item \underline{Functioning}: It should do what it is supposed to do. No more, no less.
-    % \item \underline{Predicatability}: All uses cases must be contemplated. No unknown states should be possible.
+    % \item \underline{Predictability}: All uses cases must be contemplated. No unknown states should be possible.
     \item \underline{Compatibility}: It should be compatible with the Aerostack framework architecture.
     \item \underline{Independency}: It should work independently of the UAV in use.
   \end{enumerate}
@@ -19,7 +19,7 @@
 
   To test this constraint we will provide both a simulation and a real mission and put to work each behavior independently, testing that each one works as expected.
 
-  % Predicatability is always a desirable property in software development, but very tricky to ensure, that is the reason why, in software business, there is always a team decicated solely to test the software, many criterias can be applied here. In our case, we will test the predicatability of the behavior functionality, not the software itself. This means that we will test that, for each behavior, all case studies are covered: the correct sensors are available, the algorithm process is effectively running, the behavior knows how to interpret the output of the algorithm it monitors, etc. More specifically, we will test this cases to grasp an intuition about what to do when those criterias fail. The real world is full of randomness and uncertainty and hardware is usually not realiable enough, these reasons place this constraint as the hardest to test.
+  % Predictability is always a desirable property in software development, but very tricky to ensure, that is the reason why, in software business, there is always a team decicated solely to test the software, many criterias can be applied here. In our case, we will test the predictability of the behavior functionality, not the software itself. This means that we will test that, for each behavior, all case studies are covered: the correct sensors are available, the algorithm process is effectively running, the behavior knows how to interpret the output of the algorithm it monitors, etc. More specifically, we will test this cases to grasp an intuition about what to do when those criterias fail. The real world is full of randomness and uncertainty and hardware is usually not realiable enough, these reasons place this constraint as the hardest to test.
 
   Ensuring a peace of software is compatible with another one is much easier than covering all possible uses cases in an unpredictable environment, furthermore, as we expect all the data accessed by a behavior to be in a certain format (and ensured through static, c++ compilation), this constraint should be straightforward. Nevertheless, there are some considerations to be taken care of here. To follow the Aerostack architecture, a behavior should always inherit the behavior class, implementing the functions imposed by it. Also, when getting data from the outside (from the rest of Aerostack, standard), extreme values should be tested, for example, sending an infite double or \textit{nan} value to a controller can effectively be a problem.
 
@@ -61,41 +61,151 @@
 
 \section{Experiments} \label{ch_5:sect:experiments}
 
-  As mentioned before, for each behavior we will ensure it complies with our constraints: correct functioning, predicatability, compatibility and independency. 
+  As mentioned before, for each behavior we will ensure it complies with our constraints: correct functioning, compatibility and independency. 
+  % predictability , 
   
   Compatibility and independency are tested by putting the system to work, if all the code compiles and can be started, the next step is to activate each behavior through the behavior coordinator.
 
-  Once the whole Aerostack system is deployed, the first test for each behavior consists in checking it's activation conditions, i.e.: the \textit{behavior self localize and map by lidar} cannot work without a lidar, deploying the whole Aerostack in a lidar-less UAV should cause the behavior not be activated.
+  Once the whole Aerostack system is deployed, the first test for each behavior consists in checking it's activation conditions, i.e.: the \textit{behavior self localize and map by lidar} cannot work without a lidar, deploying the whole Aerostack in a lidar-less UAV should cause the behavior to be deactivated instantly.
 
-  In this way we tested all conditions and capabilities of all the proposed behaviors. As this is all software related, we easily correct all the bugs found. One example of this was the access to the path planner module: The new planner (\textit{move base}) can only plan to one goal, this makes all the behaviors requiring this module mutually incompatible, namely, the behavior that generates paths cannot work simultaneously with that the go to point one. In the same fashion the behaviors that make use of the trajectory planner cannot work together or a collision could occur.
+  This way we tested all conditions and capabilities of all the proposed behaviors. As this is all software related, we easily corrected all the bugs found. One example of this was the access to the path planner module: The new planner (\textit{move base}) can only plan to one goal, this makes all the behaviors requiring this module mutually incompatible, namely, the behavior that generates paths cannot work simultaneously with that of the go to point . In the same fashion the behaviors that make use of the trajectory planner cannot work together or a collision could occur.
 
   For the functioning constraint we setup both the real and simulated missions with a python script that commands the Aerostack, if after doing a certain amount of missions, the behaviors work as expected we consider that they work correctly. 
- % Predicatability was trickier to check, in this case we only tested it in simulation as it could be potentially dangerous to do it with the real aircraft. During the execution of the missions we disconected the lidar sensor to check
+  
+  % Predictability was trickier to check, in this case we only tested it in simulation as it could be potentially dangerous to do it with the real aircraft. During the execution of the missions we disconected the lidar sensor to check
 
-  The implemented mission consists in:
+  The following subsections explain the implemented mission for each behavior. Note that, the first two missions where only tested on the simulated environment to minimize the human operator time needed for the tests. For all missions both the simulation and the real environments used are the same, nothing was changed in the environment.
 
-  \begin{enumerate}
-    \item Take Off
-    \item Go to $1.5$ meters height.
-    \item Go to $1$ meter to the front while maintaining the altitude.
-    \item Go to $10$ meters height while maintaining the same distance to the wall.
-    \item Go to $5$ meters to the right while maintaining the same distance and altitude.
-    \item Go to $1$ meter away from the wall while maintaining the same altitude.
-    \item Go to $1$ meter height while maintaining the same distance to the wall.
-    \item Land
-  \end{enumerate}
+  \subsection{Behavior Generate Path in Occupancy Grid} \label{ch_5:subsect:behav_genpath_mission}
 
-  This a similar mission to the one carried out in the boiler. All the python code for this mission can be found in the appendix.
+    This mission was only tested in simulation, it consisted in generating a path for every point in the go to point mission (sect. \ref{ch_5:subsect:behav_gtp_mission}). After the mission is finished, $6$ paths should be present in the belief memmory. Therefore the mission can be described as follows:
+    
+    \begin{enumerate}
+      \item Generate path for point: ([0, 0, 1.5])
+      \item Generate path for point: ([1, 0, 1.5])
+      \item Generate path for point: ([1, 0, 10])
+      \item Generate path for point: ([1, -5, 10])
+      \item Generate path for point: ([0, -5, 1.5])
+      \item Generate path for point: ([0, -5, 1])
+    \end{enumerate}
 
-  \textbf{[ToDo := Ref to the appendix]}
+    At the end of the mission we will save all the generated paths to used them as the input for the next behavior's mission.
+
+  \subsection{Behavior Follow Path in Occupancy Grid} \label{ch_5:subsect:behav_fpath_mission}
+
+    In this mission we took all the generated paths and tested the execution one by one. It's worth noting that as each path was generated from the inital point, we will interleave the execution of each path with a reset, as the drone has to start on the [0, 0] coordinate always. In this way, the mission generated is:
+
+    \begin{enumerate}
+      \item Follow path for point: ([0, 0, 1.5])
+      \item Follow path for point: ([1, 0, 1.5])
+      \item Follow path for point: ([1, 0, 10])
+      \item Follow path for point: ([1, -5, 10])
+      \item Follow path for point: ([0, -5, 1.5])
+      \item Follow path for point: ([0, -5, 1])
+    \end{enumerate}
+
+  \subsection{Behavior Go To Point in Occupancy Grid} \label{ch_5:subsect:behav_gtp_mission}
+
+    \begin{enumerate}
+      \item Take Off
+      \item Go to $1.5$ meters height ([0, 0, 1.5])
+      \item Go to $1$ meter to the front, maintaining the altitude. ([1, 0, 1.5])
+      \item Go to $10$ meters height, maintaining the same distance to the wall. ([1, 0, 10])
+      \item Go to $5$ meters to the right, keeping the same distance and altitude. ([1, -5, 10])
+      \item Go to $1$ meter away from the wall, maintaining the same altitude. ([0, -5, 1.5])
+      \item Go to $1$ meter height, maintaining the same distance to the wall. ([0, -5, 1])
+      \item Land
+    \end{enumerate}
+
+    This a similar mission to the one carried out in the boiler. All the python code for this mission can be found in the appendix \ref{app1:py_mission}.
+
+  \pagebreak
 
   \subsection{Simulation} \label{ch_5:subsect:exp_simulation}
 
-    % ToDo := Picture of the boiler
-    % ToDo := Measures of the boiler
-    % ToDo := Mission flight time
+    \begin{figure}[!h]
+      \centering
+      \includegraphics[width=0.9\textwidth,height=0.4\textheight,keepaspectratio]{./Figures/BoilerSim.png}
+      \caption{Simulated boiler. $57$ meters tall by $16$ meters (square section)}
+      \label{ch_5:fig:boiler_sim}
+    \end{figure}
+
+    For the simulation we created a blender model of a boiler and exported it to Gazebo, then we created a RotorS enabled Gazebo world with the hummingbird drone model. The dimensions of the simulated boiler are listed in table \ref{ch_5:table:boiler_sim_dims}. To get an idea of the proportions of the boiler with the aircraft see figure \ref{ch_5:fig:boiler_sim}.  
+
+    \begin{table}[!h]
+      \centering
+      \begin{tabular}{lr} \toprule
+        \multicolumn{2}{c}{\textit{Simulated boiler dimensions}}        \\ \midrule
+        Width $\times$ Depth $\times$ Height & $16 \times 16 \times 57$ \\ \bottomrule
+        \hline
+      \end{tabular}
+      \caption{Simulation computer specifications}
+      \label{ch_5:table:boiler_sim_dims}
+    \end{table}
+
+    The mission took about 1 minute to execute in a laptop with the following specs (table \ref{ch_5:table:laptop_specs}):
+
+    \begin{table}[!h]
+      \centering
+      \begin{tabular}{lr} \toprule
+        \multicolumn{1}{c}{\textit{component}} & \multicolumn{1}{c}{\textit{value}}   \\ \midrule
+        Ram           & DDR 4 32 GB     \\
+        Processor     & 3.4 Ghz 8 cores \\
+        GPU           & GTX 1050 Ti     \\ \bottomrule
+        \hline
+      \end{tabular}
+      \caption{Simulation computer specifications}
+      \label{ch_5:table:laptop_specs}
+    \end{table}
+
+    In this scenario, perfomance does not comprise a problem because with enough GPU, the simulation can run smoothly and all processes can run with good memmory support. 
+
+    Figure \ref{ch_5:fig:full_sim} shows the gazebo world running in a simulation.
+    
+    \begin{figure}
+      \centering
+      \includegraphics[width=0.9\textwidth,height=0.5\textheight,keepaspectratio]{./Figures/FullSim.png}
+      \caption{Gazebo and Rviz. Simulation visualization during the execution of the mission. Left: Gazebo World, top-right: Rviz lidar measures, bottom-right: Hummingbird front camera}
+      \label{ch_5:fig:full_sim}
+    \end{figure}
 
   \subsection{Real Flight} \label{ch_5:subsect:exp_real_flight}
+
+    For the real flight tests we used the sports centre in the School of Industrial Engineers, which is a closed space that can serve for our purposes, it's dimensions are listed in table \ref{ch_5:table:sports_dims}
+
+    \begin{table}[!h]
+      \centering
+      \begin{tabular}{lr} \toprule
+        \multicolumn{2}{c}{\textit{Sports Centre Dimensions}}        \\ \midrule
+        Width $\times$ Depth $\times$ Height & $10 \times 25 \times 14$ \\ \bottomrule
+        \hline
+      \end{tabular}
+      \caption{Dimensions of the sports centre used for real flight tests. Shool of Industrial Engineers}
+      \label{ch_5:table:sports_dims}
+    \end{table}
+
+    The chosen drone ships a \href{https://www.dji.com/es/manifold}{DJI Manifold} micro computer for onboard computation. Its technical details are contained in table \ref{ch_5:table:manifold_specs}
+
+    \begin{table}[!h]
+      \centering
+      \begin{tabular}{lr} \toprule
+        \multicolumn{1}{c}{\textit{component}} & \multicolumn{1}{c}{\textit{value}}   \\ \midrule
+        Ram           & DDR 3 2 GB     \\
+        Processor     & 2.5 Ghz 4 cores \\
+        GPU           & NVIDIA Kepler GeForce \\ \bottomrule
+        \hline
+      \end{tabular}
+      \caption{Onboard computer specification}
+      \label{ch_5:table:manifold_specs}
+    \end{table}
+
+    Onboard computation is the better option in this case because there is no \textit{auto pilot} (fallback driver controller, shipped in many drones to do automatic hover when no orders are received) and given the distances it can travel and the altitude, ensuring WiFi coverage is difficult. Hence, the most secure option is to load all the necessary software inside the onboard computer and send just a few orders from the ground control station. More specifically, launch the Aerostack and the python mission.
+
+    The manifold computer is not very powerful so special attention must be put on perfomance, if computing power drains it can be catastrophic. To aid in this situation a human pilot was prepared to take control during all the tests, although at the end it was not necessary.
+
+\section{Experimental Results} \label{ch_5:sect:results}
+
+  This section will explain the results obtained
 
 \section{Conclusions} \label{ch_5:sect:conclusions}
 

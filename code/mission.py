@@ -8,7 +8,7 @@ import os.path as path
 behavior_uids = {}
 behavior_names = {
   'go_to_point' : 'GO_TO_POINT_IN_OCCUPANCY_GRID',
-  'slam'        : 'SELF_LOCALIZE_AND_MAP_BY_ODOMETRY',
+  'slam'        : 'SELF_LOCALIZE_AND_MAP_BY_LIDAR',
   'take_off'    : 'TAKE_OFF',
   'land'        : 'LAND'
 }
@@ -17,46 +17,63 @@ behavior_names = {
 #   take off
 def activate(behavior):
   behavior_name = behavior_names[behavior]
-  print('-> ' + behavior)
-  activated, uid = api.activateBehavior(behavior)
-  if not activated:
-    uid = -1
+  print('-> activate ' + behavior + '(' + behavior_names[behavior] + ')')
+  uid = api.executeBehavior(behavior)
   return uid
 
 def go_to_point(coordinates='absolute', point=[]):
   if len(point) == 0:
     raise Exception('Empty point!')
 
-  print('-> go to point ' + point + ' mode ' + coordinates)
+  print('-> go to point ' + str(point) + ' mode ' + coordinates)
   if coordinates == 'absolute':
-    activated, uid = api.activateBehavior(GO_TO_BEHAV_NAME, relative_coordinates=point)
+    activated, uid = api.activateBehavior(behavior_names['go_to_point'], coordinates=point)
   else:
-    activated, uid = api.activateBehavior(GO_TO_BEHAV_NAME, coordinates=point)
-  if not activated:
-    uid = -1
+    activated, uid = api.activateBehavior(behavior_names['go_to_point'], relative_coordinates=point)
   return uid
 
+def get_input():
+  char = ''
+  while char != 'q' and char != 'c':
+    char = raw_input('Continue, quit (c/q)')
+
+  return char
+
 def run_mission(coordinates='absolute', points=[]):
+  print('run_mission', coordinates, points)
   print('Starting mission...')
-  behaviors = ['slam', 'take_off']
-  for behavior in behaviors:
-    uid = activate(behavior)
-    assert(uid != -1)
-    behavior_uids[behavior] = uid
-    print('-> done id: ' + uid)
+  print('-> activate SLAM')
+  print(api.activateBehavior(behavior_names['slam']))
+  print('-> execute TAKE_OFF')
+  print(api.executeBehavior(behavior_names['take_off']))
 
-  for point in points:
-    uid = go_to_point(coordinates=coordinates, point=point)
-    if uid == -1:
-      # no success, land
-      break
+  char = get_input()
+  index = 0
+  while char != 'q' and index < len(points):
+    point = points[index]
+    go_to_point(coordinates=coordinates, point=point)
+    index += 1
+    char = get_input()
 
-  uid = activate('land')
-  assert(uid != -1)
+  print(api.executeBehavior(behavior_names['land']))
   print('Finish mission...')
 
 def usage():
   print('Usage mission.py points.json')
+
+def runMission():
+  data = {
+    "coordinates": "absolute",
+    "points": [
+      [0, 0, 1.5],
+      [1, 0, 1.5],
+      [1, 0, 10],
+      [1, -5, 10], 
+      [0, -5, 10], 
+      [0, -5, 1.5]
+    ]
+  }
+  run_mission(**data)
 
 if __name__ == '__main__':
   try:

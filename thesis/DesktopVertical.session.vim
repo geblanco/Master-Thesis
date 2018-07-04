@@ -2,20 +2,57 @@ let SessionLoad = 1
 if &cp | set nocp | endif
 let s:cpo_save=&cpo
 set cpo&vim
+inoremap <silent> <Plug>(fzf-maps-i) :call fzf#vim#maps('i', 0)
+inoremap <expr> <Plug>(fzf-complete-buffer-line) fzf#vim#complete#buffer_line()
+inoremap <expr> <Plug>(fzf-complete-line) fzf#vim#complete#line()
+inoremap <expr> <Plug>(fzf-complete-file-ag) fzf#vim#complete#path('ag -l -g ""')
+inoremap <expr> <Plug>(fzf-complete-file) fzf#vim#complete#path("find . -path '*/\.*' -prune -o -type f -print -o -type l -print | sed 's:^..::'")
+inoremap <expr> <Plug>(fzf-complete-path) fzf#vim#complete#path("find . -path '*/\.*' -prune -o -print | sed '1d;s:^..::'")
+inoremap <expr> <Plug>(fzf-complete-word) fzf#vim#complete#word()
 inoremap <silent> <expr> <Plug>delimitMateS-BS delimitMate#WithinEmptyPair() ? "\<Del>" : "\<S-BS>"
 inoremap <silent> <Plug>delimitMateBS =delimitMate#BS()
 nnoremap t :vertical term 
 nnoremap K i
+nmap <silent> \w\m <Plug>VimwikiMakeTomorrowDiaryNote
+nmap <silent> \w\y <Plug>VimwikiMakeYesterdayDiaryNote
+nmap <silent> \w\t <Plug>VimwikiTabMakeDiaryNote
+nmap <silent> \w\w <Plug>VimwikiMakeDiaryNote
+nmap <silent> \w\i <Plug>VimwikiDiaryGenerateLinks
+nmap <silent> \wi <Plug>VimwikiDiaryIndex
+nmap <silent> \ws <Plug>VimwikiUISelect
+nmap <silent> \wt <Plug>VimwikiTabIndex
+nmap <silent> \ww <Plug>VimwikiIndex
+omap \	 <Plug>(fzf-maps-o)
+xmap \	 <Plug>(fzf-maps-x)
+nmap \	 <Plug>(fzf-maps-n)
+nnoremap \w :w
+nnoremap \O :CtrlP
+nnoremap \o :Files
+nnoremap \<s :call Player('previous') 
+nnoremap \>s :call Player('next') 
+nnoremap \ps :call Player('play-pause') 
 vmap gx <Plug>NetrwBrowseXVis
 nmap gx <Plug>NetrwBrowseX
 vnoremap <silent> <Plug>NetrwBrowseXVis :call netrw#BrowseXVis()
 nnoremap <silent> <Plug>NetrwBrowseX :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())
-nnoremap <silent> <F3> :CtrlP
-nnoremap <SNR>15_: :=v:count ? v:count : ''
-map <F4> : VimtexTocOpen
+xnoremap <silent> <Plug>(Limelight) :Limelight
+nnoremap <silent> <Plug>(Limelight) :set opfunc=limelight#operatorg@
+onoremap <silent> <Plug>(fzf-maps-o) :call fzf#vim#maps('o', 0)
+xnoremap <silent> <Plug>(fzf-maps-x) :call fzf#vim#maps('x', 0)
+nnoremap <silent> <Plug>(fzf-maps-n) :call fzf#vim#maps('n', 0)
+map <F3> <Plug>(ctrlp)
+nnoremap <silent> <Plug>(ctrlp) :CtrlP
+nnoremap <Right> :vertical resize +2
+nnoremap <Left> :vertical resize -2
+nnoremap <Down> :resize +2
+nnoremap <Up> :resize -2
 nnoremap <C-Left> gT
 nnoremap <C-Right> gT
 map <F2> : NERDTreeToggle
+imap  <Plug>(fzf-complete-line)
+imap <NL> <Plug>(fzf-complete-file-ag)
+imap  <Plug>(fzf-complete-path)
+imap  <Plug>(fzf-complete-word)
 let &cpo=s:cpo_save
 unlet s:cpo_save
 set background=dark
@@ -26,6 +63,7 @@ set directory=~/.vim/swap//
 set errorfile=~/Documents/AIMaster/Curso/TFM/Master-Thesis/thesis/Thesis.blg
 set expandtab
 set fileencodings=ucs-bom,utf-8,default,latin1
+set formatlistpat=^\\s*\\%(\\(-\\|\\*\\|#\\)\\|\\(\\C\\%(\\d\\+)\\|\\d\\+\\.\\|[ivxlcdm]\\+)\\|[IVXLCDM]\\+)\\|\\l\\{1,2})\\|\\u\\{1,2})\\)\\)\\)\\s\\+\\%(\\[\\([\ .oOX-]\\)\\]\\s\\)\\?
 set guifont=Ubuntu\ Mono\ derivative\ Powerline:8
 set helplang=en
 set hlsearch
@@ -36,7 +74,7 @@ set laststatus=2
 set mouse=n
 set pyxversion=3
 set ruler
-set runtimepath=~/.vim,~/.vim/bundle/Vundle.vim,~/.vim/bundle/vim-fugitive,~/.vim/bundle/nerdtree,~/.vim/bundle/ctrlp.vim,~/.vim/bundle/delimitMate,~/.vim/bundle/vim-monokai,~/.vim/bundle/vim-javascript,~/.vim/bundle/powerline/powerline/bindings/vim/,~/.vim/bundle/vim-cpp-enhanced-highlight,~/.vim/bundle/vimtex,~/.vim/bundle/pydiction,~/.vim/bundle/vim-javascript-lib,~/.vim/bundle/AutoComplPop,~/.vim/bundle/vim-repl,/usr/share/vim/vimfiles,/usr/share/vim/vim81,/usr/share/vim/vimfiles/after,~/.vim/after,~/.vim/bundle/Vundle.vim,~/.vim/bundle/Vundle.vim/after,~/.vim/bundle/vim-fugitive/after,~/.vim/bundle/nerdtree/after,~/.vim/bundle/ctrlp.vim/after,~/.vim/bundle/delimitMate/after,~/.vim/bundle/vim-monokai/after,~/.vim/bundle/vim-javascript/after,~/.vim/bundle/powerline/powerline/bindings/vim//after,~/.vim/bundle/vim-cpp-enhanced-highlight/after,~/.vim/bundle/vimtex/after,~/.vim/bundle/pydiction/after,~/.vim/bundle/vim-javascript-lib/after,~/.vim/bundle/AutoComplPop/after,~/.vim/bundle/vim-repl/after
+set runtimepath=~/.vim,~/.vim/bundle/Vundle.vim,~/.vim/bundle/nerdtree,~/.vim/bundle/ctrlp.vim,~/.vim/bundle/delimitMate,~/.vim/bundle/fzf.vim,~/.vim/bundle/fzf,~/.vim/bundle/tabular,~/.vim/bundle/powerline/powerline/bindings/vim/,~/.vim/bundle/vim-wordmotion,~/.vim/bundle/limelight.vim,~/.vim/bundle/vimwiki,~/.vim/bundle/taskwiki,~/.vim/bundle/tagbar,~/.vim/bundle/vim-monokai,~/.vim/bundle/vim-devicons,~/.vim/bundle/vim-javascript,~/.vim/bundle/vim-javascript-lib,~/.vim/bundle/AutoComplPop,~/.vim/bundle/vim-jsbeautify,~/.vim/bundle/vimtex,~/.vim/bundle/syntastic,~/.vim/bundle/vim-repl,/usr/share/vim/vimfiles,/usr/share/vim/vim81,/usr/share/vim/vimfiles/after,~/.vim/after,~/.vim/bundle/Vundle.vim,~/.vim/bundle/Vundle.vim/after,~/.vim/bundle/nerdtree/after,~/.vim/bundle/ctrlp.vim/after,~/.vim/bundle/delimitMate/after,~/.vim/bundle/fzf.vim/after,~/.vim/bundle/fzf/after,~/.vim/bundle/tabular/after,~/.vim/bundle/powerline/powerline/bindings/vim//after,~/.vim/bundle/vim-wordmotion/after,~/.vim/bundle/limelight.vim/after,~/.vim/bundle/vimwiki/after,~/.vim/bundle/taskwiki/after,~/.vim/bundle/tagbar/after,~/.vim/bundle/vim-monokai/after,~/.vim/bundle/vim-devicons/after,~/.vim/bundle/vim-javascript/after,~/.vim/bundle/vim-javascript-lib/after,~/.vim/bundle/AutoComplPop/after,~/.vim/bundle/vim-jsbeautify/after,~/.vim/bundle/vimtex/after,~/.vim/bundle/syntastic/after,~/.vim/bundle/vim-repl/after
 set shiftwidth=2
 set showcmd
 set softtabstop=2
@@ -48,6 +86,7 @@ set tabline=%!py3eval('powerline.tabline()')
 set termencoding=utf-8
 set undodir=~/.vim/undo//
 set undofile
+set viewoptions=folds
 let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 let v:this_session=expand("<sfile>:p")
 silent only
@@ -56,11 +95,13 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +0 Thesis.tex
+badd +1 Thesis.tex
+badd +3 ~/Documents/AIMaster/Curso/TFM/Master-Thesis/todos/wiki/index.wiki
+badd +0 ~/Documents/AIMaster/Curso/TFM/Master-Thesis/todos/wiki/Tasks.wiki
 argglobal
 silent! argdel *
 $argadd Thesis.tex
-edit Thesis.tex
+edit ~/Documents/AIMaster/Curso/TFM/Master-Thesis/todos/wiki/Tasks.wiki
 set splitbelow splitright
 wincmd _ | wincmd |
 split
@@ -68,22 +109,452 @@ split
 wincmd _ | wincmd |
 vsplit
 1wincmd h
-wincmd w
 wincmd _ | wincmd |
 split
 1wincmd k
 wincmd w
 wincmd w
+wincmd w
 wincmd t
 set winminheight=1 winheight=1 winminwidth=1 winwidth=1
-exe '1resize ' . ((&lines * 46 + 28) / 57)
-exe 'vert 1resize ' . ((&columns * 177 + 118) / 237)
-exe '2resize ' . ((&lines * 22 + 28) / 57)
-exe 'vert 2resize ' . ((&columns * 59 + 118) / 237)
-exe '3resize ' . ((&lines * 23 + 28) / 57)
-exe 'vert 3resize ' . ((&columns * 59 + 118) / 237)
-exe '4resize ' . ((&lines * 8 + 28) / 57)
+exe '1resize ' . ((&lines * 28 + 29) / 59)
+exe 'vert 1resize ' . ((&columns * 96 + 118) / 237)
+exe '2resize ' . ((&lines * 17 + 29) / 59)
+exe 'vert 2resize ' . ((&columns * 96 + 118) / 237)
+exe '3resize ' . ((&lines * 46 + 29) / 59)
+exe 'vert 3resize ' . ((&columns * 140 + 118) / 237)
+exe '4resize ' . ((&lines * 10 + 29) / 59)
 argglobal
+let s:cpo_save=&cpo
+set cpo&vim
+imap <buffer> <S-BS> <Plug>delimitMateS-BS
+imap <buffer> <BS> <Plug>delimitMateBS
+inoremap <buffer> <silent> <S-CR> :VimwikiReturn 2 2
+inoremap <buffer> <expr> <S-Tab> vimwiki#tbl#kbd_shift_tab()
+nmap <buffer> <silent> 	 <Plug>VimwikiNextLink
+vmap <buffer> <silent>  <Plug>VimwikiNormalizeLinkVisualCR
+nnoremap <buffer> <silent>  :py3 Mappings.task_info_or_vimwiki_follow_link()
+vmap <buffer> <silent> + <Plug>VimwikiNormalizeLinkVisual
+nmap <buffer> <silent> + <Plug>VimwikiNormalizeLink
+nmap <buffer> <silent> - <Plug>VimwikiRemoveHeaderLevel
+nmap <buffer> <silent> <D-CR> <Plug>VimwikiTabnewLink
+nmap <buffer> <silent> = <Plug>VimwikiAddHeaderLevel
+nnoremap <buffer> <silent> O :call vimwiki#lst#kbd_O()
+nmap <buffer> <silent> [= <Plug>VimwikiGoToPrevSiblingHeader
+nmap <buffer> <silent> [[ <Plug>VimwikiGoToPrevHeader
+nmap <buffer> <silent> [u <Plug>VimwikiGoToParentHeader
+vmap <buffer> <silent> \t- :TaskWikiStop
+vmap <buffer> <silent> \t+ :TaskWikiStart
+vmap <buffer> <silent> \t. :TaskWikiRedo
+vmap <buffer> <silent> \tm :TaskWikiMod
+vmap <buffer> <silent> \tl :TaskWikiLink
+vmap <buffer> <silent> \ti :TaskWikiInfo
+vmap <buffer> <silent> \tg :TaskWikiGrid
+vmap <buffer> <silent> \te :TaskWikiEdit
+vmap <buffer> <silent> \tD :TaskWikiDelete
+vmap <buffer> <silent> \td :TaskWikiDone
+vmap <buffer> <silent> \tct :TaskWikiChooseTag
+vmap <buffer> <silent> \tcp :TaskWikiChooseProject
+vmap <buffer> <silent> \ta :TaskWikiAnnotate
+nmap <buffer> <silent> \t- :TaskWikiStop
+nmap <buffer> <silent> \t+ :TaskWikiStart
+nmap <buffer> <silent> \t. :TaskWikiRedo
+nmap <buffer> <silent> \tt :TaskWikiTags
+nmap <buffer> <silent> \tS :TaskWikiStats
+nmap <buffer> <silent> \ts :TaskWikiProjectsSummary
+nmap <buffer> <silent> \tp :TaskWikiProjects
+nmap <buffer> <silent> \tm :TaskWikiMod
+nmap <buffer> <silent> \tl :TaskWikiLink
+nmap <buffer> <silent> \ti :TaskWikiInfo
+nmap <buffer> <silent> \tha :TaskWikiHistoryAnnual
+nmap <buffer> <silent> \thm :TaskWikiHistoryMonthly
+nmap <buffer> <silent> \tGa :TaskWikiGhistoryAnnual
+nmap <buffer> <silent> \tGm :TaskWikiGhistoryMonthly
+nmap <buffer> <silent> \tg :TaskWikiGrid
+nmap <buffer> <silent> \te :TaskWikiEdit
+nmap <buffer> <silent> \tD :TaskWikiDelete
+nmap <buffer> <silent> \td :TaskWikiDone
+nmap <buffer> <silent> \tC :TaskWikiCalendar
+nmap <buffer> <silent> \tct :TaskWikiChooseTag
+nmap <buffer> <silent> \tcp :TaskWikiChooseProject
+nmap <buffer> <silent> \tbm :TaskWikiBurndownMonthly
+nmap <buffer> <silent> \tbw :TaskWikiBurndownWeekly
+nmap <buffer> <silent> \tbd :TaskWikiBurndownDaily
+nmap <buffer> <silent> \ta :TaskWikiAnnotate
+nmap <buffer> <silent> \wr <Plug>VimwikiRenameLink
+nmap <buffer> <silent> \wd <Plug>VimwikiDeleteLink
+nmap <buffer> \whh <Plug>Vimwiki2HTMLBrowse
+nmap <buffer> \wh <Plug>Vimwiki2HTML
+nmap <buffer> <silent> ]= <Plug>VimwikiGoToNextSiblingHeader
+nmap <buffer> <silent> ]] <Plug>VimwikiGoToNextHeader
+nmap <buffer> <silent> ]u <Plug>VimwikiGoToParentHeader
+vnoremap <buffer> <silent> al :call vimwiki#lst#TO_list_item(0, 1)
+onoremap <buffer> <silent> al :call vimwiki#lst#TO_list_item(0, 0)
+vnoremap <buffer> <silent> ac :call vimwiki#base#TO_table_col(0, 1)
+onoremap <buffer> <silent> ac :call vimwiki#base#TO_table_col(0, 0)
+vnoremap <buffer> <silent> a\ :call vimwiki#base#TO_table_cell(0, 1)
+onoremap <buffer> <silent> a\ :call vimwiki#base#TO_table_cell(0, 0)
+vnoremap <buffer> <silent> aH :call vimwiki#base#TO_header(0, 1, v:count1)
+onoremap <buffer> <silent> aH :call vimwiki#base#TO_header(0, 1, v:count1)
+vnoremap <buffer> <silent> ah :call vimwiki#base#TO_header(0, 0, v:count1)
+onoremap <buffer> <silent> ah :call vimwiki#base#TO_header(0, 0, v:count1)
+nnoremap <buffer> gww :VimwikiTableAlignW
+nnoremap <buffer> gqq :VimwikiTableAlignQ
+noremap <buffer> <silent> gLA :VimwikiChangeSymbolInListTo A)
+noremap <buffer> <silent> glA :VimwikiChangeSymbolTo A)
+noremap <buffer> <silent> gLa :VimwikiChangeSymbolInListTo a)
+noremap <buffer> <silent> gla :VimwikiChangeSymbolTo a)
+noremap <buffer> <silent> gLI :VimwikiChangeSymbolInListTo I)
+noremap <buffer> <silent> glI :VimwikiChangeSymbolTo I)
+noremap <buffer> <silent> gLi :VimwikiChangeSymbolInListTo i)
+noremap <buffer> <silent> gli :VimwikiChangeSymbolTo i)
+noremap <buffer> <silent> gL1 :VimwikiChangeSymbolInListTo 1.
+noremap <buffer> <silent> gl1 :VimwikiChangeSymbolTo 1.
+noremap <buffer> <silent> gL# :VimwikiChangeSymbolInListTo #
+noremap <buffer> <silent> gl# :VimwikiChangeSymbolTo #
+noremap <buffer> <silent> gL\* :VimwikiChangeSymbolInListTo \*
+noremap <buffer> <silent> gl\* :VimwikiChangeSymbolTo \*
+noremap <buffer> <silent> gL- :VimwikiChangeSymbolInListTo -
+noremap <buffer> <silent> gl- :VimwikiChangeSymbolTo -
+map <buffer> <silent> gL  <Plug>VimwikiRemoveCBInList
+map <buffer> <silent> gl  <Plug>VimwikiRemoveSingleCB
+map <buffer> <silent> gLL <Plug>VimwikiIncreaseLvlWholeItem
+map <buffer> <silent> gLl <Plug>VimwikiIncreaseLvlWholeItem
+map <buffer> <silent> gLH <Plug>VimwikiDecreaseLvlWholeItem
+map <buffer> <silent> gLh <Plug>VimwikiDecreaseLvlWholeItem
+map <buffer> <silent> gll <Plug>VimwikiIncreaseLvlSingleItem
+map <buffer> <silent> glh <Plug>VimwikiDecreaseLvlSingleItem
+nmap <buffer> <silent> gLR <Plug>VimwikiRenumberAllLists
+nmap <buffer> <silent> gLr <Plug>VimwikiRenumberAllLists
+nmap <buffer> <silent> glr <Plug>VimwikiRenumberList
+vmap <buffer> <silent> glp <Plug>VimwikiDecrementListItem
+nmap <buffer> <silent> glp <Plug>VimwikiDecrementListItem
+vmap <buffer> <silent> gln <Plug>VimwikiIncrementListItem
+nmap <buffer> <silent> gln <Plug>VimwikiIncrementListItem
+vmap <buffer> <silent> glx <Plug>VimwikiToggleRejectedListItem
+nmap <buffer> <silent> glx <Plug>VimwikiToggleRejectedListItem
+vnoremap <buffer> <silent> il :call vimwiki#lst#TO_list_item(1, 1)
+onoremap <buffer> <silent> il :call vimwiki#lst#TO_list_item(1, 0)
+vnoremap <buffer> <silent> ic :call vimwiki#base#TO_table_col(1, 1)
+onoremap <buffer> <silent> ic :call vimwiki#base#TO_table_col(1, 0)
+vnoremap <buffer> <silent> i\ :call vimwiki#base#TO_table_cell(1, 1)
+onoremap <buffer> <silent> i\ :call vimwiki#base#TO_table_cell(1, 0)
+vnoremap <buffer> <silent> iH :call vimwiki#base#TO_header(1, 1, v:count1)
+onoremap <buffer> <silent> iH :call vimwiki#base#TO_header(1, 1, v:count1)
+vnoremap <buffer> <silent> ih :call vimwiki#base#TO_header(1, 0, v:count1)
+onoremap <buffer> <silent> ih :call vimwiki#base#TO_header(1, 0, v:count1)
+nnoremap <buffer> <silent> o :call vimwiki#lst#kbd_o()
+nnoremap <buffer> <silent> <Plug>VimwikiGoToPrevSiblingHeader :call vimwiki#base#goto_sibling(-1)
+nnoremap <buffer> <silent> <Plug>VimwikiGoToNextSiblingHeader :call vimwiki#base#goto_sibling(+1)
+nnoremap <buffer> <silent> <Plug>VimwikiGoToPrevHeader :call vimwiki#base#goto_prev_header()
+nnoremap <buffer> <silent> <Plug>VimwikiGoToNextHeader :call vimwiki#base#goto_next_header()
+nnoremap <buffer> <silent> <Plug>VimwikiGoToParentHeader :call vimwiki#base#goto_parent_header()
+nnoremap <buffer> <silent> <Plug>VimwikiRemoveHeaderLevel :call vimwiki#base#RemoveHeaderLevel()
+nnoremap <buffer> <silent> <Plug>VimwikiAddHeaderLevel :call vimwiki#base#AddHeaderLevel()
+nmap <buffer> <silent> <M-Right> <Plug>VimwikiTableMoveColumnRight
+nmap <buffer> <silent> <M-Left> <Plug>VimwikiTableMoveColumnLeft
+vmap <buffer> <silent> <Nul> <Plug>VimwikiToggleListItem
+nmap <buffer> <silent> <Nul> <Plug>VimwikiToggleListItem
+vmap <buffer> <silent> <C-Space> <Plug>VimwikiToggleListItem
+nmap <buffer> <silent> <C-Space> <Plug>VimwikiToggleListItem
+nmap <buffer> <silent> <C-Up> <Plug>VimwikiDiaryPrevDay
+nmap <buffer> <silent> <C-Down> <Plug>VimwikiDiaryNextDay
+nmap <buffer> <silent> <S-Tab> <Plug>VimwikiPrevLink
+nmap <buffer> <silent> <BS> <Plug>VimwikiGoBackLink
+nmap <buffer> <silent> <C-S-CR> <Plug>VimwikiTabnewLink
+nmap <buffer> <silent> <C-CR> <Plug>VimwikiVSplitLink
+nmap <buffer> <silent> <S-CR> <Plug>VimwikiSplitLink
+imap <buffer> <silent>  <Plug>VimwikiDecreaseLvlSingleItem
+imap <buffer> <silent> g <Plug>delimitMateJumpMany
+imap <buffer>  <Plug>delimitMateBS
+inoremap <buffer> <expr> 	 vimwiki#tbl#kbd_tab()
+imap <buffer> <silent>  <Plug>VimwikiListToggle
+imap <buffer> <silent>  <Plug>VimwikiListPrevSymbol
+imap <buffer> <silent> <NL> <Plug>VimwikiListNextSymbol
+inoremap <buffer> <silent>  :VimwikiReturn 1 5
+imap <buffer> <silent>  <Plug>VimwikiIncreaseLvlSingleItem
+imap <buffer> " <Plug>delimitMate"
+imap <buffer> ' <Plug>delimitMate'
+imap <buffer> ( <Plug>delimitMate(
+imap <buffer> ) <Plug>delimitMate)
+imap <buffer> [ <Plug>delimitMate[
+imap <buffer> ] <Plug>delimitMate]
+imap <buffer> ` <Plug>delimitMate`
+imap <buffer> { <Plug>delimitMate{
+imap <buffer> } <Plug>delimitMate}
+let &cpo=s:cpo_save
+unlet s:cpo_save
+setlocal keymap=
+setlocal noarabic
+setlocal autoindent
+setlocal backupcopy=
+setlocal balloonexpr=
+setlocal nobinary
+setlocal nobreakindent
+setlocal breakindentopt=
+setlocal bufhidden=
+setlocal buflisted
+setlocal buftype=
+setlocal nocindent
+setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
+setlocal cinoptions=
+setlocal cinwords=if,else,while,do,for,switch
+setlocal colorcolumn=
+setlocal comments=
+setlocal commentstring=%%%s
+setlocal complete=.,w,b,u,t,i
+setlocal concealcursor=nc
+set conceallevel=2
+setlocal conceallevel=2
+setlocal completefunc=
+setlocal nocopyindent
+setlocal cryptmethod=
+setlocal nocursorbind
+setlocal nocursorcolumn
+setlocal nocursorline
+setlocal define=
+setlocal dictionary=
+setlocal nodiff
+setlocal equalprg=
+setlocal errorformat=
+setlocal expandtab
+if &filetype != 'vimwiki'
+setlocal filetype=vimwiki
+endif
+setlocal fixendofline
+setlocal foldcolumn=0
+setlocal foldenable
+setlocal foldexpr=0
+setlocal foldignore=#
+setlocal foldlevel=0
+setlocal foldmarker={{{,}}}
+set foldmethod=indent
+setlocal foldmethod=manual
+setlocal foldminlines=1
+setlocal foldnestmax=20
+setlocal foldtext=TaskwikiFoldText()
+setlocal formatexpr=
+setlocal formatoptions=tqn
+setlocal formatlistpat=^\\s*\\%(\\(-\\|\\*\\|#\\)\\|\\(\\C\\%(\\d\\+)\\|\\d\\+\\.\\|[ivxlcdm]\\+)\\|[IVXLCDM]\\+)\\|\\l\\{1,2})\\|\\u\\{1,2})\\)\\)\\)\\s\\+\\%(\\[\\([\ .oOX-]\\)\\]\\s\\)\\?
+setlocal formatprg=
+setlocal grepprg=
+setlocal iminsert=0
+setlocal imsearch=-1
+setlocal include=
+setlocal includeexpr=
+setlocal indentexpr=
+setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
+setlocal noinfercase
+setlocal iskeyword=@,48-57,_,192-255
+setlocal keywordprg=
+setlocal nolinebreak
+setlocal nolisp
+setlocal lispwords=
+setlocal nolist
+setlocal makeencoding=
+setlocal makeprg=
+setlocal matchpairs=(:),{:},[:]
+setlocal modeline
+setlocal modifiable
+setlocal nrformats=bin,octal,hex
+set number
+setlocal number
+setlocal numberwidth=4
+setlocal omnifunc=Complete_wikifiles
+setlocal path=
+setlocal nopreserveindent
+setlocal nopreviewwindow
+setlocal quoteescape=\\
+setlocal noreadonly
+setlocal norelativenumber
+setlocal norightleft
+setlocal rightleftcmd=search
+setlocal noscrollbind
+setlocal shiftwidth=2
+setlocal noshortname
+setlocal signcolumn=auto
+setlocal nosmartindent
+setlocal softtabstop=2
+setlocal nospell
+setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
+setlocal spellfile=
+setlocal spelllang=en
+setlocal statusline=%!py3eval('powerline.statusline(1)')
+setlocal suffixesadd=.wiki
+setlocal swapfile
+setlocal synmaxcol=3000
+if &syntax != 'vimwiki'
+setlocal syntax=vimwiki
+endif
+setlocal tabstop=8
+setlocal tagcase=
+setlocal tags=./tags,./TAGS,tags,TAGS,~/Documents/AIMaster/Curso/TFM/Master-Thesis/todos/wiki/.tags
+setlocal termwinkey=
+setlocal termwinscroll=10000
+setlocal termwinsize=
+setlocal textwidth=0
+setlocal thesaurus=
+setlocal undofile
+setlocal undolevels=-123456
+setlocal nowinfixheight
+setlocal nowinfixwidth
+setlocal wrap
+setlocal wrapmargin=0
+silent! normal! zE
+let s:l = 76 - ((27 * winheight(0) + 14) / 28)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+76
+normal! 0
+lcd ~/Documents/AIMaster/Curso/TFM/Master-Thesis/thesis
+wincmd w
+argglobal
+terminal ++curwin ++cols=96 ++rows=17 
+let s:cpo_save=&cpo
+set cpo&vim
+imap <buffer> <S-Tab> <Plug>delimitMateS-Tab
+imap <buffer> <S-BS> <Plug>delimitMateS-BS
+imap <buffer> <BS> <Plug>delimitMateBS
+imap <buffer> <silent> g <Plug>delimitMateJumpMany
+imap <buffer>  <Plug>delimitMateBS
+imap <buffer> " <Plug>delimitMate"
+imap <buffer> ' <Plug>delimitMate'
+imap <buffer> ( <Plug>delimitMate(
+imap <buffer> ) <Plug>delimitMate)
+imap <buffer> [ <Plug>delimitMate[
+imap <buffer> ] <Plug>delimitMate]
+imap <buffer> ` <Plug>delimitMate`
+imap <buffer> { <Plug>delimitMate{
+imap <buffer> } <Plug>delimitMate}
+let &cpo=s:cpo_save
+unlet s:cpo_save
+setlocal keymap=
+setlocal noarabic
+setlocal noautoindent
+setlocal backupcopy=
+setlocal balloonexpr=
+setlocal nobinary
+setlocal nobreakindent
+setlocal breakindentopt=
+setlocal bufhidden=
+setlocal buflisted
+setlocal buftype=terminal
+setlocal nocindent
+setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
+setlocal cinoptions=
+setlocal cinwords=if,else,while,do,for,switch
+setlocal colorcolumn=
+setlocal comments=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
+setlocal commentstring=/*%s*/
+setlocal complete=.,w,b,u,t,i
+setlocal concealcursor=
+set conceallevel=2
+setlocal conceallevel=2
+setlocal completefunc=
+setlocal nocopyindent
+setlocal cryptmethod=
+setlocal nocursorbind
+setlocal nocursorcolumn
+setlocal nocursorline
+setlocal define=
+setlocal dictionary=
+setlocal nodiff
+setlocal equalprg=
+setlocal errorformat=
+setlocal expandtab
+if &filetype != ''
+setlocal filetype=
+endif
+setlocal fixendofline
+setlocal foldcolumn=0
+setlocal foldenable
+setlocal foldexpr=0
+setlocal foldignore=#
+setlocal foldlevel=0
+setlocal foldmarker={{{,}}}
+set foldmethod=indent
+setlocal foldmethod=indent
+setlocal foldminlines=1
+setlocal foldnestmax=20
+setlocal foldtext=foldtext()
+setlocal formatexpr=
+setlocal formatoptions=tcq
+setlocal formatlistpat=^\\s*\\%(\\(-\\|\\*\\|#\\)\\|\\(\\C\\%(\\d\\+)\\|\\d\\+\\.\\|[ivxlcdm]\\+)\\|[IVXLCDM]\\+)\\|\\l\\{1,2})\\|\\u\\{1,2})\\)\\)\\)\\s\\+\\%(\\[\\([\ .oOX-]\\)\\]\\s\\)\\?
+setlocal formatprg=
+setlocal grepprg=
+setlocal iminsert=0
+setlocal imsearch=-1
+setlocal include=
+setlocal includeexpr=
+setlocal indentexpr=
+setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
+setlocal noinfercase
+setlocal iskeyword=@,48-57,_,192-255
+setlocal keywordprg=
+setlocal nolinebreak
+setlocal nolisp
+setlocal lispwords=
+setlocal nolist
+setlocal makeencoding=
+setlocal makeprg=
+setlocal matchpairs=(:),{:},[:]
+setlocal modeline
+setlocal nomodifiable
+setlocal nrformats=bin,octal,hex
+set number
+setlocal number
+setlocal numberwidth=4
+setlocal omnifunc=
+setlocal path=
+setlocal nopreserveindent
+setlocal nopreviewwindow
+setlocal quoteescape=\\
+setlocal noreadonly
+setlocal norelativenumber
+setlocal norightleft
+setlocal rightleftcmd=search
+setlocal noscrollbind
+setlocal shiftwidth=2
+setlocal noshortname
+setlocal signcolumn=auto
+setlocal nosmartindent
+setlocal softtabstop=2
+setlocal nospell
+setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
+setlocal spellfile=
+setlocal spelllang=en
+setlocal statusline=%!py3eval('powerline.statusline(4)')
+setlocal suffixesadd=
+setlocal swapfile
+setlocal synmaxcol=3000
+if &syntax != ''
+setlocal syntax=
+endif
+setlocal tabstop=8
+setlocal tagcase=
+setlocal tags=
+setlocal termwinkey=
+setlocal termwinscroll=10000
+setlocal termwinsize=
+setlocal textwidth=0
+setlocal thesaurus=
+setlocal undofile
+setlocal undolevels=-123456
+setlocal nowinfixheight
+setlocal nowinfixwidth
+setlocal wrap
+setlocal wrapmargin=0
+let s:l = 1 - ((0 * winheight(0) + 8) / 17)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+1
+normal! 0
+lcd ~/Documents/AIMaster/Curso/TFM/Master-Thesis/thesis
+wincmd w
+argglobal
+if bufexists('~/Documents/AIMaster/Curso/TFM/Master-Thesis/thesis/Thesis.tex') | buffer ~/Documents/AIMaster/Curso/TFM/Master-Thesis/thesis/Thesis.tex | else | edit ~/Documents/AIMaster/Curso/TFM/Master-Thesis/thesis/Thesis.tex | endif
 let s:cpo_save=&cpo
 set cpo&vim
 imap <buffer> <S-Tab> <Plug>delimitMateS-Tab
@@ -192,18 +663,18 @@ xnoremap <buffer> <silent> <Plug>(vimtex-ic) :call vimtex#text_obj#commands(1,
 nnoremap <buffer> <Plug>(vimtex-reload-state) :VimtexReloadState
 nnoremap <buffer> <Plug>(vimtex-toggle-main) :VimtexToggleMain
 nnoremap <buffer> <Plug>(vimtex-errors) :call vimtex#qf#toggle()
-xnoremap <buffer> <silent> <SNR>104_(vimtex-[[) :call vimtex#motion#next_section(0,1,1)
-xnoremap <buffer> <silent> <SNR>104_(vimtex-[]) :call vimtex#motion#next_section(1,1,1)
-xnoremap <buffer> <silent> <SNR>104_(vimtex-][) :call vimtex#motion#next_section(1,0,1)
-xnoremap <buffer> <silent> <SNR>104_(vimtex-]]) :call vimtex#motion#next_section(0,0,1)
+xnoremap <buffer> <silent> <SNR>131_(vimtex-[[) :call vimtex#motion#next_section(0,1,1)
+xnoremap <buffer> <silent> <SNR>131_(vimtex-[]) :call vimtex#motion#next_section(1,1,1)
+xnoremap <buffer> <silent> <SNR>131_(vimtex-][) :call vimtex#motion#next_section(1,0,1)
+xnoremap <buffer> <silent> <SNR>131_(vimtex-]]) :call vimtex#motion#next_section(0,0,1)
 nnoremap <buffer> <silent> <Plug>(vimtex-[[) :call vimtex#motion#next_section(0,1,0)
 nnoremap <buffer> <silent> <Plug>(vimtex-[]) :call vimtex#motion#next_section(1,1,0)
 nnoremap <buffer> <silent> <Plug>(vimtex-][) :call vimtex#motion#next_section(1,0,0)
 nnoremap <buffer> <silent> <Plug>(vimtex-]]) :call vimtex#motion#next_section(0,0,0)
-xnoremap <buffer> <silent> <SNR>104_(vimtex-%) :call vimtex#motion#find_matching_pair(1)
+xnoremap <buffer> <silent> <SNR>131_(vimtex-%) :call vimtex#motion#find_matching_pair(1)
 nnoremap <buffer> <silent> <Plug>(vimtex-%) :call vimtex#motion#find_matching_pair()
-nnoremap <buffer> <SNR>104_(V) V
-nnoremap <buffer> <SNR>104_(v) v
+nnoremap <buffer> <SNR>131_(V) V
+nnoremap <buffer> <SNR>131_(v) v
 nnoremap <buffer> <Plug>(vimtex-reload) :VimtexReload
 nnoremap <buffer> <Plug>(vimtex-log) :VimtexLog
 nnoremap <buffer> <Plug>(vimtex-labels-toggle) :call b:vimtex.labels.toggle()
@@ -409,7 +880,7 @@ setlocal nospell
 setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
 setlocal spellfile=
 setlocal spelllang=en
-setlocal statusline=%!py3eval('powerline.statusline(1)')
+setlocal statusline=%!py3eval('powerline.statusline(3)')
 setlocal suffixesadd=.tex,.sty,.cls
 setlocal swapfile
 setlocal synmaxcol=3000
@@ -430,293 +901,7 @@ setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-let s:l = 106 - ((105 * winheight(0) + 23) / 46)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-106
-normal! 067|
-lcd ~/Documents/AIMaster/Curso/TFM/Master-Thesis/thesis
-wincmd w
-argglobal
-terminal ++curwin ++cols=59 ++rows=22 
-let s:cpo_save=&cpo
-set cpo&vim
-imap <buffer> <S-Tab> <Plug>delimitMateS-Tab
-imap <buffer> <S-BS> <Plug>delimitMateS-BS
-imap <buffer> <BS> <Plug>delimitMateBS
-imap <buffer> <silent> g <Plug>delimitMateJumpMany
-imap <buffer>  <Plug>delimitMateBS
-imap <buffer> " <Plug>delimitMate"
-imap <buffer> ' <Plug>delimitMate'
-imap <buffer> ( <Plug>delimitMate(
-imap <buffer> ) <Plug>delimitMate)
-imap <buffer> [ <Plug>delimitMate[
-imap <buffer> ] <Plug>delimitMate]
-imap <buffer> ` <Plug>delimitMate`
-imap <buffer> { <Plug>delimitMate{
-imap <buffer> } <Plug>delimitMate}
-let &cpo=s:cpo_save
-unlet s:cpo_save
-setlocal keymap=
-setlocal noarabic
-setlocal noautoindent
-setlocal backupcopy=
-setlocal balloonexpr=
-setlocal nobinary
-setlocal nobreakindent
-setlocal breakindentopt=
-setlocal bufhidden=
-setlocal buflisted
-setlocal buftype=terminal
-setlocal nocindent
-setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
-setlocal cinoptions=
-setlocal cinwords=if,else,while,do,for,switch
-setlocal colorcolumn=
-setlocal comments=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
-setlocal commentstring=/*%s*/
-setlocal complete=.,w,b,u,t,i
-setlocal concealcursor=
-setlocal conceallevel=0
-setlocal completefunc=
-setlocal nocopyindent
-setlocal cryptmethod=
-setlocal nocursorbind
-setlocal nocursorcolumn
-setlocal nocursorline
-setlocal define=
-setlocal dictionary=
-setlocal nodiff
-setlocal equalprg=
-setlocal errorformat=
-setlocal expandtab
-if &filetype != ''
-setlocal filetype=
-endif
-setlocal fixendofline
-setlocal foldcolumn=0
-setlocal foldenable
-setlocal foldexpr=0
-setlocal foldignore=#
-setlocal foldlevel=0
-setlocal foldmarker={{{,}}}
-set foldmethod=indent
-setlocal foldmethod=indent
-setlocal foldminlines=1
-setlocal foldnestmax=20
-setlocal foldtext=foldtext()
-setlocal formatexpr=
-setlocal formatoptions=tcq
-setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
-setlocal formatprg=
-setlocal grepprg=
-setlocal iminsert=0
-setlocal imsearch=-1
-setlocal include=
-setlocal includeexpr=
-setlocal indentexpr=
-setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
-setlocal noinfercase
-setlocal iskeyword=@,48-57,_,192-255
-setlocal keywordprg=
-setlocal nolinebreak
-setlocal nolisp
-setlocal lispwords=
-setlocal nolist
-setlocal makeencoding=
-setlocal makeprg=
-setlocal matchpairs=(:),{:},[:]
-setlocal modeline
-setlocal nomodifiable
-setlocal nrformats=bin,octal,hex
-set number
-setlocal number
-setlocal numberwidth=4
-setlocal omnifunc=
-setlocal path=
-setlocal nopreserveindent
-setlocal nopreviewwindow
-setlocal quoteescape=\\
-setlocal noreadonly
-setlocal norelativenumber
-setlocal norightleft
-setlocal rightleftcmd=search
-setlocal noscrollbind
-setlocal shiftwidth=2
-setlocal noshortname
-setlocal signcolumn=auto
-setlocal nosmartindent
-setlocal softtabstop=2
-setlocal nospell
-setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
-setlocal spellfile=
-setlocal spelllang=en
-setlocal statusline=%!py3eval('powerline.statusline(3)')
-setlocal suffixesadd=
-setlocal swapfile
-setlocal synmaxcol=3000
-if &syntax != ''
-setlocal syntax=
-endif
-setlocal tabstop=8
-setlocal tagcase=
-setlocal tags=
-setlocal termwinkey=
-setlocal termwinscroll=10000
-setlocal termwinsize=
-setlocal textwidth=0
-setlocal thesaurus=
-setlocal undofile
-setlocal undolevels=-123456
-setlocal nowinfixheight
-setlocal nowinfixwidth
-setlocal wrap
-setlocal wrapmargin=0
-let s:l = 1 - ((0 * winheight(0) + 11) / 22)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-1
-normal! 0
-lcd ~/Documents/AIMaster/Curso/TFM/Master-Thesis/thesis
-wincmd w
-argglobal
-terminal ++curwin ++cols=59 ++rows=23 
-let s:cpo_save=&cpo
-set cpo&vim
-imap <buffer> <S-Tab> <Plug>delimitMateS-Tab
-imap <buffer> <S-BS> <Plug>delimitMateS-BS
-imap <buffer> <BS> <Plug>delimitMateBS
-imap <buffer> <silent> g <Plug>delimitMateJumpMany
-imap <buffer>  <Plug>delimitMateBS
-imap <buffer> " <Plug>delimitMate"
-imap <buffer> ' <Plug>delimitMate'
-imap <buffer> ( <Plug>delimitMate(
-imap <buffer> ) <Plug>delimitMate)
-imap <buffer> [ <Plug>delimitMate[
-imap <buffer> ] <Plug>delimitMate]
-imap <buffer> ` <Plug>delimitMate`
-imap <buffer> { <Plug>delimitMate{
-imap <buffer> } <Plug>delimitMate}
-let &cpo=s:cpo_save
-unlet s:cpo_save
-setlocal keymap=
-setlocal noarabic
-setlocal noautoindent
-setlocal backupcopy=
-setlocal balloonexpr=
-setlocal nobinary
-setlocal nobreakindent
-setlocal breakindentopt=
-setlocal bufhidden=
-setlocal buflisted
-setlocal buftype=terminal
-setlocal nocindent
-setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
-setlocal cinoptions=
-setlocal cinwords=if,else,while,do,for,switch
-setlocal colorcolumn=
-setlocal comments=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
-setlocal commentstring=/*%s*/
-setlocal complete=.,w,b,u,t,i
-setlocal concealcursor=
-setlocal conceallevel=0
-setlocal completefunc=
-setlocal nocopyindent
-setlocal cryptmethod=
-setlocal nocursorbind
-setlocal nocursorcolumn
-setlocal nocursorline
-setlocal define=
-setlocal dictionary=
-setlocal nodiff
-setlocal equalprg=
-setlocal errorformat=
-setlocal expandtab
-if &filetype != ''
-setlocal filetype=
-endif
-setlocal fixendofline
-setlocal foldcolumn=0
-setlocal foldenable
-setlocal foldexpr=0
-setlocal foldignore=#
-setlocal foldlevel=0
-setlocal foldmarker={{{,}}}
-set foldmethod=indent
-setlocal foldmethod=indent
-setlocal foldminlines=1
-setlocal foldnestmax=20
-setlocal foldtext=foldtext()
-setlocal formatexpr=
-setlocal formatoptions=tcq
-setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
-setlocal formatprg=
-setlocal grepprg=
-setlocal iminsert=0
-setlocal imsearch=-1
-setlocal include=
-setlocal includeexpr=
-setlocal indentexpr=
-setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
-setlocal noinfercase
-setlocal iskeyword=@,48-57,_,192-255
-setlocal keywordprg=
-setlocal nolinebreak
-setlocal nolisp
-setlocal lispwords=
-setlocal nolist
-setlocal makeencoding=
-setlocal makeprg=
-setlocal matchpairs=(:),{:},[:]
-setlocal modeline
-setlocal nomodifiable
-setlocal nrformats=bin,octal,hex
-set number
-setlocal number
-setlocal numberwidth=4
-setlocal omnifunc=
-setlocal path=
-setlocal nopreserveindent
-setlocal nopreviewwindow
-setlocal quoteescape=\\
-setlocal noreadonly
-setlocal norelativenumber
-setlocal norightleft
-setlocal rightleftcmd=search
-setlocal noscrollbind
-setlocal shiftwidth=2
-setlocal noshortname
-setlocal signcolumn=auto
-setlocal nosmartindent
-setlocal softtabstop=2
-setlocal nospell
-setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
-setlocal spellfile=
-setlocal spelllang=en
-setlocal statusline=%!py3eval('powerline.statusline(4)')
-setlocal suffixesadd=
-setlocal swapfile
-setlocal synmaxcol=3000
-if &syntax != ''
-setlocal syntax=
-endif
-setlocal tabstop=8
-setlocal tagcase=
-setlocal tags=
-setlocal termwinkey=
-setlocal termwinscroll=10000
-setlocal termwinsize=
-setlocal textwidth=0
-setlocal thesaurus=
-setlocal undofile
-setlocal undolevels=-123456
-setlocal nowinfixheight
-setlocal nowinfixwidth
-setlocal wrap
-setlocal wrapmargin=0
-let s:l = 1 - ((0 * winheight(0) + 11) / 23)
+let s:l = 1 - ((0 * winheight(0) + 23) / 46)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -861,13 +1046,14 @@ setlocal wrap
 setlocal wrapmargin=0
 lcd ~/Documents/AIMaster/Curso/TFM/Master-Thesis/thesis
 wincmd w
-exe '1resize ' . ((&lines * 46 + 28) / 57)
-exe 'vert 1resize ' . ((&columns * 177 + 118) / 237)
-exe '2resize ' . ((&lines * 22 + 28) / 57)
-exe 'vert 2resize ' . ((&columns * 59 + 118) / 237)
-exe '3resize ' . ((&lines * 23 + 28) / 57)
-exe 'vert 3resize ' . ((&columns * 59 + 118) / 237)
-exe '4resize ' . ((&lines * 8 + 28) / 57)
+3wincmd w
+exe '1resize ' . ((&lines * 28 + 29) / 59)
+exe 'vert 1resize ' . ((&columns * 96 + 118) / 237)
+exe '2resize ' . ((&lines * 17 + 29) / 59)
+exe 'vert 2resize ' . ((&columns * 96 + 118) / 237)
+exe '3resize ' . ((&lines * 46 + 29) / 59)
+exe 'vert 3resize ' . ((&columns * 140 + 118) / 237)
+exe '4resize ' . ((&lines * 10 + 29) / 59)
 tabnext 1
 if exists('s:wipebuf') && s:wipebuf != bufnr('%')
   silent exe 'bwipe ' . s:wipebuf
