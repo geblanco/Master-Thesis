@@ -2,7 +2,7 @@
 
   This chapter will go through all the validation and tests implemented to measure the perfomance and the correct functioning of the new behaviors. 
 
-  To validate each implemented behavior we propose using them both in simulation and in real flight missions. The validation tests are presented in detail in section \ref{ch_5:sect:val_tests}, explaining what the tests measure and how they do it as well as the intuition behind each test. Afterwards, in section \ref{ch_5:subsect:exp_simulation} we will epose the simulator used and it's particularities as well as how it is integrated with the current version of Aerostack. It will be followed by the specification of the aircraft used for the real flight mission in section \ref{ch_5:sect:real_flight} to finish with some conclusions in section \ref{ch_5:sect:conclusions}.
+  To validate each implemented behavior we propose using them both in simulation and in real flight missions. The validation tests are presented in detail in section \ref{ch_5:sect:val_tests}, explaining what the tests measure and how they do it as well as the intuition behind each test. Afterwards, in section \ref{ch_5:subsect:exp_simulation} we will epose the simulator used and it's particularities as well as how it is integrated with the current version of Aerostack. It will be followed by the specification of the aircraft used for the real flight mission in section \ref{ch_5:sect:real_flight} to finish with some conclusions in section [].
 
 \section{Validation Tests} \label{ch_5:sect:val_tests}
 
@@ -89,11 +89,11 @@
       \item Generate path for point: ([0, -5, 1])
     \end{enumerate}
 
-    At the end of the mission we will save all the generated paths to used them as the input for the next behavior's mission.
+    The full python source code can be found in the appendix \ref{app1:generate_path_mission}
 
   \subsection{Behavior Follow Path in Occupancy Grid} \label{ch_5:subsect:behav_fpath_mission}
 
-    In this mission we took all the generated paths and tested the execution one by one. It's worth noting that as each path was generated from the inital point, we will interleave the execution of each path with a reset, as the drone has to start on the [0, 0] coordinate always. In this way, the mission generated is:
+    In this mission we employ the previous behavior to generate paths from the current position to the target point. Working in tandem, these behaviors do a similar job to the go to point one. The generated mission is as follows:
 
     \begin{enumerate}
       \item Follow path for point: ([0, 0, 1.5])
@@ -103,6 +103,8 @@
       \item Follow path for point: ([0, -5, 1.5])
       \item Follow path for point: ([0, -5, 1])
     \end{enumerate}
+
+    The python code for this mission can be found in the appendix \ref{app1:follow_path_mission}
 
   \subsection{Behavior Go To Point in Occupancy Grid} \label{ch_5:subsect:behav_gtp_mission}
 
@@ -117,7 +119,7 @@
       \item Land
     \end{enumerate}
 
-    This a similar mission to the one carried out in the boiler. All the python code for this mission can be found in the appendix \ref{app1:py_mission}.
+    This a similar mission to the one carried out in the boiler. All the python code for this mission can be found in the appendix \ref{app1:go_to_point_mission}
 
   \pagebreak
 
@@ -205,9 +207,23 @@
 
 \section{Experimental Results} \label{ch_5:sect:results}
 
-  This section will explain the results obtained
+  This section will explain the results obtained, we will first go through the simulation results and continue with the real flight ones. For each behavior, tables [ref tables] show: the correct execution of the behavior, the mean and standard deviation execution time for all points and the total time of the mission, also, the last row shows the averaged scores and times. Everything is measured in minutes and each experiment is run ten times, also, the timeout counter for each behavior is set to 4 minutes.
+ 
+  \input{./Tables/Behavior_Generate_Path_results.tex}
 
-\section{Conclusions} \label{ch_5:sect:conclusions}
+  Table \ref{ch_5:table:generate_path_results} shows the results for the behavior \textit{generate path in occupancy grid}. Since this behavior does not perform any motion, it is just planning, a $100\%$ hits seems reasonable, it means that the planner does its job correctly, both the move base planner and the path planner modules work correctly, also, the behavior works as expected, generating all the requested paths. Furthermore, the times employed to generate the trajectories are very stable, which meets our requirements. 
+
+  \input{./Tables/Behavior_Go_To_Point_results.tex}
+
+  The case of the \textit{go to point} behavior is slighty more complicated, as it needs motions to be executed, more issues can arise. We acknowledged various fault causes, the very first one is estimation, although some points where not perfectly matched, the end positions where very close to the goal. This drift in localization arises from the lack of fine tuning, the localization EKF is not completely tuned for simulatation or the UAV. Also, during the tests we observed that the trajectory controller has some weird behaviors. There were various cases where the orders took no effect. Taking a look over the memmory consumption clarified the assumptions that there are some conditions that cause the controller to hang in an intensive loop. As of the time of writing, the controller is being remade from the ground up.
+
+  Not matching the target points means that the behavior does not finish and it only stops when the timeout is reached. This faulty finish condition, in turn adds up to the execution time, which explains some of the large times of execution. This is the case of the 2nd, 3rd and 5th tests, which fail to reach half of the points, rising the execution time to 15 minutes at worst, the correlation is clear. We strengthen our assumption with tests 8th and 9th, that amounts for 5 out of 6 and 6 out 6 goals reached, respectively, with the lowest times of all the tests.
+
+  In any case, the implemented behavior works correctly in 68\% of the cases, which is not bad given the complexity in coordination needed to accomplish the task and the short time employed implementing it.
+
+  % \input{./Tables/Behavior_Follow_Path_results.tex}
+
+  \textbf{[ToDo:= Comment on follow path table and add real flight table and comments]}
 
 \begin{comment}
   \begin{itemize}

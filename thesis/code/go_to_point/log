@@ -1,0 +1,304 @@
+[INFO] Mission loaded
+Start dump dir: /root/workspace/ros/aerostack_catkin_ws/src/aerostack_stack/launchers/tfm_guillermo/test_results/go_to_point
+######## TEST 0 ########
+Starting mission...
+-> take off
+-> result TIME_OUT
+-> go to point [0, 0, 1.5]
+-> result GOAL_ACHIEVED
+-> go to point [1, 0, 1.5]
+-> result TIME_OUT
+-> go to point [1, 0, 10]
+-> result TIME_OUT
+-> go to point [1, -5, 10]
+-> result GOAL_ACHIEVED
+-> go to point [0, -5, 10]
+-> result GOAL_ACHIEVED
+-> go to point [0, -5, 1.5]
+-> result TIME_OUT
+-> land
+-> result TIME_OUT
+Finish mission...
+Completed mission in 426.407072783 secods
+dumping point_times to point_times_0
+dumping point_fails to point_fails_0
+Reset sequence started...
+[ERROR] Error: Drone landed
+-> Landed
+-> Gazebo worl reset
+-> Planner reset
+-> SLAM
+... done
+########  DONE  ########
+######## TEST 1 ########
+Starting mission...
+-> take off
+-> result TIME_OUT
+-> go to point [0, 0, 1.5]
+-> result GOAL_ACHIEVED
+-> go to point [1, 0, 1.5]
+-> result GOAL_ACHIEVED
+-> go to point [1, 0, 10]
+-> result GOAL_ACHIEVED
+-> go to point [1, -5, 10]
+-> result GOAL_ACHIEVED
+-> go to point [0, -5, 10]
+-> result GOAL_ACHIEVED
+-> go to point [0, -5, 1.5]
+-> result GOAL_ACHIEVED
+-> land
+-> result TIME_OUT
+Finish mission...
+Completed mission in 64.899326086 secods
+dumping point_times to point_times_1
+dumping point_fails to point_fails_1
+Reset sequence started...
+[ERROR] Error: Drone landed
+-> Landed
+-> Gazebo worl reset
+-> Planner reset
+-> SLAM
+... done
+########  DONE  ########
+######## TEST 2 ########
+Starting mission...
+-> take off
+-> result TIME_OUT
+-> go to point [0, 0, 1.5]
+-> result GOAL_ACHIEVED
+-> go to point [1, 0, 1.5]
+-> result TIME_OUT
+-> go to point [1, 0, 10]
+-> result TIME_OUT
+-> go to point [1, -5, 10]
+-> result GOAL_ACHIEVED
+-> go to point [0, -5, 10]
+-> result TIME_OUT
+-> go to point [0, -5, 1.5]
+-> result TIME_OUT
+-> land
+-> result TIME_OUT
+Finish mission...
+Completed mission in 545.671450853 secods
+dumping point_times to point_times_2
+dumping point_fails to point_fails_2
+Reset sequence started...
+[ERROR] Error: Drone landed
+-> Landed
+-> Gazebo worl reset
+-> Planner reset
+-> SLAM
+... done
+########  DONE  ########
+######## TEST 3 ########
+Starting mission...
+-> take off
+-> result TIME_OUT
+-> go to point [0, 0, 1.5]
+-> result GOAL_ACHIEVED
+-> go to point [1, 0, 1.5]
+-> result TIME_OUT
+-> go to point [1, 0, 10]
+-> result GOAL_ACHIEVED
+-> go to point [1, -5, 10]
+-> result GOAL_ACHIEVED
+-> go to point [0, -5, 10]
+-> result TIME_OUT
+-> go to point [0, -5, 1.5]
+-> result TIME_OUT
+-> land
+-> result TIME_OUT
+Finish mission...
+Completed mission in 536.209832907 secods
+dumping point_times to point_times_3
+dumping point_fails to point_fails_3
+Reset sequence started...
+[ERROR] Error: Drone landed
+-> Landed
+-> Gazebo worl reset
+-> Planner reset
+-> SLAM
+... done
+########  DONE  ########
+######## TEST 4 ########
+Starting mission...
+-> take off
+-> result TIME_OUT
+-> go to point [0, 0, 1.5]
+-> result GOAL_ACHIEVED
+-> go to point [1, 0, 1.5]
+-> result GOAL_ACHIEVED
+-> go to point [1, 0, 10]
+-> result GOAL_ACHIEVED
+-> go to point [1, -5, 10]
+-> result GOAL_ACHIEVED
+-> go to point [0, -5, 10]
+-> result GOAL_ACHIEVED
+-> go to point [0, -5, 1.5]
+-> result GOAL_ACHIEVED
+-> land
+-> result TIME_OUT
+Finish mission...
+Completed mission in 75.1172680855 secods
+dumping point_times to point_times_4
+dumping point_fails to point_fails_4
+Reset sequence started...
+[ERROR] Error: Drone landed
+-> Landed
+-> Gazebo worl reset
+-> Planner reset
+-> SLAM
+... done
+########  DONE  ########
+######## TEST 5 ########
+Starting mission...
+-> take off
+-> result TIME_OUT
+-> go to point [0, 0, 1.5]
+-> result GOAL_ACHIEVED
+-> go to point [1, 0, 1.5]
+-> result TIME_OUT
+-> go to point [1, 0, 10]
+-> result TIME_OUT
+-> go to point [1, -5, 10]
+-> result GOAL_ACHIEVED
+-> go to point [0, -5, 10]
+-> result GOAL_ACHIEVED
+-> go to point [0, -5, 1.5]
+-> result GOAL_ACHIEVED
+-> land
+-> result TIME_OUT
+Finish mission...
+Completed mission in 418.19562602 secods
+dumping point_times to point_times_5
+dumping point_fails to point_fails_5
+Reset sequence started...
+[ERROR] Error: Drone landed
+-> Landed
+-> Gazebo worl reset
+-> Planner reset
+-> SLAM
+... done
+########  DONE  ########
+######## TEST 6 ########
+Starting mission...
+-> take off
+-> result TIME_OUT
+-> go to point [0, 0, 1.5]
+-> result GOAL_ACHIEVED
+-> go to point [1, 0, 1.5]
+-> result TIME_OUT
+-> go to point [1, 0, 10]
+-> result GOAL_ACHIEVED
+-> go to point [1, -5, 10]
+-> result GOAL_ACHIEVED
+-> go to point [0, -5, 10]
+-> result GOAL_ACHIEVED
+-> go to point [0, -5, 1.5]
+-> result GOAL_ACHIEVED
+-> land
+-> result TIME_OUT
+Finish mission...
+Completed mission in 396.132585049 secods
+dumping point_times to point_times_6
+dumping point_fails to point_fails_6
+Reset sequence started...
+[ERROR] Error: Drone landed
+-> Landed
+-> Gazebo worl reset
+-> Planner reset
+-> SLAM
+... done
+########  DONE  ########
+######## TEST 7 ########
+Starting mission...
+-> take off
+-> result TIME_OUT
+-> go to point [0, 0, 1.5]
+-> result GOAL_ACHIEVED
+-> go to point [1, 0, 1.5]
+-> result TIME_OUT
+-> go to point [1, 0, 10]
+-> result GOAL_ACHIEVED
+-> go to point [1, -5, 10]
+-> result GOAL_ACHIEVED
+-> go to point [0, -5, 10]
+-> result TIME_OUT
+-> go to point [0, -5, 1.5]
+-> result TIME_OUT
+-> land
+-> result TIME_OUT
+Finish mission...
+Completed mission in 536.586570978 secods
+dumping point_times to point_times_7
+dumping point_fails to point_fails_7
+Reset sequence started...
+[ERROR] Error: Drone landed
+-> Landed
+-> Gazebo worl reset
+-> Planner reset
+-> SLAM
+... done
+########  DONE  ########
+######## TEST 8 ########
+Starting mission...
+-> take off
+-> result TIME_OUT
+-> go to point [0, 0, 1.5]
+-> result GOAL_ACHIEVED
+-> go to point [1, 0, 1.5]
+-> result TIME_OUT
+-> go to point [1, 0, 10]
+-> result GOAL_ACHIEVED
+-> go to point [1, -5, 10]
+-> result GOAL_ACHIEVED
+-> go to point [0, -5, 10]
+-> result TIME_OUT
+-> go to point [0, -5, 1.5]
+-> result TIME_OUT
+-> land
+-> result TIME_OUT
+Finish mission...
+Completed mission in 537.961713791 secods
+dumping point_times to point_times_8
+dumping point_fails to point_fails_8
+Reset sequence started...
+[ERROR] Error: Drone landed
+-> Landed
+-> Gazebo worl reset
+-> Planner reset
+-> SLAM
+... done
+########  DONE  ########
+######## TEST 9 ########
+Starting mission...
+-> take off
+-> result TIME_OUT
+-> go to point [0, 0, 1.5]
+-> result GOAL_ACHIEVED
+-> go to point [1, 0, 1.5]
+-> result GOAL_ACHIEVED
+-> go to point [1, 0, 10]
+-> result GOAL_ACHIEVED
+-> go to point [1, -5, 10]
+-> result GOAL_ACHIEVED
+-> go to point [0, -5, 10]
+-> result GOAL_ACHIEVED
+-> go to point [0, -5, 1.5]
+-> result GOAL_ACHIEVED
+-> land
+-> result TIME_OUT
+Finish mission...
+Completed mission in 286.86968708 secods
+dumping point_times to point_times_9
+dumping point_fails to point_fails_9
+Reset sequence started...
+[ERROR] Error: Drone landed
+-> Landed
+-> Gazebo worl reset
+-> Planner reset
+-> SLAM
+... done
+########  DONE  ########
+dumping global_times to global_times_0
+

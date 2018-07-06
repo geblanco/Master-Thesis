@@ -73,5 +73,11 @@
         * [ ] [CH 5][Val] Performance comparison  #99cc64a9
         * [ ] [CH 5][Val] Conclusions  #f38baa50
     * [ ] [CH 5] Chapter conclusions & close up  #a837173e
-* [ ] [Appendix] Add the mission code to the appendix.  #bc53ba2f
-    * [ ] [Appendix] Tidy up mission  #f9f4f0e0
+* [ ] Write Chapter 6  #ce2c11e8
+    * [ ] [CH 6] Write intro  #58bd5a04
+    * [ ] [CH 6] Link start with sota and results  #834bf120
+    * [ ] [CH 6] Present conclusions  #75acf80d
+    * [ ] [CH 6] Close up  #4c7c6e7a
+* [o] [Appendix] Add the mission code to the appendix.  #bc53ba2f
+    * [X] [Appendix] Tidy up mission  #f9f4f0e0
+    * [ ] [Appendix] Add real source code files  #7f5e305a
