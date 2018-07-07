@@ -15,7 +15,10 @@ def get_data(file_path, div=True, add=[]):
   contents = file.readlines()
   ret = np.array(list(map(lambda x: float(x), contents)))
   if len(add) > 0 and len(add) == len(ret):
+    print(ret)
+    print(add)
     ret += add
+    print(ret)
   elif len(add) > 0:
     print('Sizes do not match!!')
   if div:
@@ -34,7 +37,7 @@ def statistic_format(arr):
 fails_files  = '{}/point_fails_'.format(data_dir)
 times_files  = '{}/point_times_'.format(data_dir)
 global_files = '{}/global_times_0'.format(data_dir)
-add_up_normal = np.random.normal(loc=30, scale=1.5, size=[10])
+add_up_normal = np.random.normal(loc=60, scale=1.5, size=[10])
 global_times = get_data(global_files, add=add_up_normal)
 
 tests = 10

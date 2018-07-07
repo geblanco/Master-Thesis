@@ -1,9 +1,9 @@
 \chapter{Validation}
 
-  This chapter will go through all the validation and tests implemented to measure the perfomance and the correct functioning of the new behaviors. 
+  This chapter will go through all the validation and tests implemented to measure the performance and the correct functioning of the new behaviors. 
 
-  To validate each implemented behavior we propose using them both in simulation and in real flight missions. The validation tests are presented in detail in section \ref{ch_5:sect:val_tests}, explaining what the tests measure and how they do it as well as the intuition behind each test. Afterwards, in section \ref{ch_5:subsect:exp_simulation} we will epose the simulator used and it's particularities as well as how it is integrated with the current version of Aerostack. It will be followed by the specification of the aircraft used for the real flight mission in section \ref{ch_5:sect:real_flight} to finish with some conclusions in section [].
-
+  To validate each implemented behavior we propose using them both in simulation and in real flight missions. The validation tests are presented in detail in section \ref{ch_5:sect:val_tests}, explaining what the tests measure and how they do it as well as the intuition behind each test. Afterwards, in section \ref{ch_5:sect:experiments} we explain in detail the mission implemented for each behavior along with further information of the simulator employed \ref{ch_5:subsect:exp_simulation} and how is integrated with the current version of Aerostack and the specific details of the real flight aircraft, in section \ref{ch_5:subsect:exp_real_flight}. Section \ref{ch_5:sect:results} reports on the results obtained for each mission both in sumulation and in real flight and \ref{ch_5:sect:discussion} closes the chapter with the discussion of the results.
+ 
 \section{Validation Tests} \label{ch_5:sect:val_tests}
 
   A validation test should ensure that the behavior complies with the following constraints:
@@ -160,7 +160,7 @@
       \label{ch_5:table:laptop_specs}
     \end{table}
 
-    In this scenario, perfomance does not comprise a problem because with enough GPU, the simulation can run smoothly and all processes can run with good memmory support. 
+    In this scenario, performance does not comprise a problem because with enough GPU, the simulation can run smoothly and all processes can run with good memmory support. 
 
     Figure \ref{ch_5:fig:full_sim} shows the gazebo world running in a simulation.
     
@@ -182,7 +182,7 @@
         Width $\times$ Depth $\times$ Height & $10 \times 25 \times 14$ \\ \bottomrule
         \hline
       \end{tabular}
-      \caption{Dimensions of the sports centre used for real flight tests. Shool of Industrial Engineers}
+      \caption{Dimensions of the sports centre used for real flight tests. School of Industrial Engineers}
       \label{ch_5:table:sports_dims}
     \end{table}
 
@@ -203,7 +203,7 @@
 
     Onboard computation is the better option in this case because there is no \textit{auto pilot} (fallback driver controller, shipped in many drones to do automatic hover when no orders are received) and given the distances it can travel and the altitude, ensuring WiFi coverage is difficult. Hence, the most secure option is to load all the necessary software inside the onboard computer and send just a few orders from the ground control station. More specifically, launch the Aerostack and the python mission.
 
-    The manifold computer is not very powerful so special attention must be put on perfomance, if computing power drains it can be catastrophic. To aid in this situation a human pilot was prepared to take control during all the tests, although at the end it was not necessary.
+    The manifold computer is not very powerful so special attention must be put on performance , if computing power drains it can be catastrophic. To aid in this situation a human pilot was prepared to take control during all the tests, although at the end it was not necessary.
 
 \section{Experimental Results} \label{ch_5:sect:results}
 
@@ -213,20 +213,32 @@
 
   Table \ref{ch_5:table:generate_path_results} shows the results for the behavior \textit{generate path in occupancy grid}. Since this behavior does not perform any motion, it is just planning, a $100\%$ hits seems reasonable, it means that the planner does its job correctly, both the move base planner and the path planner modules work correctly, also, the behavior works as expected, generating all the requested paths. Furthermore, the times employed to generate the trajectories are very stable, which meets our requirements. 
 
+  \input{./Tables/Behavior_Follow_Path_results.tex}
+
+  This behavior had the worst performance of all, although it scores for 65\% of the points, it has a lot of variability, this may be due to the fact that it executes the motions blindly, no logic is applied to recalculate paths when needed. It just executes the given trajectory. This behavior is slighty more complicated than the previous one in the sense that it has to execute motions, which increases the difficulty.
+
+  We acknowledged various fault causes, the very first one is estimation, although some points where not perfectly matched, the end positions where very close to the goal. This drift in localization arises from the lack of fine tuning, the localization EKF is not completely tuned for simulatation or the UAV. Also, during the tests we observed that the trajectory controller has some weird behaviors. There were various cases where the orders took no effect. Taking a look over the memmory consumption clarified the assumptions that there are some conditions that cause the controller to hang in an intensive loop. As of the time of writing, the controller is being remade from the ground up.
+
+  Not matching the target points means that the behavior does not finish and it only stops when the timeout is reached. This faulty finish condition, in turn adds up to the execution time, which explains some of the large times of execution. Tests 2, 4, 5 and 9 accounts for this fact, they score the least but also last the most. Interestingly enough, this test has more fully completed missions that the one of \textit{go to point}, 2 out of 10 versus 1 out time, but in general has more faulty points, rising the global time of execution for the whole test.
+
   \input{./Tables/Behavior_Go_To_Point_results.tex}
 
-  The case of the \textit{go to point} behavior is slighty more complicated, as it needs motions to be executed, more issues can arise. We acknowledged various fault causes, the very first one is estimation, although some points where not perfectly matched, the end positions where very close to the goal. This drift in localization arises from the lack of fine tuning, the localization EKF is not completely tuned for simulatation or the UAV. Also, during the tests we observed that the trajectory controller has some weird behaviors. There were various cases where the orders took no effect. Taking a look over the memmory consumption clarified the assumptions that there are some conditions that cause the controller to hang in an intensive loop. As of the time of writing, the controller is being remade from the ground up.
+  This behavior is most complex, but also more stable than the previous one, it contains some logic to handle obstacles and track the drone position. Nevertheless, the bad matching of points is a problem, this is the case of the 2nd, 3rd and 5th tests, which fail to reach half of the points, rising the execution time to 15 minutes at worst, the correlation is clear. We strengthen our assumption with tests 8th and 9th, that amounts for 5 out of 6 and 6 out 6 goals reached, respectively, with the lowest times of all the tests. The implemented behavior works correctly in 68\% of the cases, which is not bad given the complexity in coordination needed to accomplish the task and the short time employed implementing it.
 
-  Not matching the target points means that the behavior does not finish and it only stops when the timeout is reached. This faulty finish condition, in turn adds up to the execution time, which explains some of the large times of execution. This is the case of the 2nd, 3rd and 5th tests, which fail to reach half of the points, rising the execution time to 15 minutes at worst, the correlation is clear. We strengthen our assumption with tests 8th and 9th, that amounts for 5 out of 6 and 6 out 6 goals reached, respectively, with the lowest times of all the tests.
+  The last test in our experiments are run in real flight, with the previously explained drone and environment. Due to time constraints and both hardware and pilot availability, we ran only 3 tests, the results are reported in table \ref{ch_5:table:real_flight_results}
 
-  In any case, the implemented behavior works correctly in 68\% of the cases, which is not bad given the complexity in coordination needed to accomplish the task and the short time employed implementing it.
+  \input{./Tables/Real_flight_results.tex}
 
-  % \input{./Tables/Behavior_Follow_Path_results.tex}
+  It is worth noting that these tests are much more robust and fast, the intuition behind these results is that the localization module is widely tested and tuned for this specific aircraft which makes sense given that it is used for industrial level real flight missions. Also, the speed of this drone is comparably higher.
 
-  \textbf{[ToDo:= Comment on follow path table and add real flight table and comments]}
+  Although these tests were run with a human operator fallback, just in case something went wrong, none of the tests required it. Even in the first test, where two points failed to match, the system recovered and successfully finished the mission. Furthermore, the two failed points where encountered when reaching the highest altitude and when moving away from the wall at highest altitude, points for and six, respectively (refer to \ref{ch_5:subsect:behav_gtp_mission} for detailed coordinates). Our best guess for this performance is based on the environment: the sports centre walls are made of various materials, it has about 8-9 meters of solid wall and then a grid gate with holes to the roof. We believe that the holes in the grid gate tricked the lidar based localization, which in turn caused the go to point not to match the target point. Also, as the localization is made out of the fusion of various sensor inputs, this phenomenon does not happen always, which is another proof of the robustness of the system.
 
-\begin{comment}
-  \begin{itemize}
-    \item Comment bullet
-  \end{itemize}
-\end{comment}
+  \textbf{[ToDo := Add speeds of each drone?]}
+
+\section{Discussion} \label{ch_5:sect:discussion}
+
+  The results obtained shed some light over the problems that arise in an autonomous navigation system, clarifying the need for more tests and a better prepared simulation environment.
+
+  First, the environment used for simulation is very well suited for our needs, but lacks some tuning. The fact that there exists such difference between  the real flight mission and the simulated one is not good, although clearly improvable through extensing tuning and testing. Even though, the proposed system works reasonably well for the time invested to implementing and also highlights that we are on the correct track for future experiments.
+
+This chapter presented all the validation missions and environment employed for testing all the implemented behaviors, also the results were presented and analyzed for discussion. The next chapter will conclude the thesis adding more in depth thoughts about the results obtained and further research.

@@ -39,12 +39,15 @@
     * [X] [CH 4][All] Add implementation diff  #9fc0da7c
     * [X] [CH 4][All] Talk about the onStart algorithm  #8677106d
     * [X] [CH 4][All] Talk about the activation conditions  #6e08ecc3
-* [o] Write chapter 5 - Validation  #d83aa343
+* [X] [Appendix] Add the mission code to the appendix.  #bc53ba2f
+    * [X] [Appendix] Tidy up mission  #f9f4f0e0
+    * [X] [Appendix] Add real source code files  #7f5e305a
+* [X] Write chapter 5 - Validation  #d83aa343
     * [X] [CH 5][Val] Present the validation tests  #b8d42d2b
         * [X] [CH 5][Val] What to measure  #691462e3
         * [X] [CH 5][Val] How to measure  #4948d5ef
         * [X] [CH 5][Val] What the measure mean  #5f27a7c4
-        * [ ] [CH 5][Val] Add time measures (depends on validation)  #3782e78e
+        * [X] [CH 5][Val] Add time measures (depends on validation)  #3782e78e
     * [X] [CH 5][Val] Simulation  #90fa7adb
         * [X] [CH 5][Val] Present the simulator  #40c762d0
         * [X] [CH 5][Val] Present rotors  #3103e9b1
@@ -68,16 +71,14 @@
             * [X] [CH 5][Val] School sports centre  #fb71f957
             * [X] [CH 5][Val] Computing resources  #20a76d32
             * [X] [CH 5][Val] Limitation  #aa45cf0a
-    * [ ] [CH 5][Val] Validate the introduction  #57fb1b77
-    * [ ] Results  #414f67c2
-        * [ ] [CH 5][Val] Performance comparison  #99cc64a9
-        * [ ] [CH 5][Val] Conclusions  #f38baa50
-    * [ ] [CH 5] Chapter conclusions & close up  #a837173e
+    * [X] Results  #414f67c2
+        * [X] [CH 5][Val] Performance comparison  #99cc64a9
+        * [X] [CH 5][Val] Conclusions  #f38baa50
+    * [X] [CH 5][Val] Validate the introduction  #57fb1b77
+    * [X] [CH 5] Chapter conclusions & close up  #a837173e
+    * [X] [CH 5] Discussion  #fa7d5602
 * [ ] Write Chapter 6  #ce2c11e8
     * [ ] [CH 6] Write intro  #58bd5a04
     * [ ] [CH 6] Link start with sota and results  #834bf120
     * [ ] [CH 6] Present conclusions  #75acf80d
     * [ ] [CH 6] Close up  #4c7c6e7a
-* [o] [Appendix] Add the mission code to the appendix.  #bc53ba2f
-    * [X] [Appendix] Tidy up mission  #f9f4f0e0
-    * [ ] [Appendix] Add real source code files  #7f5e305a
