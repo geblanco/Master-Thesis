@@ -21,7 +21,7 @@
 
   % Predictability is always a desirable property in software development, but very tricky to ensure, that is the reason why, in software business, there is always a team decicated solely to test the software, many criterias can be applied here. In our case, we will test the predictability of the behavior functionality, not the software itself. This means that we will test that, for each behavior, all case studies are covered: the correct sensors are available, the algorithm process is effectively running, the behavior knows how to interpret the output of the algorithm it monitors, etc. More specifically, we will test this cases to grasp an intuition about what to do when those criterias fail. The real world is full of randomness and uncertainty and hardware is usually not realiable enough, these reasons place this constraint as the hardest to test.
 
-  Ensuring a peace of software is compatible with another one is much easier than covering all possible uses cases in an unpredictable environment, furthermore, as we expect all the data accessed by a behavior to be in a certain format (and ensured through static, c++ compilation), this constraint should be straightforward. Nevertheless, there are some considerations to be taken care of here. To follow the Aerostack architecture, a behavior should always inherit the behavior class, implementing the functions imposed by it. Also, when getting data from the outside (from the rest of Aerostack, standard), extreme values should be tested, for example, sending an infite double or \textit{nan} value to a controller can effectively be a problem.
+  Ensuring a piece of software is compatible with another one is much easier than covering all possible uses cases in an unpredictable environment, furthermore, as we expect all the data accessed by a behavior to be in a certain format (and ensured through static, c++ compilation), this constraint should be straightforward. Nevertheless, there are some considerations to be taken care of here. To follow the Aerostack architecture, a behavior should always inherit the behavior class, implementing the functions imposed by it. Also, when getting data from the outside (from the rest of Aerostack, standard), extreme values should be tested, for example, sending an infite double or \textit{nan} value to a controller can effectively be a problem.
 
   The last constraint comes from the idea that behaviors depend upon the available features, independently of the data, if a drone has a lidar sensor, the behavior that does licalization based on lidar should work on any lidar, independently of the brand of the sensor and the drone featuring it. To ensure this constraint software based abstraction layers should be placed to handle the sensors and it's data format, providing uniform APIs, this is the case of the path planner module implemented in the Navigation interface, that abstracts the real planner so that any behavior can access it in a unified format, independently of the underlying planner.
 
@@ -29,19 +29,19 @@
 
 \section{Simulation} \label{ch_5:sect:simulation}
 
-  The chosen simulator for these tests is \href{http://gazebosim.org/}{Gazebo Sim}, an open source, multiplatform, robot simulator. It was chosen because of it's open source nature, ease of use and great integration with ROS. Gazebo features an open modular, plugin based architecture, which makes it perfect to integrate new components and open the door for modules being simulated inside it and the outside world. In our case, to communicate the simulated UAV with ROS and the Aerostack framework.
+  The chosen simulator for these tests is Gazebo Sim (\cite{gazebo_web}), an open source, multiplatform, robot simulator. It was chosen because of it's open source nature, ease of use and great integration with ROS. Gazebo features an open modular, plugin based architecture, which makes it perfect to integrate new components and open the door for modules being simulated inside it and the outside world. In our case, to communicate the simulated UAV with ROS and the Aerostack framework.
 
-  In order to convey the simulator with ROS we will employ an already made plugin called \href{https://github.com/ethz-asl/rotors_simulator/wiki}{RotorS} \cite{rotors2016}. RotorS provides some UAV models and a plugin that translates gazebo topics to ROS ones, unifying the access to the data. This architecture is perfect for any robotic environment as it minimizes the overhead of changing from simulation to real flight, as long as the topics are called the same, the Aerostack framework does not even notice it.
+  In order to convey the simulator with ROS we will employ an already made plugin called RotorS \cite{rotors2016}. RotorS provides some UAV models and a plugin that translates gazebo topics to ROS ones, unifying the access to the data. This architecture is perfect for any robotic environment as it minimizes the overhead of changing from simulation to real flight, as long as the topics are called the same, the Aerostack framework does not even notice it.
 
   As all the simulation is launched with configuration files and was done with flexibility in mind, we could adapt the already available configurations to our needs, minimizing the overhead of naming topics to our conventions.
 
-  To choose a UAV model from the available ones we looked up for one that matches our requirements, namely a lidar sensor (hokuyo if possible), a front camera and an altitude sensor. RotorS provides a UAV modeled after the \href{http://www.asctec.de/en/uav-uas-drones-rpas-roav/asctec-hummingbird/}{AscTec Hummingbird} drone, which meets all our requirements.
+  To choose a UAV model from the available ones we looked up for one that matches our requirements, namely a lidar sensor (hokuyo if possible), a front camera and an altitude sensor. RotorS provides a UAV modeled after the AscTec Hummingbird \cite{hummingbird_web} drone, which meets all our requirements.
 
   \textbf{[ToDo := Add picture of the simulator??]}
 
 \section{Real Flight} \label{ch_5:sect:real_flight}
 
-  Our requirements came mainly because of the implemented behaviors, which in turn came from the available hardware in the research group. Currently, the aircraft used for the most important missions is a \href{https://www.dji.com/es/matrice100}{Matrice 100} from DJI with all the sensorization cited above.
+  Our requirements came mainly because of the implemented behaviors, which in turn came from the available hardware in the research group. Currently, the aircraft used for the most important missions is a Matrice 100 from DJI (\cite{dji_matrice_web}) with all the sensorization cited above.
 
   This is used because of it's extendability (any sensor platform can be plugged in), open API and powerful motors. It's verstaile enough to provide a testbed for many research experiments and the battery lasts enough for medium duration missions.
 
@@ -186,7 +186,7 @@
       \label{ch_5:table:sports_dims}
     \end{table}
 
-    The chosen drone ships a \href{https://www.dji.com/es/manifold}{DJI Manifold} micro computer for onboard computation. Its technical details are contained in table \ref{ch_5:table:manifold_specs}
+    The chosen drone ships a DJI Manifold micro computer for onboard computation (\cite{dji_manifold_web}). Its technical details are contained in table \ref{ch_5:table:manifold_specs}
 
     \begin{table}[!h]
       \centering

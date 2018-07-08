@@ -31,7 +31,7 @@
       \begin{figure}
         \centering
         \includegraphics[width=0.6\textwidth]{./Figures/trilateration.png}
-        \caption{The area enclosed by the three intersections ca be used to localize univocally. The three simple intersections formed by pairs of circumferences are always outside of the Earth. As more satellites are included, precision increases. Taken from \href{https://en.wikipedia.org/wiki/Trilateration}{wikipedia}}
+        \caption{The area enclosed by the three intersections ca be used to localize univocally. The three simple intersections formed by pairs of circumferences are always outside of the Earth. As more satellites are included, precision increases. Taken from \cite{wikipedia_trilateration_web}.}
         \label{ch_3:fig:trilateration}
       \end{figure}
 
@@ -47,9 +47,9 @@
 
       In the case of WiFi hotspots localization is usually done by analyzing the signal strength and incoming angle. This method only works when the hotspots' location is known beforehand and is very prone to errors because the device must remain static in a certain angle.
 
-      From the computer vision perspective, visual markers can be placed too and processed by the device localizing and again, this requires preparation beforehand. One example of this setup are the well known \href{https://www.uco.es/investiga/grupos/ava/node/26}{Aruco markers}.
+      From the computer vision perspective, visual markers can be placed too and processed by the device localizing and again, this requires preparation beforehand. One example of this setup are the well known \cite{romeroramirez201838}.
 
-      In many robotic applications like swarm robotics there is a necessity to track each member of the swarm in a closed, contained environment, for this purpose an \href{http://www.optitrack.com/}{OptiTrack} system can be used, it is a highly precise camera set that can track various markers (marked swarm members) and serve it's location through the network in real time. This setup is specially useful to monitor the swarm, enabling each member to access it's location.
+      In many robotic applications like swarm robotics there is a necessity to track each member of the swarm in a closed, contained environment, for this purpose an OptiTrack system \cite{optitrack_web} can be used, it is a highly precise camera set that can track various markers (marked swarm members) and serve it's location through the network in real time. This setup is specially useful to monitor the swarm, enabling each member to access it's location.
 
     \subsection{SLAM} \label{ch_3:sect:localization:slam}
 
@@ -64,7 +64,7 @@
       \begin{figure}[!t]
         \centering
         \includegraphics[width=0.8\textwidth]{./Figures/slam_ekf_model.png}
-        \caption{EKF applied to the SLAM problem. Dotted line: robot's path. Shaded ellipses: position estimates. Small dots: Unkown location landmarks. White ellipses: Landmarks' position estimates. In (d) the robot senses the first landmark, anchoring the rest of the estimates, reducing uncertainty.}
+        \caption{EKF applied to the SLAM problem. Dotted line: robot's path. Shaded ellipses: position estimates. Small dots: Unkown location landmarks. White ellipses: Landmarks' position estimates. In (d) the robot senses the first landmark, anchoring the rest of the estimates, reducing uncertainty. Taken from \cite{inbookhandbook}}
         \label{ch_3:fig:ekf_slam}
       \end{figure}
 
