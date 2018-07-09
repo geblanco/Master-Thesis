@@ -185,8 +185,12 @@
     \let \footnote \thanks
     \setcounter{footnote}{0}
     \null\vfil
-    \vskip 60\p@
+    \vskip 10\p@
     \begin{center}
+      \includegraphics[width=2.25cm]{Figures/logoFi.png}
+        \hspace{8cm}
+      \includegraphics[width=2cm]{Figures/logoupm.png}
+      \\[3cm]
       \setlength{\parskip}{0pt}
       {\large\textbf{\UNIVNAME}\par}
       \vfill

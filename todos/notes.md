@@ -7,7 +7,7 @@ Me alegro de que hayas podido escribir la memoria en este tiempo, aunque de form
 - ~~No se deberían poner enlaces the hipertexto~~
 -  ~~No me convence la organización del punto 4. Sería mejor 4.1 Requisitos y 4.2. Behaviors~~
 -  ~~La descripción de cada behavior ha quedado poco formal / técnica. Podría mejorar incluyendo el algoritimo seguido en pseudo-cógido /cuando se activa el behavior). En cada behavior explicaría además mejor el funcionalmiento de los componentes usados (hector_mapping, move_base, ...). También pondría la parte del catálogo.~~ **pseudo code algorithms**
-- El objetivo de la validación no veo que sea la independencia ni la compatiblidad. Creo que habría que centrarse en la verificación del correcto funcionamiento de acuerodo con los requisitos (que deberían estar expresados de una manera más formal). La validación además debería evaluar el rendimiento de la ejecución de los behaviors en forma de métricas sobre consumo de recursos (tiempo, CPU usage, memoria, ?)
-- Las conclusiones deberían resumir las ideas principales sobre cómo se han logrado los objetivos. También indicar que este trabajo se espera publicar en una versión de Aerostack.
-- Hay que mostrar fotos del vuelo real y todos gráficos de parámetros de ejecución.
-- Los anexos deben incluir una explicación.
+- ~~El objetivo de la validación no veo que sea la independencia ni la compatiblidad. Creo que habría que centrarse en la verificación del correcto funcionamiento de acuerodo con los requisitos (que deberían estar expresados de una manera más formal). La validación además debería evaluar el rendimiento de la ejecución de los behaviors en forma de métricas sobre consumo de recursos (tiempo, CPU usage, memoria, ?)~~
+- ~~Las conclusiones deberían resumir las ideas principales sobre cómo se han logrado los objetivos. También indicar que este trabajo se espera publicar en una versión de Aerostack.~~
+- ~~Hay que mostrar fotos del vuelo real y todos gráficos de parámetros de ejecución.~~
+- ~~Los anexos deben incluir una explicación.~~
