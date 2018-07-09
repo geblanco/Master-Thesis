@@ -5,7 +5,7 @@ In this chapter, the technical goals of the project are introduced. Each develop
 \begin{itemize}
   \item Technical goals
   \item Problem to which the module provides a solution
-  \item Some of it's properties (reusability, scalability \dots)
+  \item Some of it's properties (re usability, scalability \dots)
   \item Integration with the current version of Aerostack
 \end{itemize}
 
@@ -13,23 +13,23 @@ The chapter is structured as follows: Section \ref{ch_4:sect:requirements} prese
 
 \section{Requirements} \label{ch_4:sect:requirements}
 
-  In order for the Aerostack framework to localize with a different technique rather than visual markers, a lidar sensor will be used. In this case, the \textit{Hokuyo Eye} range sensor will be employed, which is the \textit{defacto} range sensor in this context. Also, the low level implentation provides a nice ros API that can be used to fetch data. To wrap all this functionallity we propose the implementation of a new high level behavior that coordinates all the framework with the lidar interface, providing a high level, standarized API for lidar-based localization.
+  In order for the Aerostack framework to localize with a different technique rather than visual markers, a lidar sensor will be used. In this case, the \textit{Hokuyo Eye} range sensor will be employed, which is the \textit{defacto} range sensor in this context. Also, the low level implementation provides a nice ros API that can be used to fetch data. To wrap all this functionality we propose the implementation of a new high level behavior that coordinates all the framework with the lidar interface, providing a high level, standardized API for lidar-based localization.
 
-  As of the current version of Aerostack, navigation is done with a 2D probabilistic roadmap planner, the input for the planner is a predefined map, done by hand in the Graphical User Interface that Aerostack provides. This is a static map and goes against the nature of the any dynamically acquired mapping signal. To tackle this problem several new navigation behaviors are proposed. These behaviors will abstract the planner used for each localization mode, providing a high level standarized API that can be used independently of the localization technique, replacing the old one.
+  As of the current version of Aerostack, navigation is done with a 2D probabilistic roadmap planner, the input for the planner is a predefined map, done by hand in the Graphical User Interface that Aerostack provides. This is a static map and goes against the nature of the any dynamically acquired mapping signal. To tackle this problem several new navigation behaviors are proposed. These behaviors will abstract the planner used for each localization mode, providing a high level standardized API that can be used independently of the localization technique, replacing the old one.
 
   \subsection{Specification} \label{ch_4:subsect:specs}
 
-    Each implemented module should follow the specification imposed by the Aerostack framework. In Aerostack there are different types of processes providing structure and added functionallity. When a new process is created it should be decided whether to implement it as a plain, simple ros node, a robot process or a behavior process. Their differences are as follows:
+    Each implemented module should follow the specification imposed by the Aerostack framework. In Aerostack there are different types of processes providing structure and added functionality. When a new process is created it should be decided whether to implement it as a plain, simple ros node, a robot process or a behavior process. Their differences are as follows:
 
     \begin{itemize}
-      \item ROS Node: This is the standard way of adding modules in a ROS oriented architecture. A ros node is simply a process programmed in any of the programming languages supported by ros (C, C++, Python \dots) that implements a task and is interfaced through the ros master server with named topics, services or both. A ros node can subscribe or publish topics and optionally, provide services, as many topics or services as it wants. These topics and services are nothing more than binded ports to the ROS master server, that works over TCP (normally) or UDP to distribute traffic. This is the implementation to follow when adding very low level modules, like platform drivers.
-      \item Robot Process: A Robot Process is an abstraction provided by Aerostack, it serves mainly as a standarization layer, providing an interface for the rest of the architecture to be used. It provides three services to manage the process, one for stopping it, one for starting it and another one to check whether it is running or not, aditionally it emits an alive signal every second or an error signal when the thread crashes. It runs the inheritors' code inside a separate thread in order to monitor it. When adding a module that abstracts some low level APIs, like a visual marker processor, this is the class to inherit from.
-      \item Behavior Process: This is the highest level of the hierarchy, inside the Aerostack framework there exists a process that coordinates all the behaviors, to do so, every behavior exposes an interface similar to the Robot Process and a configuration file that especifies the mid and low level processes the behavior depends upon (it's capabilities and incompabilities), amongst other parameters, in this sense, the behavior that provides localization based on visual markers depends on the visual marker processor to work. Formally, a behavior is just a high level process that monitors an algorithm: it runs the algorithm in a separate thread and emits the state and error signals, listening to \textit{start/stop} events and acting accordingly over the algorithm. When adding a high level functionallity, this is the class that should be inherited.
+      \item ROS Node: This is the standard way of adding modules in a ROS oriented architecture. A ros node is simply a process programmed in any of the programming languages supported by ros (C, C++, Python \dots) that implements a task and is interfaced through the ros master server with named topics, services or both. A ros node can subscribe or publish topics and optionally, provide services, as many topics or services as it wants. These topics and services are nothing more than bind ed ports to the ROS master server, that works over TCP (normally) or UDP to distribute traffic. This is the implementation to follow when adding very low level modules, like platform drivers.
+      \item Robot Process: A Robot Process is an abstraction provided by Aerostack, it serves mainly as a standardization layer, providing an interface for the rest of the architecture to be used. It provides three services to manage the process, one for stopping it, one for starting it and another one to check whether it is running or not, additionally it emits an alive signal every second or an error signal when the thread crashes. It runs the inheritors' code inside a separate thread in order to monitor it. When adding a module that abstracts some low level APIs, like a visual marker processor, this is the class to inherit from.
+      \item Behavior Process: This is the highest level of the hierarchy, inside the Aerostack framework there exists a process that coordinates all the behaviors, to do so, every behavior exposes an interface similar to the Robot Process and a configuration file that specifies the mid and low level processes the behavior depends upon (it's capabilities and incompatibilities), among other parameters, in this sense, the behavior that provides localization based on visual markers depends on the visual marker processor to work. Formally, a behavior is just a high level process that monitors an algorithm: it runs the algorithm in a separate thread and emits the state and error signals, listening to \textit{start/stop} events and acting accordingly over the algorithm. When adding a high level functionality, this is the class that should be inherited.
     \end{itemize}
 
     In a similar fashion to the visual marker localization behavior, the lidar localization behavior proposed will require three more processes: the slam process, an ekf that combines various signals and a localization technique selector, this is explained in detail in the corresponding behavior section (sect. \ref{ch_4:sect:behav_slam}).
 
-    The navigation interface is slightly more complicated, it will be composed of various behaviors that provide different functionallity, abstracting away the logic needed to navigate at different levels. We propose three new behaviors and the inclusion of a new planner, efficiently designed to work with lidar signal. More details will be provided in the corresponding section \ref{ch_4:sect:nav_interface}
+    The navigation interface is slightly more complicated, it will be composed of various behaviors that provide different functionality, abstracting away the logic needed to navigate at different levels. We propose three new behaviors and the inclusion of a new planner, efficiently designed to work with lidar signal. More details will be provided in the corresponding section \ref{ch_4:sect:nav_interface}
 
   \subsection{Integration} \label{ch_4:subsect:integration}
 
@@ -38,7 +38,7 @@ The chapter is structured as follows: Section \ref{ch_4:sect:requirements} prese
     When integrating a new behavior some steps should be followed:
     \begin{itemize}
       \item Add the necessary mid and low level processes to the Aerostack and ensure they can be started automatically.
-      \item Add the technical specification of the behavior to the behavior catalog. These are the capabilities and incompabilities of the behavior and should include the mid and low level processes previously mentioned so that they can be started automatically. In this step, the behaviors that are incompatible with the new one should be identified.
+      \item Add the technical specification of the behavior to the behavior catalog. These are the capabilities and incompatibilities of the behavior and should include the mid and low level processes previously mentioned so that they can be started automatically. In this step, the behaviors that are incompatible with the new one should be identified.
       \item Add the implementation of the behavior and test it with the Aerostack to ensure it can be started and that no incompatibilities arise.
     \end{itemize}
 
@@ -53,8 +53,8 @@ The chapter is structured as follows: Section \ref{ch_4:sect:requirements} prese
     \item It should be able to do planning with the available data to get to a desired goal avoiding obstacles.
     \item It should be able to adapt in environments with moving obstacles.
     \item It should be efficient enough to run both onboard and on ground control stations.
-    \item It should be possuble to be interfaced at different levels of abstraction.
-    \item It should provide an standarized API access to navigate the robot using lidar sensorization.
+    \item It should be possible to be interfaced at different levels of abstraction.
+    \item It should provide an standardized API access to navigate the robot using lidar sensorization.
   \end{enumerate}
 
 \section{Behavior Self Localize and Map by Lidar} \label{ch_4:sect:behav_slam}
@@ -111,11 +111,11 @@ The chapter is structured as follows: Section \ref{ch_4:sect:requirements} prese
 
   For the last functionality, generating obstacle-free paths, another behavior will be implemented. It will consist mainly in a wrapper around the new planner, providing the lowest level of control in our navigation interface. For the planning we will employ the previously mentioned planner \textit{move base}, provided as a ros package, which is specially crafted for lidar interfaces. It accepts an occupancy grid map and the raytraces from the lidar and implements the planning algorithm. Under the hood, it uses the elastic band algorithm for path optimization, as mentioned in section \ref{ch_3:sect:planning}.
 
-  The proposed names for each behavior are: \textit{behavior go to point in occupancy grid}, \textit{behavior follow path in occupancy grid} and \textit{behavior generate path in occupancy grid}. \cref{ch_4:fig:behav_gtp,ch_4:fig:behav_fp,ch_4:fig:behav_gp} ilustrate the architecture followed by each of these behaviors. The following subsubsections explain each behavior in detail.
+  The proposed names for each behavior are: \textit{behavior go to point in occupancy grid}, \textit{behavior follow path in occupancy grid} and \textit{behavior generate path in occupancy grid}. \cref{ch_4:fig:behav_gtp,ch_4:fig:behav_fp,ch_4:fig:behav_gp} illustrate the architecture followed by each of these behaviors. The following sub subsections explain each behavior in detail.
 
 \subsection{Behavior Go to Point in Occupancy Grid} \label{ch_4:subsect:behav_gtp}
 
-  This behavior provides the highest abstraction level of all the navigation interface, provided a target point, it will generate an obstacle-free trajectory to follow and send it to the trajectory controller, which executes the necessary motions to follow that trajectory. During the motion, this behavior will also ensure that no dynamic object gets in the way, recalculating the trajectory if necessary. In order to plan the trajectories, the new planner, \textit{move base} will be used, and as it will be a goal based behavior, the taget goal will be given as an argument to the start service. Figure \ref{ch_4:fig:behav_gtp} illustrates the general architecture of this behavior.
+  This behavior provides the highest abstraction level of all the navigation interface, provided a target point, it will generate an obstacle-free trajectory to follow and send it to the trajectory controller, which executes the necessary motions to follow that trajectory. During the motion, this behavior will also ensure that no dynamic object gets in the way, recalculating the trajectory if necessary. In order to plan the trajectories, the new planner, \textit{move base} will be used, and as it will be a goal based behavior, the target goal will be given as an argument to the start service. Figure \ref{ch_4:fig:behav_gtp} illustrates the general architecture of this behavior.
 
   \begin{figure}[h]
     \centering
@@ -144,7 +144,7 @@ The chapter is structured as follows: Section \ref{ch_4:sect:requirements} prese
 
   This strategy for detecting obstacles comes from the fact that the newly integrated planner outputs an empty path when an obstacle is found on the way.
 
-  As for the activation conditions, this behavior requires that the battery is not in a \textit{LOW} state and the aircraft is in state \textit{FLYING}. To check these conditions, it will make use of the \textit{belief manager} that stores important state information from all the Aerostack in the so called \textit{beliefs}. Beliefs are the symbolic representation of the known environment and gathered information so far in the mission, they are the other part of the executive layer, providing persistance accross the whole mission. For example, when the drone starts flying it will toggle its state from \textit{LANDED} to \textit{FLYING} and the belief manager will gather this information for easy retrieval, this goes for the battery state too.
+  As for the activation conditions, this behavior requires that the battery is not in a \textit{LOW} state and the aircraft is in state \textit{FLYING}. To check these conditions, it will make use of the \textit{belief manager} that stores important state information from all the Aerostack in the so called \textit{beliefs}. Beliefs are the symbolic representation of the known environment and gathered information so far in the mission, they are the other part of the executive layer, providing persistence across the whole mission. For example, when the drone starts flying it will toggle its state from \textit{LANDED} to \textit{FLYING} and the belief manager will gather this information for easy retrieval, this goes for the battery state too.
 
 \subsection{Behavior Follow Path in Occupancy Grid} \label{ch_4:subsect:behav_fpog}
 
@@ -193,7 +193,7 @@ The chapter is structured as follows: Section \ref{ch_4:sect:requirements} prese
 
 \subsection{Path Planner in Occupancy Grid} \label{ch_4:subsect:path_planner}
 
-  This module was developed as part of the Navigation Interface to provide a unified API access to the move base planner, reducing the overhead of changing the planner in the future and monitoring the correct funcioning of the move base planner.
+  This module was developed as part of the Navigation Interface to provide a unified API access to the move base planner, reducing the overhead of changing the planner in the future and monitoring the correct functioning of the move base planner.
 
   It implements a queue of target goals and dispatches them one by one to the planner. This decision was taken for two reasons, the main one is that \textit{move base} contains a bug, when the computation power is lowering, sometimes the planner fails to generate a path. To monitor this strange behavior and correctly handle it we implemented this intermediate module. The second reason is that in the future, the underlying planner could be changed, unifying a path planning API will smooth the transition, making it transparent to the API consumers.
 

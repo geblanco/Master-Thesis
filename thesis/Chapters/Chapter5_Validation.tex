@@ -1,8 +1,8 @@
-\chapter{Validation}
+\chapter{Validation} \label{ch_5:chapter}
 
   This chapter will go through all the validation and tests implemented to measure the performance and the correct functioning of the new behaviors. 
 
-  To validate each implemented behavior we propose using them both in simulation and in real flight missions. The validation tests are presented in detail in section \ref{ch_5:sect:val_tests}, explaining what the tests measure and how they do it as well as the intuition behind each test. Afterwards, in section \ref{ch_5:sect:experiments} we explain in detail the mission implemented for each behavior along with further information of the simulator employed in section \ref{ch_5:subsect:exp_simulation}. The simulation integration with the current version of Aerostack and the specific details of the real flight aircraft are detailed in section \ref{ch_5:subsect:exp_real_flight}. Section \ref{ch_5:sect:results} reports on the results obtained for each mission both in sumulation and in real flight and \ref{ch_5:sect:discussion} closes the chapter with the discussion of the results.
+  To validate each implemented behavior we propose using them both in simulation and in real flight missions. The validation tests are presented in detail in section \ref{ch_5:sect:val_tests}, explaining what the tests measure and how they do it as well as the intuition behind each test. Afterwards, in section \ref{ch_5:sect:experiments} we explain in detail the mission implemented for each behavior along with further information of the simulator employed in section \ref{ch_5:subsect:exp_simulation}. The simulation integration with the current version of Aerostack and the specific details of the real flight aircraft are detailed in section \ref{ch_5:subsect:exp_real_flight}. Section \ref{ch_5:sect:results} reports on the results obtained for each mission both in simulation and in real flight and \ref{ch_5:sect:discussion} closes the chapter with the discussion of the results.
  
 \section{Validation Tests} \label{ch_5:sect:val_tests}
 
@@ -17,11 +17,11 @@
 
   To test this constraint we will provide both a simulation and a real mission and put to work each behavior independently, testing that each one works as expected. We will measure the precision of each behavior based on the amount of the task that it is able to complete without errors.
 
-  One of the hardest requirements to meet is that of the efficiency, any implemented behavior should be efficient enough to run both onboard and in ground control stations in real time. Although this requirement could not be a problem for a PC it surely can be a problem on onborad computers. Also, it is difficult to measure for real flight missions because a cpu tracker also takes computing resources and the onboard computers mounted on the UAVs are not very powerful. Nevertheless, the cpu usage will be measured both in sumulation and in real flight and the corresponding data will be provided for analysis.
+  One of the hardest requirements to meet is that of the performance, any implemented behavior should be efficient enough to run both onboard and in ground control stations in real time. Although this requirement could not be a problem for a PC it surely can be a problem on onborad computers. Also, it is difficult to measure as it is not possible to isolate the behaviors from the Aerostack platform. A possibility could be to run the Aerostack without the behaviors, in idle and measure and then add the behaviors and measure again. In any case, measuring the performance in idle is not very representative in this case. Instead, what we will do is put the system to work and test whether it crashes or drops frames.
 
 \section{Simulation} \label{ch_5:sect:simulation}
 
-  The chosen simulator for these tests is Gazebo Sim (\cite{gazebo_web}), an open source, multiplatform, robot simulator. It was chosen because of it's open source nature, ease of use and great integration with ROS. Gazebo features an open, modular, plugin based architecture, which makes it perfect to integrate new components and opens the door for modules being simulated inside it and the outside world. In our case, to communicate the simulated UAV with ROS and the Aerostack framework.
+  The chosen simulator for these tests is Gazebo Sim (\cite{gazebo_web}), an open source, multi platform, robot simulator. It was chosen because of it's open source nature, ease of use and great integration with ROS. Gazebo features an open, modular, plugin based architecture, which makes it perfect to integrate new components and opens the door for modules being simulated inside it and the outside world. In our case, to communicate the simulated UAV with ROS and the Aerostack framework.
 
   In order to convey the simulator with ROS we will employ an already made plugin called RotorS \cite{rotors2016}. RotorS provides some UAV models and a plugin that translates gazebo topics to ROS ones, unifying the access to the data. This architecture is perfect for any robotic environment as it minimizes the overhead of changing from simulation to real flight, as long as the topics are called the same, the Aerostack framework does not even notice it.
 
@@ -33,11 +33,11 @@
 
   Our requirements came mainly because of the implemented behaviors, which in turn came from the available hardware in the research group. Currently, the aircraft used for the most important missions is a Matrice 100 from DJI (\cite{dji_matrice_web}) with all the sensorization cited above.
 
-  This is used because of it's extendability (any sensor platform can be plugged in), open API and powerful motors. It's verstaile enough to provide a testbed for many research experiments and the battery lasts enough for medium duration missions.
+  This is used because of it's extendability (any sensor platform can be plugged in), open API and powerful motors. It's versatile enough to provide a testbed for many research experiments and the battery lasts enough for medium duration missions.
 
 \section{Testing Mission} \label{ch_5:sect:testing_mission}
 
-  To provide the most realistic environment possible, the mission used to conduct all the experiments will be based in a real assignment requested to the research group a few months ago. The mission consists in inspecting the internal facade of a plant's boiler. At the time of request this new navigation interface was not implemented, so the flight was made almost by hand. In fact, this inteface was proposed after the need of an autonomous flight navigator whith the available hardware.
+  To provide the most realistic environment possible, the mission used to conduct all the experiments will be based in a real assignment requested to the research group a few months ago. The mission consists in inspecting the internal facade of a plant's boiler. At the time of request this new navigation interface was not implemented, so the flight was made almost by hand. In fact, this interface was proposed after the need of an autonomous flight navigator with the available hardware.
 
   The idea behind the mission is to fly a drone along the facade filming all the breathers, after the mission is completed, the film is extracted and given to the plant experts for their analysis. Additionally, a handmade mission could be very costly for the gas company as they would have had to install a portable crane and put a human to do the inspection of the 40 meters long facade.
 
@@ -45,11 +45,11 @@
 
   As the job is already done it is not possible to replicate it, hence we propose to simulate a boiler in Gazebo that resembles to the real mission and the inspection of an internal facade in a building for the real flight.
 
-  The next sections will deepen in all the details of the conduted experiments and the results obtained during the tests.
+  The next sections will deepen in all the details of the conducted experiments and the results obtained during the tests.
 
 \section{Experiments} \label{ch_5:sect:experiments}
 
-  As mentioned before, for each behavior we will ensure it complies with our constraints: correct functioning and requirements (efficiency mostly).
+  As mentioned before, for each behavior we will ensure it complies with our constraints: correct functioning and requirements (performance mostly).
   
   Once the whole Aerostack system is deployed, the first test for each behavior consists in checking it's activation conditions, i.e.: the \textit{behavior self localize and map by lidar} cannot work without a lidar, deploying the whole Aerostack in a lidar-less UAV should cause the behavior to be deactivated instantly.
 
@@ -91,7 +91,7 @@
 
   \subsection{Behavior Go To Point in Occupancy Grid} \label{ch_5:subsect:behav_gtp_mission}
 
-    This is the centre key of the navigation system, providing the most rich, autonomous behavior. The mission is as simplified version of the one made for the real boiler inspection, but fitted to the real flight scenario at hand. It's outline is presented below:
+    This is the center key of the navigation system, providing the most rich, autonomous behavior. The mission is as simplified version of the one made for the real boiler inspection, but fitted to the real flight scenario at hand. It's outline is presented below:
 
     \begin{enumerate}
       \item Take Off
@@ -115,7 +115,7 @@
       \label{ch_5:fig:boiler_sim}
     \end{figure}
 
-    For the simulation we created a blender model of a boiler and exported it to Gazebo, then we created a RotorS enabled Gazebo world with the hummingbird drone model. The dimensions of the simulated boiler are listed in table \ref{ch_5:table:boiler_sim_dims}. To get an idea of the proportions of the boiler with the aircraft see figure \ref{ch_5:fig:boiler_sim}. The drone has been outlined in yellow, it almost unseeable.
+    For the simulation we created a blender model of a boiler and exported it to Gazebo, then we created a RotorS enabled Gazebo world with the hummingbird drone model. The dimensions of the simulated boiler are listed in table \ref{ch_5:table:boiler_sim_dims}. To get an idea of the proportions of the boiler with the aircraft see figure \ref{ch_5:fig:boiler_sim}. The drone has been outlined in yellow, it almost invisible.
 
     \begin{table}[!h]
       \centering
@@ -156,18 +156,26 @@
 
   \subsection{Real Flight} \label{ch_5:subsect:exp_real_flight}
 
-    For the real flight tests we used the sports centre in the School of Industrial Engineers, which is a closed space that can serve for our purposes, it's dimensions are listed in table \ref{ch_5:table:sports_dims}
+    For the real flight tests we used the sports center in the School of Industrial Engineers, which is a closed space that can serve for our purposes, it's dimensions are listed in table \ref{ch_5:table:sports_dims}.
 
     \begin{table}[!h]
       \centering
       \begin{tabular}{lr} \toprule
-        \multicolumn{2}{c}{\textit{Sports Centre Dimensions}}        \\ \midrule
+        \multicolumn{2}{c}{\textit{Sports Center Dimensions}}        \\ \midrule
         Width $\times$ Depth $\times$ Height & $10 \times 25 \times 14$ \\ \bottomrule
         \hline
       \end{tabular}
-      \caption{Dimensions of the sports centre used for real flight tests. School of Industrial Engineers}
+      \caption{Dimensions of the sports center used for real flight tests. School of Industrial Engineers}
       \label{ch_5:table:sports_dims}
     \end{table}
+
+    \begin{figure}
+      \centering
+      \includegraphics[width=0.9\textwidth,height=0.5\textheight,keepaspectratio]{./Figures/RealFlight.png}
+      \caption{DJI Matrice 100 drone in the real flight mission, School of Industrial Engineers Sports center. Top left: Front camera from the drone before the mission. Bottom left: drone flying during the mission. Right: closeup of the landed drone before the mission.}
+      \label{ch_5:fig:full_realflight}
+    \end{figure}
+
 
     The chosen drone ships a DJI Manifold micro computer for onboard computation (\cite{dji_manifold_web}). Its technical details are contained in table \ref{ch_5:table:manifold_specs}
 
@@ -176,7 +184,7 @@
       \begin{tabular}{lr} \toprule
         \multicolumn{1}{c}{\textit{component}} & \multicolumn{1}{c}{\textit{value}}   \\ \midrule
         Ram           & DDR 3 2 GB     \\
-        Processor     & 2.5 Ghz 4 cores \\
+        Processor     & 2.5 GHz 4 cores \\
         GPU           & NVIDIA Kepler GeForce \\ \bottomrule
         \hline
       \end{tabular}
@@ -184,29 +192,29 @@
       \label{ch_5:table:manifold_specs}
     \end{table}
 
-    Onboard computation is the better option in this case because there is no \textit{auto pilot} (fallback driver controller, shipped in many drones to do automatic hover when no orders are received) and given the distances it can travel and the altitude, ensuring WiFi coverage is difficult. Hence, the most secure option is to load all the necessary software inside the onboard computer and send just a few orders from the ground control station. More specifically, launch the Aerostack and the python mission.
+    Onboard computation is the better option in this case because there is no \textit{auto pilot} (fallback driver controller, shipped in many commercial drones to do automatic hover when no orders are received) and given the distances it can travel and the altitude, ensuring WiFi coverage is difficult. Hence, the most secure option is to load all the necessary software inside the onboard computer and send just a few orders from the ground control station. More specifically, launch the Aerostack and the python mission.
 
     The manifold computer is not very powerful so special attention must be put on performance , if computing power drains it can be catastrophic. To aid in this situation a human pilot was prepared to take control during all the tests, although at the end it was not necessary.
 
 \section{Experimental Results} \label{ch_5:sect:results}
 
-  This section will explain the results obtained, we will first go through the simulation results and continue with the real flight ones. For each behavior, tables [ref tables] show: the correct execution of the behavior, the mean and standard deviation execution time for all points and the total time of the mission, also, the last row shows the averaged scores and times. Everything is measured in minutes and each experiment is run ten times, also, the timeout counter for each behavior is set to 4 minutes.
+  This section will explain the results obtained, we will first go through the simulation results and continue with the real flight ones. For each behavior, \cref{ch_5:table:generate_path_results,ch_5:table:follow_path_results,ch_5:table:go_to_point_results,ch_5:table:real_flight_results} show: the correct execution of the behavior, the mean and standard deviation execution time for all points and the total time of the mission, also, the last row shows the averaged scores and times. Everything is measured in minutes and each experiment is run ten times, also, the timeout counter for each behavior is set to 4 minutes.
  
   \input{./Tables/Behavior_Generate_Path_results.tex}
 
-  Table \ref{ch_5:table:generate_path_results} shows the results for the behavior \textit{generate path in occupancy grid}. Since this behavior does not perform any motion, it is just planning, a $100\%$ hits seems reasonable, it means that the planner does its job correctly, both the move base planner and the path planner modules work correctly, also, the behavior works as expected, generating all the requested paths. Furthermore, the times employed to generate the trajectories are very stable, which meets our requirements. 
+  Table \ref{ch_5:table:generate_path_results} shows the results for the behavior \textit{generate path in occupancy grid}. Since this behavior does not perform any motion, it is just planning, a $100\%$ hits seems reasonable, it means that the planner does its job correctly, both the move base planner and the path planner modules work correctly, also, the behavior works as expected, generating all the requested paths and inserting them in the belief memory. Furthermore, the times employed to generate the trajectories are very stable, which meets our requirements. 
 
   \input{./Tables/Behavior_Follow_Path_results.tex}
 
-  This behavior had the worst performance of all, although it scores for 65\% of the points, it has a lot of variability, this may be due to the fact that it executes the motions blindly, no logic is applied to recalculate paths when needed. It just executes the given trajectory. This behavior is slighty more complicated than the previous one in the sense that it has to execute motions, which increases the difficulty.
+  The follow path in occupancy grid behavior had the worst performance of all, although it scores for 65\% of the points, it has a lot of variability, this may be due to the fact that it executes the motions blindly, no logic is applied to recalculate paths when needed, it just executes the given trajectory. This behavior is slightly more complicated than the previous one in the sense that it has to execute motions, which increases the difficulty.
 
-  We acknowledged various fault causes, the very first one is estimation, although some points where not perfectly matched, the end positions where very close to the goal. This drift in localization arises from the lack of fine tuning, the localization EKF is not completely tuned for simulatation or the UAV. Also, during the tests we observed that the trajectory controller has some weird behaviors. There were various cases where the orders took no effect. Taking a look over the memory consumption clarified the assumptions that there are some conditions that cause the controller to hang in an intensive loop. As of the time of writing, the controller is being remade from the ground up.
+  We acknowledged various fault causes, the very first one is estimation, although some points where not perfectly matched, the end positions where very close to the goal. This drift in localization arises from the lack of fine tuning, the localization EKF is not completely tuned for simulation of the UAV. Also, during the tests we observed that the trajectory controller has some weird behaviors. There were various cases where the orders took no effect. As of the time of writing, the controller is being remade from the ground up.
 
-  Not matching the target points means that the behavior does not finish and it only stops when the timeout is reached. This faulty finish condition, in turn adds up to the execution time, which explains some of the large times of execution. Tests 2, 4, 5 and 9 accounts for this fact, they score the least but also last the most. Interestingly enough, this test has more fully completed missions that the one of \textit{go to point}, 2 out of 10 versus 1 out time, but in general has more faulty points, rising the global time of execution for the whole test.
+  Not matching the target points means that the behavior does not finish and it only stops when the timeout is reached. This faulty finish condition, in turn adds up to the execution time, which explains some of the large times of execution. Tests 2, 4, 5 and 9 accounts for this fact, they score the least and also last the most. Interestingly enough, this test has more fully completed missions that the one of \textit{go to point}, 2 out of 10 versus 1 out time, but in general has more faulty points, rising the global time of execution for the whole test.
 
   \input{./Tables/Behavior_Go_To_Point_results.tex}
 
-  This behavior is most complex, but also more stable than the previous one, it contains some logic to handle obstacles and track the drone position. Nevertheless, the bad matching of points is a problem, this is the case of the 2nd, 3rd and 5th tests, which fail to reach half of the points, rising the execution time to 15 minutes at worst, the correlation is clear. We strengthen our assumption with tests 8th and 9th, that amounts for 5 out of 6 and 6 out 6 goals reached, respectively, with the lowest times of all the tests. The implemented behavior works correctly in 68\% of the cases, which is not bad given the complexity in coordination needed to accomplish the task and the short time employed implementing it.
+  The go to point behavior is most complex, but also more stable than the previous one, it contains some logic to handle obstacles and track the drone position. Nevertheless, the bad matching of points is a problem, this is the case of the 2nd, 3rd and 5th tests, which fail to reach half of the points, rising the execution time to 15 minutes at worst, the correlation is clear. We strengthen our assumption with tests 8th and 9th, that amounts for 5 out of 6 and 6 out 6 goals reached, respectively, with the lowest times of all the tests. The implemented behavior works correctly in 68\% of the cases, which is not bad given the complexity in coordination needed to accomplish the task and the short time employed implementing it.
 
   The last test in our experiments are run in real flight, with the previously explained drone and environment. Due to time constraints and both hardware and pilot availability, we ran only 3 tests, the results are reported in table \ref{ch_5:table:real_flight_results}
 
@@ -214,14 +222,18 @@
 
   It is worth noting that these tests are much more robust and fast, the intuition behind these results is that the localization module is widely tested and tuned for this specific aircraft which makes sense given that it is used for industrial level real flight missions. Also, the speed of this drone is comparably higher.
 
-  Although these tests were run with a human operator fallback, just in case something went wrong, none of the tests required it. Even in the first test, where two points failed to match, the system recovered and successfully finished the mission. Furthermore, the two failed points where encountered when reaching the highest altitude and when moving away from the wall at highest altitude, points for and six, respectively (refer to \ref{ch_5:subsect:behav_gtp_mission} for detailed coordinates). Our best guess for this performance is based on the environment: the sports centre walls are made of various materials, it has about 8-9 meters of solid wall and then a grid gate with holes to the roof. We believe that the holes in the grid gate tricked the lidar based localization, which in turn caused the go to point not to match the target point. Also, as the localization is made out of the fusion of various sensor inputs, this phenomenon does not happen always, which is another proof of the robustness of the system.
+  Although these tests were run with a human operator fallback, just in case something went wrong, none of the tests required it. Even in the first test, where two points failed to match, the system recovered and successfully finished the mission. Furthermore, the two failed points where encountered when reaching the highest altitude and when moving away from the wall at highest altitude, points 4 and 6, respectively (refer to \ref{ch_5:subsect:behav_gtp_mission} for detailed coordinates). Our best guess for this performance is based on the environment: the sports center walls are made of various materials, it has about 8-9 meters of solid wall and then a grid gate with holes to the roof. We believe that the holes in the grid gate tricked the lidar based localization, which in turn caused the go to point not to match the target point. Also, as the localization is made out of the fusion of various sensor inputs, this phenomenon does not happen always, which is another proof of the robustness of the system.
 
-  \textbf{[ToDo := Add speeds of each drone?]}
+  \subsection{Performance}
+
+  As stated before, measuring the performance was difficult, but we took some notes. We acknowledged that the planning system delayed the whole system, dropping some frames from the \textit{scan} topic. We believe this is related to the duplication of the \textit{map} topic in the \textit{self localize and map behavior}, our intuition behind this is the fact that map is a topic that transports dense data at a high ratio, hence this could be a problem in the future, when more intensive modules are added.
+
+  In any case, we did not recognize any significant problem in the execution of any of the tests. Even the real flight mission ran smoothly and without problems.
 
 \section{Discussion} \label{ch_5:sect:discussion}
 
-  The results obtained shed some light over the problems that arise in an autonomous navigation system, clarifying the need for more tests and a better prepared simulation environment.
+  The results obtained shed some light over the problems that arise in an autonomous navigation system, clarifying the need for more tests and a better prepared simulation environment. Also, the implemented behaviors could work better with a more robust trajectory controller and more warranties from the planner, this could help to isolate the behaviors functioning from the rest of the stack they depend upon, unmasking possible errors and helping to debug them.
 
-  First, the environment used for simulation is very well suited for our needs, but lacks some tuning. The fact that there exists such difference between  the real flight mission and the simulated one is not good, although clearly improvable through extensing tuning and testing. Even though, the proposed system works reasonably well for the time invested to implementing and also highlights that we are on the correct track for future experiments.
+  Also, the environment used for simulation is very well suited for our needs, but lacks some tuning. The fact that there exists such difference between  the real flight mission and the simulated one is not good, although clearly improvable through extensive tuning and testing. Even though, the proposed system works reasonably well for the time invested in implementation and also highlights that we are on the correct track for future experiments.
 
 This chapter presented all the validation missions and environment employed for testing all the implemented behaviors, also the results were presented and analyzed for discussion. The next chapter will conclude the thesis adding more in depth thoughts about the results obtained and further research.

@@ -1,8 +1,8 @@
-\chapter{Introduction}
+\chapter{Introduction} \label{ch_1:chapter}
 
   The following work proposes a navigation system based on state of the art algorithms. As a testbed for these algorithms we will employ the Aerostack platform, which is an extensively tested general purpose aerial robotics software framework already available in the research community. We propose the implementation of new behaviors, which are the high level abstraction modules embraced by the framework.
 
-  We propose theoretic hypotheses for a modular navigation system and provide empiric proofs through simulated and real flight missions to support them. Accross this document, the reader can grasp an idea of the state of planning and localization in aerial robotic applications and watch in action an experimentaly tested solution.
+  We propose theoretic hypotheses for a modular navigation system and provide empiric proofs through simulated and real flight missions to support them. Across this document, the reader can grasp an idea of the state of planning and localization in aerial robotic applications and watch in action an experimentally tested solution.
 
   \section{Context}
 
@@ -10,7 +10,7 @@
 
   \section{Motivation}
 
-    So far, there exists only one simple geometry planner and Aruco or odometry based localization techniques inside the Aerostack. For indoor environments, this system compels the need for environment preparation, the Arucos must be placed beforehand in well known localizations that must be hardcoded in the robot map. In this sense, there exists a need for a more robust, preparation-free localization system and accompanying planner. This work provides such improvements with the introduction of a lidar-based navigation system and a global planner.
+    So far, there exists only one simple geometry planner and Aruco or odometry based localization techniques inside the Aerostack. For indoor environments, this system compels the need for environment preparation, the Arucos must be placed beforehand in well known locations that must be hardcoded in the robot map. In this sense, there exists a need for a more robust, preparation-free localization system and accompanying planner. This work provides such improvements with the introduction of a lidar-based navigation system and a global planner.
 
   \section{General Objective}
 
@@ -32,7 +32,5 @@
 
   \section{Overview}
 
-    \textbf{[ToDo := Review when everything is finished]}
-
-    This dissertation is organized as follows: ...
+    This dissertation is organized as follows: Chapter \ref{ch_2:chapter} describes the problem at hand, namely an autonomous navigation system for aerial robotics. To solve this problem, various technologies and algorithms are studied, the current state of the art of some of them is presented in chapter \ref{ch_3:chapter} which will serve to decide between the available options in the literature. The chosen algorithms are presented in chapter \ref{ch_4:chapter} along with the full specification and details on the implemented modules. All the proposed components are validated through simulated and real flight validation tests, explained in chapter \ref{ch_5:chapter}. Chapter \ref{ch_6:chapter} concludes the thesis with the conclusions and future lines of study extracted from this work.
 

@@ -1,17 +1,24 @@
-\chapter{Conclusions \& Further Research}
+\chapter{Conclusions \& Further Research} \label{ch_6:chapter}
 
 This chapter will conclude the thesis with our conclusions on the conducted experiments and the proposed system and expose the open lines of study we would like to target our research to. 
 
 \section{Conclusions} \label{ch_6:sect:conclusions}
 
-  At the sight of the results obtained it is clear for us that we are on the right track towards a fully autonomous navigation system. We would like to stress out that, as far as the navigation system is supported by an aerial architecture, it depends upon its correct functioning. In fact, in our experiments, the biggest source of failure was the slam module, although the employed technique is very advanced and stands over the state of the art papers, it fails in some situations, propagating the error above until higher levels of abstraction: the Behavioral system, where we implemented the whole navigation system.
+  At the sight of the results obtained it is clear for us that we are on the right track towards a fully autonomous navigation system. We would like to stress out that, as far as the navigation system is supported by an aerial architecture, it depends upon its correct functioning. In fact, in our experiments, the biggest source of failure was the localization module, although the employed technique is very advanced and stands over the state of the art papers, it fails in some situations, propagating the error above until higher levels of abstraction: the Behavioral system, where we implemented the whole navigation system.
 
   In this thesis we delved into different high level abstractions for the construction of a fully autonomous navigation system, we proposed a system based on the most up to date theory in planning and localization, we prepared some experiments to test our research hypotheses and implemented all the behaviors it is composed of. Also, we counted on the necessary resources both in hardware and in time to conduct all the tests, and at the end, we proved that the Aerostack system is the perfect testbed for artificial intelligence algorithms aimed at aerial robotics.
 
-\pagebreak
+  The general goal for this thesis was the construction of an autonomous navigation system, which we achieved through the implementation of different components framed in the Aerostack framework. The system was required to localize and map in previously unseen environments and use this information to be able to navigate autonomously, given just a target point. Our experiments showed that the combination of different techniques could achieve these goals. More specifically: the inclusion of four new behaviors, an elastic band based local planner along with a global path planner and a lidar based slam module. 
+
+  It is worth noting that the implemented system will have a chance to be tested in depth on the next version of Aerostack, where it will be included. This will serve to test our hypotheses and also to find possible lost ends we could have missed.
 
 \section{Further Research} \label{ch_6:sect:research}
 
-  It is only through extensive and stressful tests that a system like this can prove useful and bullet proof. In the future, we would like explore the robustness and reliability of the proposed system under the conditions of more difficult environments, as well as to test it on a real life, business oriented mission, which is where the inspiration for this whole work.
+  It is only through extensive and stressful tests that a system like this can prove useful and bullet proof. In the future, we would like to explore the robustness and reliability of the proposed system under the conditions of more difficult environments, as well as to test it on a real life, business oriented mission, which is where the inspiration for this whole work came from.
 
   After all the tests conducted, it is clear that the localization subsystem is the key to more reliable, successful intelligent behaviors, is the basement for higher levels of abstraction. We would like to strengthen these lower level algorithms first in order to improve the base system and open the door for more intelligent, autonomous behaviors, maybe in the future more complex missions can be achieved with this system based solely on a few sources of data.
+
+\begin{comment}
+\begin{itemize}
+\end{itemize}
+\end{comment}
