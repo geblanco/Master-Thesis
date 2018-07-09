@@ -1,37 +1,34 @@
 \chapter{Introduction}
 
-  In the following work an integration of a navigation system onto the Aerostack platform is presented.
+  The following work proposes a navigation system based on state of the art algorithms. As a testbed for these algorithms we will employ the Aerostack platform, which is an extensively tested general purpose aerial robotics software framework already available in the research community. We propose the implementation of new behaviors, which are the high level abstraction modules embraced by the framework.
+
+  We propose theoretic hypotheses for a modular navigation system and provide empiric proofs through simulated and real flight missions to support them. Accross this document, the reader can grasp an idea of the state of planning and localization in aerial robotic applications and watch in action an experimentaly tested solution.
 
   \section{Context}
 
-    Aerostack is a framework for aerial robots, aimed at giving flight autonomy to some extent. It features a modular approach for the construction of behaviors that can be used to develop complex flights and automatic handling for certain situations such battery level or hardware conditions. It is the frame for the following work, which adds more autonomy through the integration of a octomap-based navigation system and a global planner. This provides a novel localization technique for the framework.
+    Aerostack is a framework for aerial robots, aimed at giving flight autonomy to some extent. It features a modular approach for the construction of behaviors that can be used to develop complex flights and automatic handling for certain situations such as battery level or hardware conditions. It is the frame for the following work, which adds more autonomy through the integration of a lidar based localization and mapping system and a global planner, composing a navigation interface for UAVs. This provides both a novel localization and planning techniques for the framework, extending the current system.
 
   \section{Motivation}
 
-    So far, there exists only one simple geometry planner and an Aruco-based localization technique. In indoor environments, this system compels the need for environment preparation, the Arucos must be placed beforehand in well known localizations that must be hardcoded in the robot map. In this sense, there exists a need for a more robust, preparation-free localization system and accompanying planner. This work provides such an improvement with the introduction of a octomap-based navigation system and a global planner.
+    So far, there exists only one simple geometry planner and Aruco or odometry based localization techniques inside the Aerostack. For indoor environments, this system compels the need for environment preparation, the Arucos must be placed beforehand in well known localizations that must be hardcoded in the robot map. In this sense, there exists a need for a more robust, preparation-free localization system and accompanying planner. This work provides such improvements with the introduction of a lidar-based navigation system and a global planner.
 
   \section{General Objective}
 
-    This work aims at adding a novel navigation system to the Aerostack framework.
+    Through this thesis we provide a way for the Aerostack enabled UAVs to map an indoor environment and localize inside it using lidar sensors and then outline a plan to traverse it in a secure manner. We believe that lidar sensors in conjunction with planning algorithms can be used to build a real time navigation system that can be used with an existent platform to enlarge the capabilities of aerial robotics. Therefore, the general objectives of this work can be described as:
 
+    \begin{enumerate}
+      \item Test whether state of the art algorithms can be employed to construct a real time, autonomous navigation interface that can be used with the existent robotic platforms.
+    \end{enumerate}
 
   \section{Specific Objectives}
 
-    This section enumerates a comprehensive list of objectives.
+    Using the available literature as the basement for the developed modules, we aim at the following specific objectives:
 
     \begin{enumerate}
-      \item Enrich the current navigation and localization systems.
-      \item Test and validate the new navigation and localization systems through simulated environments.
+      \item Contribute to the research community with our work through the implementation and integration of the proposed algorithms inside the Aerostack framework.
+      \item Measure whether the proposed algorithms comply with the proposed constraints and are suitable for real time robotic applications.
+      \item Test the implemented modules both in real flight and simulation to ensure that the proposed approach meets the imposed requirements.
     \end{enumerate}
-
-    To achieve the first objective, the following additions to the framework are proposed:
-
-    \begin{itemize}
-      \item Add a robust planner based on a new navigation technique.
-      \item Add a robust navigation technique through the use of octomaps.
-      \item Add a robust localization technique based on octomaps.
-      \item Add octomaps construction support through lidar.
-    \end{itemize}
 
   \section{Overview}
 

@@ -1,24 +1,24 @@
 \chapter{State of the Art}
 
-  This chapter will review the classic methods used for localization and mapping, which is the core for any navigation technique, it starts describing the problems that arise both in localization and mapping. Continue with some of the most prolific solutions found to these problems to finish exposing the techniques and algorithms used by the Aerostack framework.
+  This chapter will review various methods used for localization, mapping and planning, which are the core for any navigation technique. It starts by describing the problems that arise both in localization and mapping to continue with some of the most prolific solutions found to these problems. Mapping techniques will be described briefly at the end of the chapter. 
 
-  Localization is referred to all the techniques used to find the position in coordinates of an agent or object inside the world, relative to a reference frame. As far as it's absolute coordinates are known, anything can be used as reference frame, it is used as the coordinates system's centre. In an outdoors environment, the Earth could be the reference frame and the robot's coordinates can be acquired with satellite systems, giving an absolute point inside the three dimensional space. It is desirable for these coordinates to be in a format that a computer can handle efficiently, tipically as two or three floating point numbers (although integer numbers are used sometimes too), depending on the number of dimensions used to represent the space. To save computational effort, the z axis (height) could be unused in a wheeled robot.
+  Localization is referred to all the techniques used to find the position in coordinates of an agent or object inside the world, relative to a reference frame. As far as its absolute coordinates are known, anything can be used as reference frame, it is used as the coordinates system's centre. In an outdoors environment, the Earth could be the reference frame and the robot's coordinates can be acquired with satellite systems, giving an absolute point inside the three dimensional space. It is desirable for these coordinates to be in a format that a computer can handle efficiently, tipically as two or three floating point numbers (although integer numbers are used sometimes too), depending on the number of dimensions used to represent the space. To save computational effort, the z axis (height) could be unused in a wheeled robot.
 
   Moving a robot avoiding possible obstacles through the space is tricky in itself, obstacles must be detected and handled correctly, moving objects can appear in the way, and so on. This alone does not provide any intelligence nor it helps planning, to aid in planning and moving smartly in the space, a map can be constructed while the localization is happening. The term mapping covers all the algorithms used to construct a map combining the data acquired from the many input sources a robot can have. Mapping opens the door for smart planning, along with many more advantages. A classic example is finding cycles in planned paths.
-
-  \clearpage
+  
+  In the current field of study, planning refers to the set of algorithms dedicated to map a target goal (be it a coordinate in a map or a robot pose) to the necessary set of motions required to reach the goal. In our case study it will consist of composing a valid trajectory to reach from the current robot position to the target position given the map and the robot's location.
 
   \section{Localization}
 
     Localization techniques are divided into two groups: Outdoor and indoor techniques. The distinction comes from the fact that satellite systems signals cannot go through walls. This fact has led to a whole new set of technologies and techniques that are able to localize in environments without an absolute reference of the world.
 
-    This section is organized as follows: First outdoor localization will be analyzed, with a brief review of it's core components, then various indoor localization techniques will be exposed, focusing on lidar based techniques.
+    This section is organized as follows: First outdoor localization will be analyzed, with a brief review of it's core components, then various indoor localization techniques will be exposed, focusing on lidar based ones.
 
     \subsection{Outdoor localization} \label{ch_3:sect:localization:outdoor}
 
       By now, the most robust, reliable solution for outdoor localization is based on combining different sources of data. The mobile platform has drawn great attention over the past few years, pushing some of the largest companies in a shared effort to improve localization services while minimizing the impact over the battery's performance.
 
-      Satellite systems localization in mobile applications have certain drawbacks: The most obvious one is that acquiring and processing the signal wastes power, but also that in the case of civilian systems (such as GPS) the localization has a precision of 10 meters for security reasons. Figure \ref{ch_3:fig:trilateration} shows the localization dissambiguation through the trilateration technique with three satellite.
+      Satellite systems localization in mobile applications have certain drawbacks: The most obvious one is that acquiring and processing the signal wastes power, but also that in the case of civilian systems (such as GPS) the localization has a precision of 10 meters for security reasons. Figure \ref{ch_3:fig:trilateration} shows the localization dissambiguation through the trilateration technique with three sources of signal employed in any satellite system.
 
       To aid both problems two new localization techniques were implemented:
       \begin{enumerate}
@@ -26,14 +26,14 @@
         \item WiFi Localization. This powerful method can serve both as an indoor and outdoor localization technique (see sect. \ref{ch_3:sect:localization:indoor}). When a smarphone detects a WiFi hotspot, it sends it's BSSID along with the GPS coordinates if available to a centralized server. As this database grows the localization precision improves and every user can take advantage from it. This is scpecially useful in urban areas where stallite signal is poor or intermitent and improves as more and more users log information.
       \end{enumerate}
 
-      The best localization services can be provided with the conjunction of these three main techniques, which can be easily merged with an \textit{Extended Kalman Filter}.
-
-      \begin{figure}
+      \begin{figure}[!h]
         \centering
         \includegraphics[width=0.6\textwidth]{./Figures/trilateration.png}
         \caption{The area enclosed by the three intersections ca be used to localize univocally. The three simple intersections formed by pairs of circumferences are always outside of the Earth. As more satellites are included, precision increases. Taken from \cite{wikipedia_trilateration_web}.}
         \label{ch_3:fig:trilateration}
       \end{figure}
+
+      The best localization services can be provided with the conjunction of these three main techniques, which can be easily merged with an \textit{Extended Kalman Filter}.
 
       Although these techniques are widely used they are limited to mobile platforms, which are restricted both in sensorization and in processing capabilities. For robotic applications more sophisticated sensors are used, this includes depth cameras and lidars for the most part. Again, all the sensors output is merged to get the best estimates.
 
@@ -47,7 +47,7 @@
 
       In the case of WiFi hotspots localization is usually done by analyzing the signal strength and incoming angle. This method only works when the hotspots' location is known beforehand and is very prone to errors because the device must remain static in a certain angle.
 
-      From the computer vision perspective, visual markers can be placed too and processed by the device localizing and again, this requires preparation beforehand. One example of this setup are the well known \cite{romeroramirez201838}.
+      From the computer vision perspective, visual markers can be placed too and processed by the device localizing and again, this requires preparation beforehand. One example of this setup are the well known Arucos \cite{romeroramirez201838}.
 
       In many robotic applications like swarm robotics there is a necessity to track each member of the swarm in a closed, contained environment, for this purpose an OptiTrack system \cite{optitrack_web} can be used, it is a highly precise camera set that can track various markers (marked swarm members) and serve it's location through the network in real time. This setup is specially useful to monitor the swarm, enabling each member to access it's location.
 
@@ -61,16 +61,16 @@
 
       Extended Kalman Filters (EKF) SLAM is the earliest technique developed for SLAM. EKF is a general technique to find the best estimate for the measuring variable based on the mean and covariance. In this case the inputs are the odometry used to estimate the robot position, features of the environment that anchor the odometry measures and the robot motor system sensors (wheel decoders, etc) to estimate the change on the position. Then the objective is to find the best estimate for the current robot's position.
 
-      \begin{figure}[!t]
+      \begin{figure}[!h]
         \centering
         \includegraphics[width=0.8\textwidth]{./Figures/slam_ekf_model.png}
         \caption{EKF applied to the SLAM problem. Dotted line: robot's path. Shaded ellipses: position estimates. Small dots: Unkown location landmarks. White ellipses: Landmarks' position estimates. In (d) the robot senses the first landmark, anchoring the rest of the estimates, reducing uncertainty. Taken from \cite{inbookhandbook}}
         \label{ch_3:fig:ekf_slam}
       \end{figure}
 
-      At the start of the process, the system's ($0$, $0$) coordinate is established where the robot is, this is the most confident measure about the robot position. As the robot navigates the environment, succesive measures are taken and paired with the known landmarks, when a previously seen landmark is witnessed again, the position estimate is corrected with the covariance matrix, and the error correction is propagated along the previous estimates. In this way a long as the robot is navigating an sensing the landmarks, the position estimate improves. Figure \ref{ch_3:fig:ekf_slam} shows the full process, in (a) the process is started, there is a lot of uncertainty, as process continues (a-c) the uncertainty increases, until the first landmark is sensed again (c), reducing the uncertainty on the current position's estimate and the subsequent estimates.
+      At the start of the process, the system's ($0$, $0$) coordinate is established where the robot is, this is the most confident measure about the robot position. As the robot navigates the environment, succesive measures are taken and paired with the known landmarks, when a previously seen landmark is witnessed again, the position estimate is corrected with the covariance matrix, and the error correction is propagated along the previous estimates. In this way a long as the robot is navigating an sensing the landmarks, the position estimate improves. Figure \ref{ch_3:fig:ekf_slam} shows the full process, in (a) the process is started, there is a lot of uncertainty, as process continues (a-c) the uncertainty increases, until the first landmark is sensed again (d), reducing the uncertainty on the current position's estimate and the subsequent estimates.
 
-      More formally, the EKF algorithm represents the robot estimate by a multivariate Gaussian (\ref{ch_3:eq:ekf_representation})
+      More formally, the EKF algorithm represents the robot estimate by a multivariate Gaussian (eq. \ref{ch_3:eq:ekf_representation})
       
       \begin{equation} \label{ch_3:eq:ekf_representation}
         p(x_{t}, m | Z_{t}, U_{t}) = N(\mu_{t}, \Sigma_{t})
@@ -104,9 +104,9 @@
         w_{t}^{[k]} = N(z_{t} | x_{t}^{[k]}, \mu_{t,n}^{[k]}, \Sigma_{t,n}^{[k]})
       \end{equation}
 
-      After equation \ref{ch_3:eq:particle_importance} is applied for each particle, all the weights are normalized to sum up to 1, then a set new particles is drawn with replacement, where the probability of being picked is each particle weigth. Intuitively, this means that only the particles that fit the most with the current measures survive for next rounds. The final step of FastSLAM updates the mean $\mu_{t}^{[k]}$ and covariance $\Sigma_{t,n}^{[k]}$ based on the new measure $z_{t}$, which is similar to the EKF updates, but with much smaller filters.
+      After equation \ref{ch_3:eq:particle_importance} is applied for each particle, all the weights are normalized to sum up to 1, then a set new particles is drawn with replacement, where the probability of being picked is each particle's weigth. Intuitively, this means that only the particles that fit the most with the current measures survive for next rounds. The final step of FastSLAM updates the mean $\mu_{t}^{[k]}$ and covariance $\Sigma_{t,n}^{[k]}$ based on the new measure $z_{t}$, which is similar to the EKF updates, but with much smaller filters.
 
-      Although this method is easy to implement, fast enough for real time applications with not very high demanding software and yields good results on small to medium maps, it suffers from the fact that lots of particles are needed to represent big maps, specially with multiple nested loops. Therefore, many improvements have been proposed, \cite{Grisetti2007} for example uses ocucupancy grids instead of Gaussians.
+      Although this method is easy to implement, fast enough for real time applications with not very high demanding software and yields good results on small to medium maps, it suffers from the fact that lots of particles are needed to represent big maps, specially with multiple nested loops. Therefore, many improvements have been proposed, \cite{Grisetti2007} for example uses occupancy grids instead of Gaussians.
 
     \subsubsection{Graph Optimization SLAM}
 
@@ -128,9 +128,17 @@
 
       In \cite{murTRO2015}, ORB-SLAM is proposed. Intuitively, it creates ORB features from a visual input and stores it in a sparse matrix, then a matching process is launched to localize every feature, improving the localization along the way. It can work on Monocular (no scale), Stereo and Depth Cameras, giving extraordinary results.
 
-  This chapter reviewed the main adversities inherent to the SLAM problem and shed some light over the current state of the art. In the rest of this document, we will focus solely on lidar SLAM as the drones used with Aerostack are bound to lidar sensors. 
+  \section{Planning} \label{ch_3:sect:planning}
 
-  \begin{comment}
-    \begin{itemize}
-    \end{itemize}
-  \end{comment}
+    As planning algorithms have been around since the conception of robots, we will just go through the employed method and it's integration with Aerostack.
+
+    Once the occupancy grid map is constructed and target position is given, a plan has to be made in order for the robot to get to that target. Also, obstacles should be avoided. The module in charge of this task is the planner.
+
+    There exists many planning techniques, amongst the most common, we find \textit{probabilistic road maps} \cite{probabilistic_rmaps}, which builds a unidirected graph that connects random points for later exploration, or \textit{rapidly exploring random trees} \cite{rapidly_exp_rand_trees}, that grows a tree in the search space from the starting position until the goal is reached. 
+
+    In the current work we will employ a planner based on \textit{elastic bands} \cite{eband}. The elastic band framework comprises a gloabl planner that makes a valid, global path based on the current world model and a local planner that deforms that path in real time to accomodate the perceptions of the robot. This way, obstacles can be avoided in real time by applying forces (internal o external) to the path as if it where atracted or repulsed. Note that this planning is agnostic of the controllers or the internal map representations of the robot.
+
+    More specifically, we will integrate an already made ROS module called \textit{move\_base} \cite{move_base_web} for the planning that uses a local planner (\textit{eband\_local\_planner} \cite{eband_planner_web}) implemented after the elastic band framework.
+
+  This chapter reviewed the main adversities inherent to the SLAM problem and shed some light over the current state of the art. Aslo, a brief introcuction to planning was made. In the rest of this document, we will focus solely on lidar SLAM, as the drones used with Aerostack are bound to lidar sensors and elastic band planning.
+

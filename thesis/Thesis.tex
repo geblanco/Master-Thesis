@@ -183,21 +183,6 @@
   \input{Chapters/Chapter4_Implementation.tex} % Experimental Setup
   \input{Chapters/Chapter5_Validation.tex} % Validation of the experiments
   \input{Chapters/Chapter6_Conclusions.tex} % Conclusions and future reseach
-%% ----------------------------------------------------------------
-%% ----- Appendices -----------------------------------------------
-  % Now begin the Appendices, including them as separate files
-
-  \addtocontents{toc}{\vspace{2em}} % Add a gap in the Contents, for aesthetics
-
-  \appendix % Cue to tell LaTeX that the following 'chapters' are Appendices
-
-  \input{Appendices/AppendixA}  % Appendix Title
-
-  %\input{Appendices/AppendixB} % Appendix Title
-
-  %\input{Appendices/AppendixC} % Appendix Title
-
-  \addtocontents{toc}{\vspace{2em}}  % Add a gap in the Contents, for aesthetics
   \backmatter
 %% ----------------------------------------------------------------
 %% ----- Bibliography ---------------------------------------------
@@ -206,5 +191,22 @@
   \printbibliography
   % \bibliographystyle{unsrtnat}  % Use the "unsrtnat" BibTeX style for formatting the Bibliography
   % \bibliography{Bibliography}  % The references (bibliography) information are stored in the file named "Bibliography.bib"
+%% ----------------------------------------------------------------
+%% ----- Appendices -----------------------------------------------
+  % Now begin the Appendices, including them as separate files
+
+  \mainmatter
+  \addtocontents{toc}{\vspace{2em}} % Add a gap in the Contents, for aesthetics
+
+  \appendix % Cue to tell LaTeX that the following 'chapters' are Appendices
+
+  \lhead{\emph{Appendix}}  % Change the left side page header to "Bibliography"
+
+  \input{Appendices/AppendixA}  % Appendix Title
+  %\input{Appendices/AppendixB} % Appendix Title
+  %\input{Appendices/AppendixC} % Appendix Title
+
+  \addtocontents{toc}{\vspace{2em}}  % Add a gap in the Contents, for aesthetics
+  \backmatter
 %% ----------------------------------------------------------------
 \end{document}  % The End
