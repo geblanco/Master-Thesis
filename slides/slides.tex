@@ -1,7 +1,7 @@
 \documentclass[]{beamer}
 \usepackage{pgfpages}
 
-%\setbeameroption{show notes on second screen}
+\setbeameroption{show notes on second screen}
 
 \graphicspath{{../thesis/Figures/}}  % Location of the graphics files (set up for graphics to be in PDF format)
 
@@ -496,6 +496,14 @@
 \begin{frame}{\mSlideTitle}
   \input{./sim_results.tex}
 \end{frame}
+
+\note{%
+  \begin{itemize}
+    \item Simulation has more tests
+    \item EKF Localization worse in simulation
+    \item Time adds up because of timeouts (bad loc)
+  \end{itemize}
+}
 
 \subsection{Discussion}
 \begin{frame}{\mSlideTitle}
